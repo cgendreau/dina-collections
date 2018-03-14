@@ -1,0 +1,29 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "scientificName": {
+      "type": "string"
+    },
+    "basionym": {
+      "$ref": "__ROOT__cName"
+    },
+    "nameType": {
+      "type": "string",
+      "enum": ["scientific"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["ok", "illegitimate"]
+    },
+    "originName": {
+      "$ref": "__ROOT__cName"
+    },
+    "origin": {
+      "type": "string",
+      "enum": ["proparte", "autonym"]
+    }
+  }
+}

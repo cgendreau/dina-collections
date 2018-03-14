@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "ancestors": {
+      "type": "array",
+      "items": {
+        "x-reference-type": "external",
+        "$ref": "__ROOT__cTaxon"
+      }
+    },
+    "descendants": {
+      "type": "array",
+      "items": {
+        "x-reference-type": "external",
+        "$ref": "__ROOT__cTaxon"
+      }
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "x-reference-type": "external",
+        "$ref": "__ROOT__cTaxon"
+      }
+    },
+    "parent": {
+      "x-reference-type": "external",
+      "$ref": "__ROOT__cTaxon"
+    },
+    "acceptedName": {
+      "x-reference-type": "external",
+      "$ref": "__ROOT__cName"
+    },
+    "synonymNames": {
+      "type": "array",
+      "items": {
+        "x-reference-type": "external",
+        "$ref": "__ROOT__cName"
+      }
+    },
+    "vernicularNames": {
+      "type": "array",
+      "items": {
+        "x-reference-type": "external",
+        "$ref": "__ROOT__cVernacularName"
+      }
+    }
+  }
+}

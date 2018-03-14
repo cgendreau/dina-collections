@@ -1,0 +1,11 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    }
+  }
+}

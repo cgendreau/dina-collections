@@ -1084,6 +1084,110 @@
     "description": "",
     "id": "storageLocationRelation"
   },
+  "cName": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "scientificName": {
+        "type": "string"
+      },
+      "basionym": {
+        "$ref": "cName"
+      },
+      "nameType": {
+        "type": "string",
+        "enum": [
+          "scientific"
+        ]
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "ok",
+          "illegitimate"
+        ]
+      },
+      "originName": {
+        "$ref": "cName"
+      },
+      "origin": {
+        "type": "string",
+        "enum": [
+          "proparte",
+          "autonym"
+        ]
+      }
+    },
+    "x-category": "taxonomyApi",
+    "x-modelType": "model",
+    "description": "",
+    "id": "cName"
+  },
+  "cTaxon": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "ancestors": {
+        "type": "array",
+        "items": {
+          "$ref": "cTaxon"
+        }
+      },
+      "descendants": {
+        "type": "array",
+        "items": {
+          "$ref": "cTaxon"
+        }
+      },
+      "children": {
+        "type": "array",
+        "items": {
+          "$ref": "cTaxon"
+        }
+      },
+      "parent": {
+        "$ref": "cTaxon"
+      },
+      "acceptedName": {
+        "$ref": "cName"
+      },
+      "synonymNames": {
+        "type": "array",
+        "items": {
+          "$ref": "cName"
+        }
+      },
+      "vernicularNames": {
+        "type": "array",
+        "items": {
+          "$ref": "cVernacularName"
+        }
+      }
+    },
+    "x-category": "taxonomyApi",
+    "x-modelType": "model",
+    "description": "",
+    "id": "cTaxon"
+  },
+  "cVernacularName": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "language": {
+        "type": "string"
+      }
+    },
+    "x-category": "taxonomyApi",
+    "x-modelType": "model",
+    "description": "",
+    "id": "cVernacularName"
+  },
   "taxon": {
     "additionalProperties": false,
     "properties": {
@@ -4720,6 +4824,3870 @@
     "x-examples": {},
     "description": ""
   },
+  "createCTaxonResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonAncestorsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/ancestors",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonChildrenResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/children",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonDescendantsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/descendants",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonSynonymNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/synonymNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonSynonymNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/synonymNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonVernacularNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cVernacularName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cVernacularName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/vernacularNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonVernacularNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/vernacularNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonAcceptedNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/acceptedName",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonAcceptedNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/acceptedName",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonParentResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/parent",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonParentResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/relationships/parent",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "acceptedName": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "ancestors": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "children": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "descendants": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "parent": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cTaxon"
+                              ],
+                              "example": "cTaxon",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "synonymNames": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "vernacularNames": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cVernacularName"
+                            ],
+                            "example": "cVernacularName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonVersionResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/versions/{versionId}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCTaxonVersionsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "acceptedName": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "ancestors": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "children": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "descendants": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "parent": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cTaxon"
+                              ],
+                              "example": "cTaxon",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "synonymNames": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "vernacularNames": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cVernacularName"
+                            ],
+                            "example": "cVernacularName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cTaxons/{id}/versions",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "createCNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameAcceptedToTaxonsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cTaxon",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/acceptedToTaxons",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameBasionymResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/basionym",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCNameBasionymResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/basionym",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameOriginResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/origin",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCNameOriginResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/origin",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameSynonymToTaxonsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/relationships/synonymToTaxons",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "acceptedToTaxons": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cTaxon"
+                              ],
+                              "example": "cTaxon",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "basionym": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "origin": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "synonymToTaxons": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameVersionResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/versions/{versionId}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCNameVersionsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "acceptedToTaxons": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cTaxon"
+                              ],
+                              "example": "cTaxon",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "basionym": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "origin": {
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "cName"
+                              ],
+                              "example": "cName",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "type": "null"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ],
+                  "type": "object"
+                },
+                "synonymToTaxons": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cNames/{id}/versions",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "createCVernacularNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCVernacularNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCVernacularNameTaxonsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cTaxon"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "type": {
+              "default": "cTaxon",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames/{id}/relationships/taxons",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCVernacularNameResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames/{id}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCVernacularNamesResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cVernacularName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "taxons": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cVernacularName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCVernacularNameVersionResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "id": {
+            "example": "1234",
+            "type": "string"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames/{id}/versions/{versionId}",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
+  "getCVernacularNameVersionsResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "data": {
+        "additionalProperties": false,
+        "items": {
+          "additionalProperties": false,
+          "properties": {
+            "attributes": {
+              "$ref": "cVernacularName"
+            },
+            "id": {
+              "example": "1234",
+              "type": "string"
+            },
+            "relationships": {
+              "properties": {
+                "taxons": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "type": {
+              "default": "cVernacularName",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "jsonapi": {
+        "type": "object"
+      },
+      "links": {
+        "properties": {
+          "self": {
+            "example": "https://domain/api/cTaxonomy/v01/cVernacularNames/{id}/versions",
+            "format": "uri",
+            "type": "string",
+            "x-faker": "internet.url"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "type": "object"
+      }
+    },
+    "type": "object",
+    "x-examples": {},
+    "description": ""
+  },
   "createAgentRequest": {
     "additionalProperties": false,
     "type": "object",
@@ -6633,6 +10601,1121 @@
                             "physicalUnit"
                           ],
                           "example": "physicalUnit",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "createCTaxonRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cTaxon",
+            "enum": [
+              "cTaxon"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCTaxonRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cTaxon",
+            "enum": [
+              "cTaxon"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cTaxon"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedName": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "ancestors": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "children": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "descendants": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "parent": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cName"
+                          ],
+                          "example": "cName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "vernacularNames": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cVernacularName"
+                          ],
+                          "example": "cVernacularName",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCTaxonSynonymNamesRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "additionalProperties": false,
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "default": "cName",
+              "enum": [
+                "cName"
+              ],
+              "type": "string"
+            },
+            "id": {
+              "type": "string",
+              "example": "1234"
+            }
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCTaxonVernacularNamesRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "additionalProperties": false,
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "default": "cVernacularName",
+              "enum": [
+                "cVernacularName"
+              ],
+              "type": "string"
+            },
+            "id": {
+              "type": "string",
+              "example": "1234"
+            }
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCTaxonAcceptedNameRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cName",
+            "enum": [
+              "cName"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCTaxonParentRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cTaxon",
+            "enum": [
+              "cTaxon"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "createCNameRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cName",
+            "enum": [
+              "cName"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cName"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCNameRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cName",
+            "enum": [
+              "cName"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cName"
+          },
+          "relationships": {
+            "properties": {
+              "acceptedToTaxons": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cTaxon"
+                            ],
+                            "example": "cTaxon",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "basionym": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "origin": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "example": "1234",
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "cName"
+                            ],
+                            "example": "cName",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "type": "null"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              },
+              "synonymToTaxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCNameBasionymRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cName",
+            "enum": [
+              "cName"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "updateCNameOriginRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cName",
+            "enum": [
+              "cName"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "description": ""
+  },
+  "createCVernacularNameRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "enum": [
+              "cVernacularName"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        }
+      }
+    },
+    "x-examples": {},
+    "description": ""
+  },
+  "updateCVernacularNameRequest": {
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "default": "cVernacularName",
+            "enum": [
+              "cVernacularName"
+            ],
+            "type": "string"
+          },
+          "attributes": {
+            "$ref": "cVernacularName"
+          },
+          "relationships": {
+            "properties": {
+              "taxons": {
+                "additionalProperties": false,
+                "properties": {
+                  "data": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "example": "1234",
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "cTaxon"
+                          ],
+                          "example": "cTaxon",
                           "type": "string"
                         }
                       },

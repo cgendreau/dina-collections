@@ -15,6 +15,7 @@ const services = {
   statusService: true,
   storageService: true,
   taxonService: true,
+  cTaxonService: true,
 }
 
 const api = {

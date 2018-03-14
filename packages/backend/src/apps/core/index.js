@@ -1,7 +1,7 @@
 const now = require('performance-now')
 
 const startTime = now()
-const openApiSpec = require('common/dist/openApi.json')
+const openApiSpec = require('common/dist/normalizedOpenApi.json')
 const createLog = require('../../utilities/log')
 const createServiceRouter = require('../../lib/serviceRouter')
 const createApp = require('../../lib/app')
