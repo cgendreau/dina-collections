@@ -10,7 +10,7 @@
       "url": "https://www.gnu.org/licenses/agpl-3.0.en.html"
     },
     "version": "0.1.0",
-    "description": "This is a first draft of dina api documentation.\nDescriptions like below can be written in markdown:\n\n* [Dina web](https://alpha-cm.dina-web.net/login)\n* [Dina web with mocks](https://alpha-cm-mock.dina-web.net/login)\n* [Dina style guilde](https://alpha-style.dina-web.net)\n",
+    "description": "Note this is a quick draft.\n\n* All the resources are prefixed with c (as in Canada) to avoid collisions. Ofc this is temporary\n\n* Taxon under classification are called ccTaxon which also is a temporary hack to avoid name collisions\n\n* Based on the [datamodel](https://github.com/DINA-Web/taxonomy/blob/master/docs/taxonomy_concept_diagram_multiple.png)\n",
     "x-versionInfo": "# This is some version specific information\n"
   },
   "servers": [
