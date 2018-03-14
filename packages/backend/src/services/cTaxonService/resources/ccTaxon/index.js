@@ -1,5 +1,5 @@
 module.exports = {
-  basePath: '/api/taxonomy/v01',
+  basePath: '/api/taxonomy/v01/classifications/{id}',
   operations: [
     {
       connect: false,
@@ -9,6 +9,23 @@ module.exports = {
       connect: false,
       type: 'update',
     },
+    {
+      connect: false,
+      relationKey: 'ancestors',
+      type: 'getRelationHasMany',
+    },
+    {
+      connect: false,
+      relationKey: 'children',
+      type: 'getRelationHasMany',
+    },
+
+    {
+      connect: false,
+      relationKey: 'descendants',
+      type: 'getRelationHasMany',
+    },
+
     {
       connect: false,
       relationKey: 'synonymNames',
@@ -44,6 +61,17 @@ module.exports = {
     },
     {
       connect: false,
+      relationKey: 'parent',
+      type: 'updateRelationHasOne',
+    },
+    {
+      connect: false,
+      relationKey: 'parent',
+      type: 'getRelationHasOne',
+    },
+
+    {
+      connect: false,
       includeRelations: true,
       type: 'getOne',
     },
@@ -51,6 +79,37 @@ module.exports = {
       connect: false,
       includeRelations: true,
       queryParams: {
+        'descendants.filter[rank]': {
+          description:
+            'Filter included descendants to only include specified ranks',
+          example: '1986',
+          required: false,
+          schema: {
+            items: {
+              type: 'string',
+              enum: ['animalia', 'carnivora'],
+            },
+            type: 'array',
+          },
+        },
+        'descendants.limit': {
+          description: 'Limit number of descendants',
+          example: '100',
+          required: false,
+          schema: {
+            type: 'integer',
+          },
+        },
+        'filter[mrca]': {
+          description: 'Not sure :)',
+          required: false,
+          schema: {
+            items: {
+              type: 'string',
+            },
+            type: 'array',
+          },
+        },
         'filter[search]': {
           description: 'Find taxons based on search ',
           example: 'vulpu',
@@ -85,6 +144,26 @@ module.exports = {
       resource: 'cName',
       type: 'hasOne',
     },
+    ancestors: {
+      format: 'array',
+      resource: 'cTaxon',
+      type: 'hasMany',
+    },
+    children: {
+      format: 'array',
+      resource: 'cTaxon',
+      type: 'hasMany',
+    },
+    descendants: {
+      format: 'array',
+      resource: 'cTaxon',
+      type: 'hasMany',
+    },
+    parent: {
+      format: 'object',
+      resource: 'cTaxon',
+      type: 'hasOne',
+    },
     synonymNames: {
       format: 'array',
       resource: 'cName',
@@ -96,6 +175,6 @@ module.exports = {
       type: 'hasMany',
     },
   },
-  resource: 'cTaxon',
-  tags: ['taxon'],
+  resource: 'ccTaxon',
+  tags: ['classification - taxon'],
 }

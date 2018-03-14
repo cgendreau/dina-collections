@@ -49,9 +49,22 @@ const extractRequestModelsFromEndpoints = (endpoints, normalize) => {
   }, {})
 }
 
+const filter = [
+  'cClassification',
+  'cClassificationTaxon',
+  'cName',
+  'cNode',
+  'cTaxon',
+  'cVernacularName',
+]
+
 const extractModelsFromModels = (models, normalize) => {
   return Object.keys(models).reduce((extractedModels, modelKey) => {
     const model = models[modelKey]
+    if (!filter.includes(modelKey)) {
+      return extractedModels
+    }
+
     return {
       ...extractedModels,
       [modelKey]: createModel({ model, modelKey, normalize, referencePath }),

@@ -9,41 +9,37 @@ module.exports = {
       connect: false,
       type: 'update',
     },
-
     {
       connect: false,
-      relationKey: 'acceptedToTaxons',
+      relationKey: 'childTaxon',
       type: 'getRelationHasOne',
     },
-
     {
       connect: false,
-      relationKey: 'basionym',
-      type: 'getRelationHasOne',
-    },
-
-    {
-      connect: false,
-      relationKey: 'basionym',
+      relationKey: 'childTaxon',
       type: 'updateRelationHasOne',
     },
 
     {
       connect: false,
-      relationKey: 'origin',
+      relationKey: 'classification',
       type: 'getRelationHasOne',
     },
-
     {
       connect: false,
-      relationKey: 'origin',
+      relationKey: 'classification',
       type: 'updateRelationHasOne',
     },
 
     {
       connect: false,
-      relationKey: 'synonymToTaxons',
-      type: 'getRelationHasMany',
+      relationKey: 'parentTaxon',
+      type: 'getRelationHasOne',
+    },
+    {
+      connect: false,
+      relationKey: 'parentTaxon',
+      type: 'updateRelationHasOne',
     },
 
     {
@@ -66,27 +62,22 @@ module.exports = {
     },
   ],
   relations: {
-    acceptedToTaxons: {
+    childTaxon: {
       format: 'object',
       resource: 'cTaxon',
-      type: 'hasMany',
+      type: 'hasOne',
     },
-    basionym: {
+    classification: {
       format: 'object',
       resource: 'cName',
       type: 'hasOne',
     },
-    origin: {
+    parentTaxon: {
       format: 'object',
-      resource: 'cName',
-      type: 'hasOne',
-    },
-    synonymToTaxons: {
-      format: 'array',
       resource: 'cTaxon',
-      type: 'hasMany',
+      type: 'hasOne',
     },
   },
-  resource: 'cName',
-  tags: ['name'],
+  resource: 'cNode',
+  tags: ['node'],
 }

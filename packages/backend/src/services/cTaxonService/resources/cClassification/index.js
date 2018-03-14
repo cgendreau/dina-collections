@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       connect: false,
-      relationKey: 'taxons',
+      relationKey: 'nodes',
       type: 'getRelationHasMany',
     },
     {
@@ -34,12 +34,12 @@ module.exports = {
     },
   ],
   relations: {
-    taxons: {
+    nodes: {
       format: 'array',
-      resource: 'cTaxon',
+      resource: 'cNode',
       type: 'hasMany',
     },
   },
-  resource: 'cVernacularName',
-  tags: ['vernacularName'],
+  resource: 'cClassification',
+  tags: ['classification'],
 }
