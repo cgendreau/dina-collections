@@ -1,0 +1,1857 @@
+[
+  {
+    "id": "1",
+    "parentId": null,
+    "name": "NRM ZOO",
+    "level": "Nivå 1",
+    "higherLevels": null
+  },
+  {
+    "id": "2",
+    "parentId": "1",
+    "name": "F. d. KÖL Plan 3",
+    "level": "Nivå 2",
+    "higherLevels": "F. d. KÖL Plan 3"
+  },
+  {
+    "id": "3",
+    "parentId": "2",
+    "name": "Gäss(t)rummet 2207",
+    "level": "Nivå 3",
+    "higherLevels": "Gäss(t)rummet 2207"
+  },
+  {
+    "id": "4",
+    "parentId": "2",
+    "name": "Havsfåglar (f.a. utländska) 2205-1",
+    "level": "Nivå 3",
+    "higherLevels": "Havsfåglar (f.a. utländska) 2205-1"
+  },
+  {
+    "id": "5",
+    "parentId": "2",
+    "name": "Lodjursrummet 1213",
+    "level": "Nivå 3",
+    "higherLevels": "Lodjursrummet 1213"
+  },
+  {
+    "id": "6",
+    "parentId": "5",
+    "name": "L 1",
+    "level": "Nivå 4",
+    "higherLevels": "L 1"
+  },
+  {
+    "id": "7",
+    "parentId": "5",
+    "name": "L 10",
+    "level": "Nivå 4",
+    "higherLevels": "L 10"
+  },
+  {
+    "id": "8",
+    "parentId": "5",
+    "name": "L 11",
+    "level": "Nivå 4",
+    "higherLevels": "L 11"
+  },
+  {
+    "id": "9",
+    "parentId": "5",
+    "name": "L 12",
+    "level": "Nivå 4",
+    "higherLevels": "L 12"
+  },
+  {
+    "id": "10",
+    "parentId": "5",
+    "name": "L 13",
+    "level": "Nivå 4",
+    "higherLevels": "L 13"
+  },
+  {
+    "id": "11",
+    "parentId": "5",
+    "name": "L 14",
+    "level": "Nivå 4",
+    "higherLevels": "L 14"
+  },
+  {
+    "id": "12",
+    "parentId": "5",
+    "name": "L 15",
+    "level": "Nivå 4",
+    "higherLevels": "L 15"
+  },
+  {
+    "id": "13",
+    "parentId": "5",
+    "name": "L 16",
+    "level": "Nivå 4",
+    "higherLevels": "L 16"
+  },
+  {
+    "id": "14",
+    "parentId": "5",
+    "name": "L 17",
+    "level": "Nivå 4",
+    "higherLevels": "L 17"
+  },
+  {
+    "id": "15",
+    "parentId": "5",
+    "name": "L 18",
+    "level": "Nivå 4",
+    "higherLevels": "L 18"
+  },
+  {
+    "id": "16",
+    "parentId": "5",
+    "name": "L 19",
+    "level": "Nivå 4",
+    "higherLevels": "L 19"
+  },
+  {
+    "id": "17",
+    "parentId": "5",
+    "name": "L 2",
+    "level": "Nivå 4",
+    "higherLevels": "L 2"
+  },
+  {
+    "id": "18",
+    "parentId": "5",
+    "name": "L 3",
+    "level": "Nivå 4",
+    "higherLevels": "L 3"
+  },
+  {
+    "id": "19",
+    "parentId": "5",
+    "name": "L 4",
+    "level": "Nivå 4",
+    "higherLevels": "L 4"
+  },
+  {
+    "id": "20",
+    "parentId": "5",
+    "name": "L 5",
+    "level": "Nivå 4",
+    "higherLevels": "L 5"
+  },
+  {
+    "id": "21",
+    "parentId": "5",
+    "name": "L 6",
+    "level": "Nivå 4",
+    "higherLevels": "L 6"
+  },
+  {
+    "id": "22",
+    "parentId": "5",
+    "name": "L 7",
+    "level": "Nivå 4",
+    "higherLevels": "L 7"
+  },
+  {
+    "id": "23",
+    "parentId": "5",
+    "name": "L 8",
+    "level": "Nivå 4",
+    "higherLevels": "L 8"
+  },
+  {
+    "id": "24",
+    "parentId": "5",
+    "name": "L 9",
+    "level": "Nivå 4",
+    "higherLevels": "L 9"
+  },
+  {
+    "id": "25",
+    "parentId": "5",
+    "name": "L17",
+    "level": "Nivå 4",
+    "higherLevels": "L17"
+  },
+  {
+    "id": "26",
+    "parentId": "5",
+    "name": "L19",
+    "level": "Nivå 4",
+    "higherLevels": "L19"
+  },
+  {
+    "id": "27",
+    "parentId": "5",
+    "name": "L20",
+    "level": "Nivå 4",
+    "higherLevels": "L20"
+  },
+  {
+    "id": "28",
+    "parentId": "5",
+    "name": "L21",
+    "level": "Nivå 4",
+    "higherLevels": "L21"
+  },
+  {
+    "id": "29",
+    "parentId": "5",
+    "name": "L22",
+    "level": "Nivå 4",
+    "higherLevels": "L22"
+  },
+  {
+    "id": "30",
+    "parentId": "5",
+    "name": "L23",
+    "level": "Nivå 4",
+    "higherLevels": "L23"
+  },
+  {
+    "id": "31",
+    "parentId": "5",
+    "name": "L24",
+    "level": "Nivå 4",
+    "higherLevels": "L24"
+  },
+  {
+    "id": "32",
+    "parentId": "5",
+    "name": "L25",
+    "level": "Nivå 4",
+    "higherLevels": "L25"
+  },
+  {
+    "id": "33",
+    "parentId": "5",
+    "name": "L26",
+    "level": "Nivå 4",
+    "higherLevels": "L26"
+  },
+  {
+    "id": "34",
+    "parentId": "5",
+    "name": "L27",
+    "level": "Nivå 4",
+    "higherLevels": "L27"
+  },
+  {
+    "id": "35",
+    "parentId": "5",
+    "name": "L28",
+    "level": "Nivå 4",
+    "higherLevels": "L28"
+  },
+  {
+    "id": "36",
+    "parentId": "5",
+    "name": "L29",
+    "level": "Nivå 4",
+    "higherLevels": "L29"
+  },
+  {
+    "id": "37",
+    "parentId": "5",
+    "name": "L30",
+    "level": "Nivå 4",
+    "higherLevels": "L30"
+  },
+  {
+    "id": "38",
+    "parentId": "5",
+    "name": "L31",
+    "level": "Nivå 4",
+    "higherLevels": "L31"
+  },
+  {
+    "id": "39",
+    "parentId": "5",
+    "name": "L32",
+    "level": "Nivå 4",
+    "higherLevels": "L32"
+  },
+  {
+    "id": "40",
+    "parentId": "5",
+    "name": "L33",
+    "level": "Nivå 4",
+    "higherLevels": "L33"
+  },
+  {
+    "id": "41",
+    "parentId": "5",
+    "name": "L34",
+    "level": "Nivå 4",
+    "higherLevels": "L34"
+  },
+  {
+    "id": "42",
+    "parentId": "5",
+    "name": "L51",
+    "level": "Nivå 4",
+    "higherLevels": "L51"
+  },
+  {
+    "id": "43",
+    "parentId": "5",
+    "name": "L52",
+    "level": "Nivå 4",
+    "higherLevels": "L52"
+  },
+  {
+    "id": "44",
+    "parentId": "5",
+    "name": "L6",
+    "level": "Nivå 4",
+    "higherLevels": "L6"
+  },
+  {
+    "id": "45",
+    "parentId": "5",
+    "name": "L7",
+    "level": "Nivå 4",
+    "higherLevels": "L7"
+  },
+  {
+    "id": "46",
+    "parentId": "5",
+    "name": "Ospecificerat",
+    "level": "Nivå 4",
+    "higherLevels": "Ospecificerat"
+  },
+  {
+    "id": "47",
+    "parentId": "2",
+    "name": "Provbank 2220",
+    "level": "Nivå 3",
+    "higherLevels": "Provbank 2220"
+  },
+  {
+    "id": "48",
+    "parentId": "47",
+    "name": "Låda 1",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 1"
+  },
+  {
+    "id": "49",
+    "parentId": "47",
+    "name": "Låda 10",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 10"
+  },
+  {
+    "id": "50",
+    "parentId": "47",
+    "name": "Låda 11",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 11"
+  },
+  {
+    "id": "51",
+    "parentId": "47",
+    "name": "Låda 12",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 12"
+  },
+  {
+    "id": "52",
+    "parentId": "47",
+    "name": "Låda 13",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 13"
+  },
+  {
+    "id": "53",
+    "parentId": "47",
+    "name": "Låda 14",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 14"
+  },
+  {
+    "id": "54",
+    "parentId": "47",
+    "name": "Låda 18",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 18"
+  },
+  {
+    "id": "55",
+    "parentId": "47",
+    "name": "Låda 19",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 19"
+  },
+  {
+    "id": "56",
+    "parentId": "47",
+    "name": "Låda 20",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 20"
+  },
+  {
+    "id": "57",
+    "parentId": "47",
+    "name": "Låda 21",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 21"
+  },
+  {
+    "id": "58",
+    "parentId": "47",
+    "name": "Låda 24",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 24"
+  },
+  {
+    "id": "59",
+    "parentId": "47",
+    "name": "Låda 3",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 3"
+  },
+  {
+    "id": "60",
+    "parentId": "47",
+    "name": "Låda 32",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 32"
+  },
+  {
+    "id": "61",
+    "parentId": "47",
+    "name": "Låda 33",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 33"
+  },
+  {
+    "id": "62",
+    "parentId": "47",
+    "name": "Låda 34",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 34"
+  },
+  {
+    "id": "63",
+    "parentId": "47",
+    "name": "Låda 35",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 35"
+  },
+  {
+    "id": "64",
+    "parentId": "47",
+    "name": "Låda 36",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 36"
+  },
+  {
+    "id": "65",
+    "parentId": "47",
+    "name": "Låda 37",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 37"
+  },
+  {
+    "id": "66",
+    "parentId": "47",
+    "name": "Låda 38",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 38"
+  },
+  {
+    "id": "67",
+    "parentId": "47",
+    "name": "Låda 6",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 6"
+  },
+  {
+    "id": "68",
+    "parentId": "47",
+    "name": "Låda 8",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 8"
+  },
+  {
+    "id": "69",
+    "parentId": "2",
+    "name": "Stora svenska 1212",
+    "level": "Nivå 3",
+    "higherLevels": "Stora svenska 1212"
+  },
+  {
+    "id": "70",
+    "parentId": "2",
+    "name": "Stora utländska 1220",
+    "level": "Nivå 3",
+    "higherLevels": "Stora utländska 1220"
+  },
+  {
+    "id": "71",
+    "parentId": "2",
+    "name": "Svenska hönsfåglar 2218",
+    "level": "Nivå 3",
+    "higherLevels": "Svenska hönsfåglar 2218"
+  },
+  {
+    "id": "72",
+    "parentId": "2",
+    "name": "Svenska rovfåglar 2209",
+    "level": "Nivå 3",
+    "higherLevels": "Svenska rovfåglar 2209"
+  },
+  {
+    "id": "73",
+    "parentId": "2",
+    "name": "Svenska rullskåp 2215",
+    "level": "Nivå 3",
+    "higherLevels": "Svenska rullskåp 2215"
+  },
+  {
+    "id": "74",
+    "parentId": "2",
+    "name": "Sälfrys 2225",
+    "level": "Nivå 3",
+    "higherLevels": "Sälfrys 2225"
+  },
+  {
+    "id": "75",
+    "parentId": "74",
+    "name": "Låda 45",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 45"
+  },
+  {
+    "id": "76",
+    "parentId": "74",
+    "name": "hylla",
+    "level": "Nivå 4",
+    "higherLevels": "hylla"
+  },
+  {
+    "id": "77",
+    "parentId": "2",
+    "name": "Utländska höns 2205",
+    "level": "Nivå 3",
+    "higherLevels": "Utländska höns 2205"
+  },
+  {
+    "id": "78",
+    "parentId": "2",
+    "name": "Utländska rullskåp 2219",
+    "level": "Nivå 3",
+    "higherLevels": "Utländska rullskåp 2219"
+  },
+  {
+    "id": "79",
+    "parentId": "2",
+    "name": "Änder, KÖL 1224",
+    "level": "Nivå 3",
+    "higherLevels": "Änder, KÖL 1224"
+  },
+  {
+    "id": "80",
+    "parentId": "1",
+    "name": "Frihamnen",
+    "level": "Nivå 2",
+    "higherLevels": "Frihamnen"
+  },
+  {
+    "id": "81",
+    "parentId": "1",
+    "name": "Huvudbyggnad Plan 2",
+    "level": "Nivå 2",
+    "higherLevels": "Huvudbyggnad Plan 2"
+  },
+  {
+    "id": "82",
+    "parentId": "81",
+    "name": "Omistliga 1297",
+    "level": "Nivå 3",
+    "higherLevels": "Omistliga 1297"
+  },
+  {
+    "id": "83",
+    "parentId": "81",
+    "name": "Äggrummet 1293",
+    "level": "Nivå 3",
+    "higherLevels": "Äggrummet 1293"
+  },
+  {
+    "id": "84",
+    "parentId": "1",
+    "name": "Huvudbyggnad Plan 3",
+    "level": "Nivå 2",
+    "higherLevels": "Huvudbyggnad Plan 3"
+  },
+  {
+    "id": "85",
+    "parentId": "84",
+    "name": "Fågelskinnsamling 1312",
+    "level": "Nivå 3",
+    "higherLevels": "Fågelskinnsamling 1312"
+  },
+  {
+    "id": "86",
+    "parentId": "84",
+    "name": "Kylda däggdjur 1392",
+    "level": "Nivå 3",
+    "higherLevels": "Kylda däggdjur 1392"
+  },
+  {
+    "id": "87",
+    "parentId": "84",
+    "name": "Plåtskåpsrummet 1393",
+    "level": "Nivå 3",
+    "higherLevels": "Plåtskåpsrummet 1393"
+  },
+  {
+    "id": "88",
+    "parentId": "84",
+    "name": "Skyddsrummet 1396,97,98",
+    "level": "Nivå 3",
+    "higherLevels": "Skyddsrummet 1396,97,98"
+  },
+  {
+    "id": "89",
+    "parentId": "1",
+    "name": "Huvudbyggnad Plan 6",
+    "level": "Nivå 2",
+    "higherLevels": "Huvudbyggnad Plan 6"
+  },
+  {
+    "id": "90",
+    "parentId": "89",
+    "name": "Doktorandrummet 1636",
+    "level": "Nivå 3",
+    "higherLevels": "Doktorandrummet 1636"
+  },
+  {
+    "id": "91",
+    "parentId": "89",
+    "name": "Korridoren 1631-1",
+    "level": "Nivå 3",
+    "higherLevels": "Korridoren 1631-1"
+  },
+  {
+    "id": "92",
+    "parentId": "89",
+    "name": "Korridoren Rondell ?",
+    "level": "Nivå 3",
+    "higherLevels": "Korridoren Rondell ?"
+  },
+  {
+    "id": "93",
+    "parentId": "89",
+    "name": "Niklas rum 1634",
+    "level": "Nivå 3",
+    "higherLevels": "Niklas rum 1634"
+  },
+  {
+    "id": "94",
+    "parentId": "89",
+    "name": "Sal 11B, 1613-2",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 11B, 1613-2"
+  },
+  {
+    "id": "95",
+    "parentId": "89",
+    "name": "Sal 12, 1615",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 12, 1615"
+  },
+  {
+    "id": "96",
+    "parentId": "89",
+    "name": "Sal 13, 1617",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 13, 1617"
+  },
+  {
+    "id": "97",
+    "parentId": "89",
+    "name": "Sal 14, 1619",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 14, 1619"
+  },
+  {
+    "id": "98",
+    "parentId": "89",
+    "name": "Sal 17, 1614",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 17, 1614"
+  },
+  {
+    "id": "99",
+    "parentId": "89",
+    "name": "Sal 18, 1612",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 18, 1612"
+  },
+  {
+    "id": "100",
+    "parentId": "89",
+    "name": "Sal 18, 1614",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 18, 1614"
+  },
+  {
+    "id": "101",
+    "parentId": "89",
+    "name": "Sal 19, 1616",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 19, 1616"
+  },
+  {
+    "id": "102",
+    "parentId": "89",
+    "name": "Sal 20, 1618",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 20, 1618"
+  },
+  {
+    "id": "103",
+    "parentId": "89",
+    "name": "Sal 21, 1620",
+    "level": "Nivå 3",
+    "higherLevels": "Sal 21, 1620"
+  },
+  {
+    "id": "104",
+    "parentId": "89",
+    "name": "Våtlabbet 1612",
+    "level": "Nivå 3",
+    "higherLevels": "Våtlabbet 1612"
+  },
+  {
+    "id": "105",
+    "parentId": "89",
+    "name": "Yngves rum 1638-2",
+    "level": "Nivå 3",
+    "higherLevels": "Yngves rum 1638-2"
+  },
+  {
+    "id": "106",
+    "parentId": "1",
+    "name": "Huvudbyggnad plan 7",
+    "level": "Nivå 2",
+    "higherLevels": "Huvudbyggnad plan 7"
+  },
+  {
+    "id": "107",
+    "parentId": "106",
+    "name": "Vinden, kylt rum 1720",
+    "level": "Nivå 3",
+    "higherLevels": "Vinden, kylt rum 1720"
+  },
+  {
+    "id": "108",
+    "parentId": "106",
+    "name": "Vinden, okylt rum 1716",
+    "level": "Nivå 3",
+    "higherLevels": "Vinden, okylt rum 1716"
+  },
+  {
+    "id": "109",
+    "parentId": "1",
+    "name": "Norra flygeln Plan 2",
+    "level": "Nivå 2",
+    "higherLevels": "Norra flygeln Plan 2"
+  },
+  {
+    "id": "110",
+    "parentId": "109",
+    "name": "Fältförråd/arkiv 2214",
+    "level": "Nivå 3",
+    "higherLevels": "Fältförråd/arkiv 2214"
+  },
+  {
+    "id": "111",
+    "parentId": "109",
+    "name": "Rum 2214-22A",
+    "level": "Nivå 3",
+    "higherLevels": "Rum 2214-22A"
+  },
+  {
+    "id": "112",
+    "parentId": "111",
+    "name": "DNA-Frys 1",
+    "level": "Nivå 4",
+    "higherLevels": "DNA-Frys 1"
+  },
+  {
+    "id": "113",
+    "parentId": "112",
+    "name": "Rack 0",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 0"
+  },
+  {
+    "id": "114",
+    "parentId": "113",
+    "name": "Låda 240",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 240"
+  },
+  {
+    "id": "115",
+    "parentId": "113",
+    "name": "Låda 241",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 241"
+  },
+  {
+    "id": "116",
+    "parentId": "113",
+    "name": "Låda 242",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 242"
+  },
+  {
+    "id": "117",
+    "parentId": "113",
+    "name": "Låda 243",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 243"
+  },
+  {
+    "id": "118",
+    "parentId": "113",
+    "name": "Låda 244",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 244"
+  },
+  {
+    "id": "119",
+    "parentId": "113",
+    "name": "Låda 245",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 245"
+  },
+  {
+    "id": "120",
+    "parentId": "113",
+    "name": "Låda 246",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 246"
+  },
+  {
+    "id": "121",
+    "parentId": "112",
+    "name": "Rack 02",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 02"
+  },
+  {
+    "id": "122",
+    "parentId": "121",
+    "name": "Låda 39",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 39"
+  },
+  {
+    "id": "123",
+    "parentId": "121",
+    "name": "Låda 40",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 40"
+  },
+  {
+    "id": "124",
+    "parentId": "112",
+    "name": "Rack 03",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 03"
+  },
+  {
+    "id": "125",
+    "parentId": "124",
+    "name": "Låda 46",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 46"
+  },
+  {
+    "id": "126",
+    "parentId": "124",
+    "name": "Låda 53",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 53"
+  },
+  {
+    "id": "127",
+    "parentId": "112",
+    "name": "Rack 05",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 05"
+  },
+  {
+    "id": "128",
+    "parentId": "127",
+    "name": "Låda 85",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 85"
+  },
+  {
+    "id": "129",
+    "parentId": "112",
+    "name": "Rack 06",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 06"
+  },
+  {
+    "id": "130",
+    "parentId": "129",
+    "name": "Låda 96",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 96"
+  },
+  {
+    "id": "131",
+    "parentId": "112",
+    "name": "Rack 07",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 07"
+  },
+  {
+    "id": "132",
+    "parentId": "131",
+    "name": "Låda 115",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 115"
+  },
+  {
+    "id": "133",
+    "parentId": "112",
+    "name": "Rack 08",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 08"
+  },
+  {
+    "id": "134",
+    "parentId": "133",
+    "name": "Låda 127",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 127"
+  },
+  {
+    "id": "135",
+    "parentId": "112",
+    "name": "Rack 09",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 09"
+  },
+  {
+    "id": "136",
+    "parentId": "135",
+    "name": "Låda 140",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 140"
+  },
+  {
+    "id": "137",
+    "parentId": "135",
+    "name": "Låda 141",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 141"
+  },
+  {
+    "id": "138",
+    "parentId": "135",
+    "name": "Låda 143",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 143"
+  },
+  {
+    "id": "139",
+    "parentId": "135",
+    "name": "Låda 144",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 144"
+  },
+  {
+    "id": "140",
+    "parentId": "135",
+    "name": "Låda 146",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 146"
+  },
+  {
+    "id": "141",
+    "parentId": "135",
+    "name": "Låda 151",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 151"
+  },
+  {
+    "id": "142",
+    "parentId": "135",
+    "name": "Låda 152",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 152"
+  },
+  {
+    "id": "143",
+    "parentId": "112",
+    "name": "Rack 10",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 10"
+  },
+  {
+    "id": "144",
+    "parentId": "143",
+    "name": "Låda 159",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 159"
+  },
+  {
+    "id": "145",
+    "parentId": "143",
+    "name": "Låda 162",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 162"
+  },
+  {
+    "id": "146",
+    "parentId": "143",
+    "name": "Låda 165",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 165"
+  },
+  {
+    "id": "147",
+    "parentId": "112",
+    "name": "Rack 11",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 11"
+  },
+  {
+    "id": "148",
+    "parentId": "147",
+    "name": "Låda 170",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 170"
+  },
+  {
+    "id": "149",
+    "parentId": "147",
+    "name": "Låda 171",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 171"
+  },
+  {
+    "id": "150",
+    "parentId": "147",
+    "name": "Låda 175",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 175"
+  },
+  {
+    "id": "151",
+    "parentId": "147",
+    "name": "Låda 176",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 176"
+  },
+  {
+    "id": "152",
+    "parentId": "147",
+    "name": "Låda 180",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 180"
+  },
+  {
+    "id": "153",
+    "parentId": "112",
+    "name": "Rack 12",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 12"
+  },
+  {
+    "id": "154",
+    "parentId": "153",
+    "name": "Låda 189",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 189"
+  },
+  {
+    "id": "155",
+    "parentId": "153",
+    "name": "Låda 192",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 192"
+  },
+  {
+    "id": "156",
+    "parentId": "153",
+    "name": "Låda 193",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 193"
+  },
+  {
+    "id": "157",
+    "parentId": "153",
+    "name": "Låda 194",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 194"
+  },
+  {
+    "id": "158",
+    "parentId": "112",
+    "name": "Rack 13",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 13"
+  },
+  {
+    "id": "159",
+    "parentId": "158",
+    "name": "Låda 199",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 199"
+  },
+  {
+    "id": "160",
+    "parentId": "158",
+    "name": "Låda 201",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 201"
+  },
+  {
+    "id": "161",
+    "parentId": "158",
+    "name": "Låda 203",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 203"
+  },
+  {
+    "id": "162",
+    "parentId": "158",
+    "name": "Låda 205",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 205"
+  },
+  {
+    "id": "163",
+    "parentId": "112",
+    "name": "Rack 14",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 14"
+  },
+  {
+    "id": "164",
+    "parentId": "163",
+    "name": "Låda 212",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 212"
+  },
+  {
+    "id": "165",
+    "parentId": "163",
+    "name": "Låda 214",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 214"
+  },
+  {
+    "id": "166",
+    "parentId": "163",
+    "name": "Låda 217",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 217"
+  },
+  {
+    "id": "167",
+    "parentId": "163",
+    "name": "Låda 220",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 220"
+  },
+  {
+    "id": "168",
+    "parentId": "163",
+    "name": "Låda 221",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 221"
+  },
+  {
+    "id": "169",
+    "parentId": "112",
+    "name": "Rack 15",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 15"
+  },
+  {
+    "id": "170",
+    "parentId": "169",
+    "name": "Låda 224",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 224"
+  },
+  {
+    "id": "171",
+    "parentId": "169",
+    "name": "Låda 227",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 227"
+  },
+  {
+    "id": "172",
+    "parentId": "112",
+    "name": "Rack 16",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 16"
+  },
+  {
+    "id": "173",
+    "parentId": "172",
+    "name": "Låda 234",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 234"
+  },
+  {
+    "id": "174",
+    "parentId": "172",
+    "name": "Låda 237",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 237"
+  },
+  {
+    "id": "175",
+    "parentId": "172",
+    "name": "Låda 238",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 238"
+  },
+  {
+    "id": "176",
+    "parentId": "172",
+    "name": "Låda 239",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 239"
+  },
+  {
+    "id": "177",
+    "parentId": "111",
+    "name": "DNA-Frys 2",
+    "level": "Nivå 4",
+    "higherLevels": "DNA-Frys 2"
+  },
+  {
+    "id": "178",
+    "parentId": "177",
+    "name": "Rack 12",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 12"
+  },
+  {
+    "id": "179",
+    "parentId": "178",
+    "name": "Låda 189",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 189"
+  },
+  {
+    "id": "180",
+    "parentId": "178",
+    "name": "Låda 192",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 192"
+  },
+  {
+    "id": "181",
+    "parentId": "178",
+    "name": "Låda 193",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 193"
+  },
+  {
+    "id": "182",
+    "parentId": "178",
+    "name": "Låda 194",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 194"
+  },
+  {
+    "id": "183",
+    "parentId": "177",
+    "name": "Rack 18",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 18"
+  },
+  {
+    "id": "184",
+    "parentId": "183",
+    "name": "Låda 271",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 271"
+  },
+  {
+    "id": "185",
+    "parentId": "183",
+    "name": "Låda 272",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 272"
+  },
+  {
+    "id": "186",
+    "parentId": "183",
+    "name": "Låda 273",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 273"
+  },
+  {
+    "id": "187",
+    "parentId": "183",
+    "name": "Låda 274",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 274"
+  },
+  {
+    "id": "188",
+    "parentId": "183",
+    "name": "Låda 275",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 275"
+  },
+  {
+    "id": "189",
+    "parentId": "177",
+    "name": "Rack 19",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 19"
+  },
+  {
+    "id": "190",
+    "parentId": "189",
+    "name": "Låda 280",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 280"
+  },
+  {
+    "id": "191",
+    "parentId": "189",
+    "name": "Låda 282",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 282"
+  },
+  {
+    "id": "192",
+    "parentId": "189",
+    "name": "Låda 285",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 285"
+  },
+  {
+    "id": "193",
+    "parentId": "189",
+    "name": "Låda 286",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 286"
+  },
+  {
+    "id": "194",
+    "parentId": "177",
+    "name": "Rack 20",
+    "level": "Nivå 5",
+    "higherLevels": "Rack 20"
+  },
+  {
+    "id": "195",
+    "parentId": "194",
+    "name": "Låda 290",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 290"
+  },
+  {
+    "id": "196",
+    "parentId": "194",
+    "name": "Låda 291",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 291"
+  },
+  {
+    "id": "197",
+    "parentId": "194",
+    "name": "Låda 293",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 293"
+  },
+  {
+    "id": "198",
+    "parentId": "194",
+    "name": "Låda 294",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 294"
+  },
+  {
+    "id": "199",
+    "parentId": "194",
+    "name": "Låda 295",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 295"
+  },
+  {
+    "id": "200",
+    "parentId": "194",
+    "name": "Låda 297",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 297"
+  },
+  {
+    "id": "201",
+    "parentId": "194",
+    "name": "Låda 299",
+    "level": "Nivå 6",
+    "higherLevels": "Låda 299"
+  },
+  {
+    "id": "202",
+    "parentId": "1",
+    "name": "Norra flygeln Plan 3",
+    "level": "Nivå 2",
+    "higherLevels": "Norra flygeln Plan 3"
+  },
+  {
+    "id": "203",
+    "parentId": "202",
+    "name": "Frysrum Anl:22",
+    "level": "Nivå 3",
+    "higherLevels": "Frysrum Anl:22"
+  },
+  {
+    "id": "204",
+    "parentId": "203",
+    "name": "Hylla 1",
+    "level": "Nivå 4",
+    "higherLevels": "Hylla 1"
+  },
+  {
+    "id": "205",
+    "parentId": "203",
+    "name": "Hylla 2",
+    "level": "Nivå 4",
+    "higherLevels": "Hylla 2"
+  },
+  {
+    "id": "206",
+    "parentId": "203",
+    "name": "Hylla 3",
+    "level": "Nivå 4",
+    "higherLevels": "Hylla 3"
+  },
+  {
+    "id": "207",
+    "parentId": "203",
+    "name": "Hylla 4",
+    "level": "Nivå 4",
+    "higherLevels": "Hylla 4"
+  },
+  {
+    "id": "208",
+    "parentId": "203",
+    "name": "Låda 115",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 115"
+  },
+  {
+    "id": "209",
+    "parentId": "203",
+    "name": "Låda 118",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 118"
+  },
+  {
+    "id": "210",
+    "parentId": "203",
+    "name": "Låda 134",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 134"
+  },
+  {
+    "id": "211",
+    "parentId": "203",
+    "name": "Låda 265",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 265"
+  },
+  {
+    "id": "212",
+    "parentId": "203",
+    "name": "Låda 300",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 300"
+  },
+  {
+    "id": "213",
+    "parentId": "203",
+    "name": "Låda 309",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 309"
+  },
+  {
+    "id": "214",
+    "parentId": "203",
+    "name": "Låda 353",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 353"
+  },
+  {
+    "id": "215",
+    "parentId": "203",
+    "name": "Låda 356",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 356"
+  },
+  {
+    "id": "216",
+    "parentId": "203",
+    "name": "Låda 38",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 38"
+  },
+  {
+    "id": "217",
+    "parentId": "203",
+    "name": "Pallen",
+    "level": "Nivå 4",
+    "higherLevels": "Pallen"
+  },
+  {
+    "id": "218",
+    "parentId": "203",
+    "name": "frys 7",
+    "level": "Nivå 4",
+    "higherLevels": "frys 7"
+  },
+  {
+    "id": "219",
+    "parentId": "202",
+    "name": "Konservatorsverkstan 2387",
+    "level": "Nivå 3",
+    "higherLevels": "Konservatorsverkstan 2387"
+  },
+  {
+    "id": "220",
+    "parentId": "219",
+    "name": "Frys 7",
+    "level": "Nivå 4",
+    "higherLevels": "Frys 7"
+  },
+  {
+    "id": "221",
+    "parentId": "219",
+    "name": "Frys 8",
+    "level": "Nivå 4",
+    "higherLevels": "Frys 8"
+  },
+  {
+    "id": "222",
+    "parentId": "219",
+    "name": "Frys 9",
+    "level": "Nivå 4",
+    "higherLevels": "Frys 9"
+  },
+  {
+    "id": "223",
+    "parentId": "219",
+    "name": "Hylla 1",
+    "level": "Nivå 4",
+    "higherLevels": "Hylla 1"
+  },
+  {
+    "id": "224",
+    "parentId": "219",
+    "name": "Låda 106",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 106"
+  },
+  {
+    "id": "225",
+    "parentId": "219",
+    "name": "Låda 115",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 115"
+  },
+  {
+    "id": "226",
+    "parentId": "219",
+    "name": "Låda 31",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 31"
+  },
+  {
+    "id": "227",
+    "parentId": "219",
+    "name": "Låda 32",
+    "level": "Nivå 4",
+    "higherLevels": "Låda 32"
+  },
+  {
+    "id": "228",
+    "parentId": "1",
+    "name": "Norra flygeln Plan 4",
+    "level": "Nivå 2",
+    "higherLevels": "Norra flygeln Plan 4"
+  },
+  {
+    "id": "229",
+    "parentId": "228",
+    "name": "Bensalen 2414, 2423",
+    "level": "Nivå 3",
+    "higherLevels": "Bensalen 2414, 2423"
+  },
+  {
+    "id": "230",
+    "parentId": "229",
+    "name": "Skåp",
+    "level": "Nivå 4",
+    "higherLevels": "Skåp"
+  },
+  {
+    "id": "231",
+    "parentId": "229",
+    "name": "Tavla 15",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 15"
+  },
+  {
+    "id": "232",
+    "parentId": "229",
+    "name": "Tavla 16",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 16"
+  },
+  {
+    "id": "233",
+    "parentId": "229",
+    "name": "Tavla 23",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 23"
+  },
+  {
+    "id": "234",
+    "parentId": "229",
+    "name": "Tavla 24",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 24"
+  },
+  {
+    "id": "235",
+    "parentId": "229",
+    "name": "Tavla 25",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 25"
+  },
+  {
+    "id": "236",
+    "parentId": "229",
+    "name": "Tavla 26",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 26"
+  },
+  {
+    "id": "237",
+    "parentId": "229",
+    "name": "Tavla 27",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 27"
+  },
+  {
+    "id": "238",
+    "parentId": "229",
+    "name": "Tavla 3",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 3"
+  },
+  {
+    "id": "239",
+    "parentId": "229",
+    "name": "Tavla 30",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 30"
+  },
+  {
+    "id": "240",
+    "parentId": "229",
+    "name": "Tavla 30/24",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 30/24"
+  },
+  {
+    "id": "241",
+    "parentId": "229",
+    "name": "Tavla 32",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 32"
+  },
+  {
+    "id": "242",
+    "parentId": "229",
+    "name": "Tavla 34",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 34"
+  },
+  {
+    "id": "243",
+    "parentId": "229",
+    "name": "Tavla 36",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 36"
+  },
+  {
+    "id": "244",
+    "parentId": "229",
+    "name": "Tavla 37",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 37"
+  },
+  {
+    "id": "245",
+    "parentId": "229",
+    "name": "Tavla 38",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 38"
+  },
+  {
+    "id": "246",
+    "parentId": "229",
+    "name": "Tavla 45",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 45"
+  },
+  {
+    "id": "247",
+    "parentId": "229",
+    "name": "Tavla 51",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 51"
+  },
+  {
+    "id": "248",
+    "parentId": "229",
+    "name": "Tavla 53",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 53"
+  },
+  {
+    "id": "249",
+    "parentId": "229",
+    "name": "Tavla 54",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 54"
+  },
+  {
+    "id": "250",
+    "parentId": "229",
+    "name": "Tavla 55",
+    "level": "Nivå 4",
+    "higherLevels": "Tavla 55"
+  },
+  {
+    "id": "251",
+    "parentId": "228",
+    "name": "Konservatorsverkstan 2388",
+    "level": "Nivå 3",
+    "higherLevels": "Konservatorsverkstan 2388"
+  },
+  {
+    "id": "252",
+    "parentId": "251",
+    "name": "frys 8",
+    "level": "Nivå 4",
+    "higherLevels": "frys 8"
+  },
+  {
+    "id": "253",
+    "parentId": "1",
+    "name": "Other",
+    "level": "Nivå 2",
+    "higherLevels": "Other"
+  },
+  {
+    "id": "254",
+    "parentId": "253",
+    "name": "Annan Institution",
+    "level": "Nivå 3",
+    "higherLevels": "Annan Institution"
+  },
+  {
+    "id": "255",
+    "parentId": "253",
+    "name": "I utställningen",
+    "level": "Nivå 3",
+    "higherLevels": "I utställningen"
+  },
+  {
+    "id": "256",
+    "parentId": "253",
+    "name": "Paleobiologi",
+    "level": "Nivå 3",
+    "higherLevels": "Paleobiologi"
+  },
+  {
+    "id": "257",
+    "parentId": "253",
+    "name": "Utlånad",
+    "level": "Nivå 3",
+    "higherLevels": "Utlånad"
+  },
+  {
+    "id": "258",
+    "parentId": "257",
+    "name": "L 9",
+    "level": "Nivå 4",
+    "higherLevels": "L 9"
+  },
+  {
+    "id": "259",
+    "parentId": "1",
+    "name": "Södra flygeln Plan 7 (?)",
+    "level": "Nivå 2",
+    "higherLevels": "Södra flygeln Plan 7 (?)"
+  },
+  {
+    "id": "260",
+    "parentId": "1",
+    "name": "Våtmagasin Plan 2",
+    "level": "Nivå 2",
+    "higherLevels": "Våtmagasin Plan 2"
+  },
+  {
+    "id": "261",
+    "parentId": "260",
+    "name": "Hisshallen [ingång från HB] ?",
+    "level": "Nivå 3",
+    "higherLevels": "Hisshallen [ingång från HB] ?"
+  },
+  {
+    "id": "262",
+    "parentId": "260",
+    "name": "Omistliga 1711",
+    "level": "Nivå 3",
+    "higherLevels": "Omistliga 1711"
+  },
+  {
+    "id": "263",
+    "parentId": "260",
+    "name": "Ospecificerat",
+    "level": "Nivå 3",
+    "higherLevels": "Ospecificerat"
+  },
+  {
+    "id": "264",
+    "parentId": "260",
+    "name": "Påfyllningsrummet 1706",
+    "level": "Nivå 3",
+    "higherLevels": "Påfyllningsrummet 1706"
+  },
+  {
+    "id": "265",
+    "parentId": "260",
+    "name": "Våtsamling 1702",
+    "level": "Nivå 3",
+    "higherLevels": "Våtsamling 1702"
+  }
+]

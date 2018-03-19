@@ -41,6 +41,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "react-scripts": "1.0.17",
+    "react-sortable-tree": "^2.1.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
     "redux-logger": "^3.0.6",

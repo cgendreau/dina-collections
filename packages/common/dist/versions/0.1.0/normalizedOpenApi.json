@@ -1954,6 +1954,26 @@
           },
           {
             "in": "query",
+            "name": "relationships",
+            "description": "Relationships to add to the response. Add 0 or many",
+            "example": [
+              "children",
+              "parent"
+            ],
+            "schema": {
+              "items": {
+                "enum": [
+                  "all",
+                  "children",
+                  "parent"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
             "name": "limit",
             "description": "Limit the result",
             "schema": {
@@ -4286,6 +4306,15 @@
         "parameters": [
           {
             "in": "query",
+            "name": "filter[locationText]",
+            "description": "Filter by location text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "exampleId",
             "description": "Set to return a specific example. If example dont exist 404 will be returned. Only active when combined with mock parameter",
             "schema": {
@@ -4307,12 +4336,16 @@
             "name": "relationships",
             "description": "Relationships to add to the response. Add 0 or many",
             "example": [
+              "children",
+              "parent",
               "physicalUnits"
             ],
             "schema": {
               "items": {
                 "enum": [
                   "all",
+                  "children",
+                  "parent",
                   "physicalUnits"
                 ],
                 "type": "string"
@@ -4513,12 +4546,16 @@
             "name": "relationships",
             "description": "Relationships to add to the response. Add 0 or many",
             "example": [
+              "children",
+              "parent",
               "physicalUnits"
             ],
             "schema": {
               "items": {
                 "enum": [
                   "all",
+                  "children",
+                  "parent",
                   "physicalUnits"
                 ],
                 "type": "string"
@@ -11842,6 +11879,69 @@
               },
               "relationships": {
                 "properties": {
+                  "children": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "storageLocation"
+                              ],
+                              "example": "storageLocation",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parent": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "type": "null"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    ],
+                    "type": "object"
+                  },
                   "physicalUnits": {
                     "additionalProperties": false,
                     "properties": {
@@ -11921,6 +12021,69 @@
               },
               "relationships": {
                 "properties": {
+                  "children": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "storageLocation"
+                              ],
+                              "example": "storageLocation",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parent": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "type": "null"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    ],
+                    "type": "object"
+                  },
                   "physicalUnits": {
                     "additionalProperties": false,
                     "properties": {
@@ -15278,6 +15441,69 @@
               },
               "relationships": {
                 "properties": {
+                  "children": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "storageLocation"
+                              ],
+                              "example": "storageLocation",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parent": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "type": "null"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    ],
+                    "type": "object"
+                  },
                   "physicalUnits": {
                     "additionalProperties": false,
                     "properties": {
@@ -15351,6 +15577,69 @@
               },
               "relationships": {
                 "properties": {
+                  "children": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "storageLocation"
+                              ],
+                              "example": "storageLocation",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parent": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "type": "null"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    ],
+                    "type": "object"
+                  },
                   "physicalUnits": {
                     "additionalProperties": false,
                     "properties": {
@@ -15470,6 +15759,69 @@
               },
               "relationships": {
                 "properties": {
+                  "children": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "example": "1234",
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "storageLocation"
+                              ],
+                              "example": "storageLocation",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parent": {
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "data": {
+                            "type": "null"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    ],
+                    "type": "object"
+                  },
                   "physicalUnits": {
                     "additionalProperties": false,
                     "properties": {
@@ -15545,6 +15897,69 @@
                 },
                 "relationships": {
                   "properties": {
+                    "children": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "items": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "example": "1234",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "storageLocation"
+                                ],
+                                "example": "storageLocation",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "parent": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "data": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "example": "1234",
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "storageLocation"
+                                  ],
+                                  "example": "storageLocation",
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "data": {
+                              "type": "null"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      ],
+                      "type": "object"
+                    },
                     "physicalUnits": {
                       "additionalProperties": false,
                       "properties": {

@@ -8,8 +8,11 @@ export const moduleOrder = [
   'registerMammal',
   'login',
   'settings',
+  'storage',
+  'taxonomyView',
   'docs',
   'pageNotFound',
+  'localities',
 ]
 
 export const type = 'view'

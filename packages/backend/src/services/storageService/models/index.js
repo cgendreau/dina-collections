@@ -1,3 +1,4 @@
+const loadInitialData = require('./loadInitialData')
 const createModel = require('../../../lib/sequelize/models/factories/versionedDocumentModel')
 
 const physicalUnitModelFactory = function physicalUnit({ sequelize }) {
@@ -24,6 +25,16 @@ const setupRelations = function setupRelations({ models }) {
     as: 'physicalUnits',
     foreignKey: 'storageLocationVersionId',
   })
+  storageLocation.Model.hasMany(storageLocation.Model, {
+    as: 'children',
+    foreignKey: 'parentVersionId',
+  })
+  storageLocation.Model.belongsTo(storageLocation.Model, {
+    as: 'parent',
+    foreignKey: 'parentVersionId',
+    targetKey: 'versionId',
+  })
+
   physicalUnit.Model.belongsTo(storageLocation.Model, {
     as: 'storageLocation',
     foreignKey: 'storageLocationVersionId',
@@ -43,5 +54,9 @@ module.exports = [
   {
     factory: setupRelations,
     name: 'setupRelations',
+  },
+  {
+    factory: loadInitialData,
+    name: 'loadInitialData',
   },
 ]

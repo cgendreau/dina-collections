@@ -45,6 +45,10 @@
     "models": {
       "en": "models",
       "sv": "modeller"
+    },
+    "storage": {
+      "en": "storage",
+      "sv": "förvaring"
     }
   }
 }

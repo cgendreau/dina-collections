@@ -15,6 +15,9 @@ import LookupMammals from '../lookupMammals/Async'
 import PageNotFound from '../pageNotFound/Async'
 import RegisterMammal from '../registerMammal/Async'
 import Settings from '../settings/Async'
+import Storage from '../storage/Async'
+import TaxonomyView from '../taxonomyView/Async'
+import Localities from '../localities/Async'
 
 const NAVIGATION_SIDEBAR_ITEMS = [
   {
@@ -34,6 +37,24 @@ const NAVIGATION_SIDEBAR_ITEMS = [
     icon: 'search',
     name: 'lookupMammals',
     path: '/app/mammals/lookup',
+  },
+  {
+    exact: true,
+    icon: 'archive',
+    name: 'storage',
+    path: '/app/storage',
+  },
+  {
+    exact: true,
+    icon: 'archive',
+    name: 'taxonomy',
+    path: '/app/taxonomy',
+  },
+  {
+    exact: true,
+    icon: 'archive',
+    name: 'localities',
+    path: '/app/localities',
   },
   {
     exact: true,
@@ -73,6 +94,18 @@ class App extends Component {
               component={EditMammal}
               path={`${match.url}/mammals/:specimenId/edit`}
             />
+            <Route component={Storage} exact path={`${match.url}/storage`} />
+            <Route
+              component={TaxonomyView}
+              exact
+              path={`${match.url}/taxonomy`}
+            />
+            <Route
+              component={Localities}
+              exact
+              path={`${match.url}/localities`}
+            />
+
             <Route component={Settings} exact path={`${match.url}/settings`} />
             <Route component={PageNotFound} />
           </Switch>
