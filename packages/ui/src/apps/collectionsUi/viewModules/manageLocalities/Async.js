@@ -3,7 +3,11 @@ import { MODULE_NAME } from './constants'
 
 export default createAsyncView({
   modules: () => {
-    return [import('domainModules/localityService'), import('coreModules/form')]
+    return [
+      import('domainModules/localityService'),
+      import('domainModules/locality'),
+      import('coreModules/form'),
+    ]
   },
   name: MODULE_NAME,
   view: () => {

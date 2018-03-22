@@ -6,6 +6,7 @@ export const moduleOrder = [
   'storageService',
   'taxonService',
   'collectionMammals',
+  'locality',
 ]
 
 export const type = 'module'

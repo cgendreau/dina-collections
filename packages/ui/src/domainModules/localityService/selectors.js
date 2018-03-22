@@ -22,6 +22,62 @@ export const getCuratedLocalities = createSelector(getResources, resources => {
   return resources.curatedLocalities
 })
 
+export const getCuratedLocalitiesArray = createSelector(
+  getCuratedLocalities,
+  curatedLocalitiesObject => {
+    return Object.keys(curatedLocalitiesObject).map(key => {
+      return curatedLocalitiesObject[key]
+    })
+  }
+)
+
+export const getCuratedLocalitiesSortedArray = createSelector(
+  getCuratedLocalitiesArray,
+  curatedLocalitiesArray => {
+    return curatedLocalitiesArray.sort((a, b) => {
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
+      return 0
+    })
+  }
+)
+
+export const getCuratedLocalitiesArrayByFilter = createSelector(
+  getCuratedLocalitiesSortedArray,
+  getSecondArgument,
+  (curatedLocalitiesArray, filter = {}) => {
+    const {
+      searchQuery: searchQueryFilter,
+      limit: limitFilter,
+      group: groupFilter,
+    } = filter
+    let filteredCuratedLocalities = curatedLocalitiesArray
+    if (searchQueryFilter) {
+      const lowerCaseSearchQuery = searchQueryFilter.toLowerCase()
+      const firstLetterMatches = curatedLocalitiesArray.filter(({ name }) => {
+        return name.toLowerCase().indexOf(lowerCaseSearchQuery) === 0
+      })
+
+      const otherMatches = curatedLocalitiesArray.filter(({ name }) => {
+        return name.toLowerCase().indexOf(lowerCaseSearchQuery) > 0
+      })
+
+      filteredCuratedLocalities = [...firstLetterMatches, ...otherMatches]
+    }
+
+    if (groupFilter) {
+      filteredCuratedLocalities = filteredCuratedLocalities.filter(
+        ({ group }) => group === groupFilter
+      )
+    }
+
+    if (limitFilter) {
+      return filteredCuratedLocalities.slice(0, limitFilter)
+    }
+    return filteredCuratedLocalities
+  }
+)
+
 export const getCuratedLocality = createSelector(
   [getCuratedLocalities, getSecondArgument],
   (curatedLocalities, id) => {
