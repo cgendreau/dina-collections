@@ -1,24 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactList from 'react-list'
-import {
-  Button,
-  Container,
-  Grid,
-  Icon,
-  Item,
-  Label,
-  List,
-  Segment,
-} from 'semantic-ui-react'
+import { Button, Icon, Item } from 'semantic-ui-react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
 import { getCuratedLocalities as getCuratedLocalitiesAc } from 'domainModules/localityService/actionCreators'
 import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
-
-import ListFilter from './ListFilter'
-import Edit from './Edit'
 
 const mapStateToProps = state => {
   const filter = keyObjectGlobalSelectors.filter(state)
@@ -37,15 +25,13 @@ const mapDispatchToProps = {
 const propTypes = {
   curatedLocalities: PropTypes.array.isRequired,
   getCuratedLocalities: PropTypes.func.isRequired,
-  handleItemClick: PropTypes.func,
-  localityId: PropTypes.string,
-  mode: PropTypes.string.isRequired,
+  onItemClick: PropTypes.func,
 }
 
 const defaultProps = {
   curatedLocalities: [],
-  handleItemClick: undefined,
   localityId: '',
+  onItemClick: undefined,
 }
 
 class LocalityList extends Component {
@@ -56,16 +42,18 @@ class LocalityList extends Component {
     this.handleItemClick = this.handleItemClick.bind(this)
   }
   componentDidMount() {
-    this.props.getCuratedLocalities()
+    this.props.getCuratedLocalities({
+      queryParams: { relationships: ['parent'] },
+    })
   }
 
   handleItemClick(id, action) {
-    if (this.props.handleItemClick) {
-      this.props.handleItemClick(id, action)
+    if (this.props.onItemClick) {
+      this.props.onItemClick(id, action)
     }
   }
 
-  renderItem(index, key) {
+  renderItem(index) {
     const curatedLocality = this.props.curatedLocalities[index]
     return (
       <Item
@@ -105,32 +93,14 @@ class LocalityList extends Component {
   }
 
   render() {
-    const { mode, localityId } = this.props
     return (
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={8}>
-              <ListFilter />
-              <Segment green segmentui>
-                <div style={{ maxHeight: 500, overflow: 'auto' }}>
-                  <ReactList
-                    itemRenderer={this.renderItem}
-                    length={this.props.curatedLocalities.length}
-                    type="uniform"
-                  />
-                </div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              {mode === 'create' && <div>CREATE</div>}
-              {mode === 'list' && <div>LIST {localityId}</div>}
-              {mode === 'edit' && <Edit />}
-              {mode === 'view' && <div>VIEW {localityId}</div>}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <div style={{ maxHeight: 500, overflow: 'auto' }}>
+        <ReactList
+          itemRenderer={this.renderItem}
+          length={this.props.curatedLocalities.length}
+          type="uniform"
+        />
+      </div>
     )
   }
 }

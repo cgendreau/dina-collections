@@ -37,7 +37,7 @@ const NAVIGATION_SIDEBAR_ITEMS = [
     path: '/app/mammals/lookup',
   },
   {
-    exact: true,
+    exact: false,
     icon: 'map outline',
     name: 'manageLocalities',
     path: '/app/localities',

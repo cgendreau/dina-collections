@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
-import { List } from 'domainModules/locality/components'
+import { LocalityManager } from 'domainModules/locality/components'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -35,8 +35,11 @@ class ManageLocalities extends Component {
 
     return (
       <PageTemplate>
-        <List
-          handleItemClick={(itemId, action) => {
+        <LocalityManager
+          onBack={() => {
+            this.props.push(`/app/localities`)
+          }}
+          onItemClick={(itemId, action) => {
             if (action === 'edit') {
               this.props.push(`/app/localities/${itemId}/edit`)
             }

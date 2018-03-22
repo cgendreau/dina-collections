@@ -1,5 +1,6 @@
 import * as components from './components'
 import { actionTypes, constants, reducer } from './keyObjectModule'
+import translations from './translations.json'
 // import * as actionCreators from './actionCreators'
 // import * as actionTypes from './actionTypes'
 // import * as constants from './constants'
@@ -19,4 +20,4 @@ const name = constants.MODULE_NAME
 //   selectors,
 // }
 
-export { actionTypes, components, constants, name, reducer }
+export { actionTypes, components, constants, name, reducer, translations }

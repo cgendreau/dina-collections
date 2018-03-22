@@ -1,3 +1,3 @@
-import List from './List'
+import LocalityManager from './LocalityManager'
 
-export { List }
+export { LocalityManager }
