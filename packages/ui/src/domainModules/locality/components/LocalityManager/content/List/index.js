@@ -29,8 +29,9 @@ export class List extends Component {
             {this.props.listMode === 'list' && (
               <LocalityList onItemClick={this.props.onItemClick} />
             )}
+
             {this.props.listMode === 'tree' && (
-              <LocalityTree onItemClick={this.props.onItemClick} />
+               <LocalityTree onItemClick={this.props.onItemClick} />
             )}
           </Segment>
         </Grid.Column>

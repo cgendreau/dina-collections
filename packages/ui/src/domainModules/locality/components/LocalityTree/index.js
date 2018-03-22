@@ -1,114 +1,104 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactList from 'react-list'
-import { Button, Icon, Item } from 'semantic-ui-react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
-import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
+import { Button, Icon } from 'semantic-ui-react'
+import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
 import { getCuratedLocalities as getCuratedLocalitiesAc } from 'domainModules/localityService/actionCreators'
+import SortableTree, { getTreeFromFlatData } from 'react-sortable-tree'
+import 'react-sortable-tree/style.css'
 import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
 
 const mapStateToProps = state => {
-  const filter = keyObjectGlobalSelectors.filter(state)
   return {
-    curatedLocalities: localityServiceSelectors.getCuratedLocalitiesArrayByFilter(
-      state,
-      filter
-    ),
+    searchQuery: keyObjectGlobalSelectors['filter.searchQuery'](state),
   }
 }
 
 const mapDispatchToProps = {
-  getCuratedLocalities: getCuratedLocalitiesAc,
+  getCuratedLocalitiesAc,
 }
 
 const propTypes = {
-  curatedLocalities: PropTypes.array.isRequired,
-  getCuratedLocalities: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func,
+  getCuratedLocalitiesAc: PropTypes.func.isRequired,
 }
 
-const defaultProps = {
-  curatedLocalities: [],
-  localityId: '',
-  onItemClick: undefined,
-}
-
-class LocalityList extends Component {
+class Localities extends Component {
   constructor(props) {
     super(props)
-
-    this.renderItem = this.renderItem.bind(this)
-    this.handleItemClick = this.handleItemClick.bind(this)
+    this.state = {
+      treeData: [],
+    }
+    this.generateNodeProps = this.generateNodeProps.bind(this)
   }
-  componentDidMount() {
-    this.props.getCuratedLocalities({
-      queryParams: { relationships: ['parent'] },
-    })
-  }
-
-  handleItemClick(id, action) {
-    if (this.props.onItemClick) {
-      this.props.onItemClick(id, action)
+  generateNodeProps({ node, path }) {
+    return {
+      buttons: [
+        <Button
+          icon
+          onClick={() => {
+            this.props.onItemClick(node.id, 'edit')
+          }}
+        >
+          <Icon name="edit" />
+        </Button>,
+        <Button
+          icon
+          onClick={() => {
+            this.props.onItemClick(node.id, 'view')
+          }}
+        >
+          <Icon name="folder open" />
+        </Button>,
+      ],
     }
   }
 
-  renderItem(index) {
-    const curatedLocality = this.props.curatedLocalities[index]
-    return (
-      <Item
-        key={curatedLocality.id}
-        style={{
-          borderBottom: '1px solid rgba(34,36,38,.15)',
-          height: '50px',
-          paddingBottom: '5px',
-          paddingTop: '5px',
-        }}
-      >
-        <Item.Content>
-          <Item.Header as="h4">
-            {curatedLocality.name} ({curatedLocality.group})
-            <Button.Group basic floated="right" size="small">
-              <Button
-                icon
-                onClick={() => {
-                  this.handleItemClick(curatedLocality.id, 'edit')
-                }}
-              >
-                <Icon name="edit" />
-              </Button>
-              <Button
-                icon
-                onClick={() => {
-                  this.handleItemClick(curatedLocality.id, 'view')
-                }}
-              >
-                <Icon name="folder open" />
-              </Button>
-            </Button.Group>
-          </Item.Header>
-        </Item.Content>
-      </Item>
-    )
-  }
+  componentWillMount() {
+    this.props
+      .getCuratedLocalitiesAc({
+        queryParams: { relationships: ['parent'] },
+      })
+      .then(localities => {
+        const subtitle = '123'
 
+        const flatData = localities.map(locality => {
+          return {
+            id: locality.id,
+            parentId: (locality.parent && locality.parent.id) || '0',
+            subtitle,
+            title: locality.name,
+          }
+        })
+        const parent = {
+          title: 'Earth',
+          id: '0',
+        }
+
+        const treeData = getTreeFromFlatData({
+          flatData: [parent, ...flatData],
+          rootKey: '0',
+        })
+        this.setState({
+          treeData,
+        })
+      })
+  }
   render() {
+    const { treeData } = this.state
     return (
-      <div style={{ maxHeight: 400, overflow: 'auto' }}>
-        <h1>tree</h1>
-        <ReactList
-          itemRenderer={this.renderItem}
-          length={this.props.curatedLocalities.length}
-          type="uniform"
+      <div style={{ height: '400px' }}>
+        <SortableTree
+          expandOnlySearchedNodes
+          generateNodeProps={this.generateNodeProps}
+          onChange={newTreeData => this.setState({ treeData: newTreeData })}
+          searchQuery={this.props.searchQuery}
+          treeData={treeData}
         />
       </div>
     )
   }
 }
 
-LocalityList.propTypes = propTypes
-LocalityList.defaultProps = defaultProps
+Localities.propTypes = propTypes
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(
-  LocalityList
-)
+export default connect(mapStateToProps, mapDispatchToProps)(Localities)
