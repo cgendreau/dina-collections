@@ -29,11 +29,15 @@ const createDelActionHandlers = delActionTypes => {
   }, {})
 }
 
-export default function createReducer(actionTypesMap) {
+export default function createReducer({ actionTypesMap, initialValues = {} }) {
   const delActionHandlers = createDelActionHandlers(actionTypesMap.del)
   const setActionHandlers = createSetActionHandlers(actionTypesMap.set)
 
-  return function reducer(state = {}, action) {
+  const getInitialValues = () => {
+    return JSON.parse(JSON.stringify(initialValues))
+  }
+
+  return function reducer(state = getInitialValues(), action) {
     const { type } = action
 
     if (delActionHandlers[type]) {

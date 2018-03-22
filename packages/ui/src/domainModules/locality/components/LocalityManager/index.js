@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
 
 import SplitView from './views/Split'
 import ModalView from './views/Modal'
@@ -21,6 +23,12 @@ const defaultProps = {
   viewMode: 'modal',
   localityId: '',
   onItemClick: undefined,
+}
+
+const mapStateToProps = state => {
+  return {
+    viewMode: keyObjectGlobalSelectors.viewMode(state),
+  }
 }
 
 class LocalityManager extends Component {
@@ -78,4 +86,4 @@ class LocalityManager extends Component {
 LocalityManager.propTypes = propTypes
 LocalityManager.defaultProps = defaultProps
 
-export default LocalityManager
+export default connect(mapStateToProps)(LocalityManager)

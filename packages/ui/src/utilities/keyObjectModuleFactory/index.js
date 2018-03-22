@@ -5,7 +5,7 @@ import createGlobalSelectors from './createGlobalSelectors'
 import createReducer from './createReducer'
 import createSelectors from './createSelectors'
 
-export default function({ name, keys = [] }) {
+export default function({ initialValues, keys = [], name }) {
   const actionPrefix = 'LOCALITY_KEY_OBJECT'
 
   const constants = createConstants({
@@ -19,7 +19,7 @@ export default function({ name, keys = [] }) {
 
   const actionCreators = createActionCreators(actionTypesMap)
 
-  const reducer = createReducer(actionTypesMap)
+  const reducer = createReducer({ actionTypesMap, initialValues })
   const selectors = createSelectors({ keys, name })
 
   const actionTypes = {

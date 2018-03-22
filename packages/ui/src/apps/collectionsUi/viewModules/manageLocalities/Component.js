@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
-import { LocalityManager } from 'domainModules/locality/components'
+import { LocalityManager, ViewPicker } from 'domainModules/locality/components'
+
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -35,6 +36,7 @@ class ManageLocalities extends Component {
 
     return (
       <PageTemplate>
+        <ViewPicker />
         <LocalityManager
           onBack={() => {
             this.props.push(`/app/localities`)

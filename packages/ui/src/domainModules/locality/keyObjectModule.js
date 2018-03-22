@@ -7,7 +7,17 @@ const {
   globalSelectors,
   reducer,
 } = keyObjectModuleFactory({
-  keys: ['filter', 'filter.searchQuery', 'filter.limit', 'filter.group'],
+  initialValues: {
+    listMode: 'list',
+  },
+  keys: [
+    'listMode',
+    'viewMode',
+    'filter',
+    'filter.searchQuery',
+    'filter.limit',
+    'filter.group',
+  ],
   name: 'locality',
 })
 

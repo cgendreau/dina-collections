@@ -1,3 +1,4 @@
 import LocalityManager from './LocalityManager'
+import ViewPicker from './LocalityManager/ViewPicker'
 
-export { LocalityManager }
+export { LocalityManager, ViewPicker }

@@ -95,6 +95,7 @@ class LocalityList extends Component {
   render() {
     return (
       <div style={{ maxHeight: 400, overflow: 'auto' }}>
+        <h1>tree</h1>
         <ReactList
           itemRenderer={this.renderItem}
           length={this.props.curatedLocalities.length}
