@@ -9,7 +9,7 @@ import { getCuratedLocalities as getCuratedLocalitiesAc } from 'domainModules/lo
 import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
 
 const mapStateToProps = state => {
-  const filter = keyObjectGlobalSelectors.filter(state)
+  const filter = keyObjectGlobalSelectors.get.filter(state)
   return {
     curatedLocalities: localityServiceSelectors.getCuratedLocalitiesArrayByFilter(
       state,

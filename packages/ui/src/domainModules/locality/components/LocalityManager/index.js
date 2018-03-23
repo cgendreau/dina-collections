@@ -2,99 +2,67 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
+import { CrudManager } from 'coreModules/crudManager/components'
 
-import SplitView from './views/Split'
-import ModalView from './views/Modal'
-import SingleView from './views/Single'
+// import SplitView from './views/Split'
+// import ModalView from './views/Modal'
+// import SingleView from './views/Single'
 
-import CreateContent from './content/Create'
+// import CreateContent from './content/Create'
 import EditContent from './content/Edit'
-import InspectContent from './content/Inspect'
+// import InspectContent from './content/Inspect'
 import ListContent from './content/List'
 
 const propTypes = {
-  viewMode: PropTypes.oneOf(['modal', 'single', 'split']),
+  action: PropTypes.oneOf(['create', 'edit', 'inspect', 'explore']).isRequired,
   localityId: PropTypes.string,
-  mode: PropTypes.string.isRequired,
-  onItemClick: PropTypes.func,
+  onItemInteraction: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
-  viewMode: 'modal',
   localityId: '',
-  onItemClick: undefined,
 }
 
 const mapStateToProps = state => {
   return {
-    viewMode: keyObjectGlobalSelectors.viewMode(state),
+    viewMode: keyObjectGlobalSelectors.get.viewMode(state),
   }
 }
 
 class LocalityManager extends Component {
-  render() {
-    const { viewMode, displayMode, mode, localityId } = this.props
-
-    const displayList = !(viewMode === 'single' && mode !== 'list')
-
-    const ListContentComponent = displayList ? (
-      <ListContent
-        activeLocalityId={localityId}
-        onItemClick={this.props.onItemClick}
+  constructor(props) {
+    super(props)
+    this.renderEdit = this.renderEdit.bind(this)
+    this.renderExplore = this.renderExplore.bind(this)
+  }
+  renderEdit() {
+    return (
+      <EditContent
+        localityId={this.props.localityId}
+        onItemInteraction={this.props.onItemInteraction}
       />
-    ) : null
+    )
+  }
+  renderExplore() {
+    return (
+      <ListContent
+        activeLocalityId={this.props.localityId}
+        onItemInteraction={this.props.onItemInteraction}
+      />
+    )
+  }
 
-    let ActionComponent = null
-
-    if (mode === 'create') {
-      ActionComponent = <CreateContent onBack={this.props.onBack} />
-    }
-
-    if (mode === 'edit') {
-      ActionComponent = (
-        <EditContent
-          pickPrev={this.props.pickPrev}
-          pickNext={this.props.pickNext}
-          localityId={localityId}
-          onBack={this.props.onBack}
-        />
-      )
-    }
-
-    if (mode === 'view') {
-      ActionComponent = (
-        <InspectContent
-          pickPrev={this.props.pickPrev}
-          pickNext={this.props.pickNext}
-          onBack={this.props.onBack}
-          localityId={localityId}
-        />
-      )
-    }
-
-    if (viewMode === 'split') {
-      return (
-        <SplitView
-          leftContent={ListContentComponent}
-          rightContent={ActionComponent}
-        />
-      )
-    }
-
-    if (viewMode === 'single') {
-      return <SingleView component={ListContentComponent || ActionComponent} />
-    }
-
-    if (viewMode === 'modal') {
-      return (
-        <ModalView
-          onBack={this.props.onBack}
-          backgroundContent={ListContentComponent}
-          modalComponent={ActionComponent}
-        />
-      )
-    }
-    return null
+  render() {
+    const { action } = this.props
+    return (
+      <CrudManager
+        action={action}
+        crudManagerId="locality"
+        renderEdit={this.renderEdit}
+        renderExplore={this.renderExplore}
+        viewMode="single"
+      />
+    )
   }
 }
 

@@ -6,56 +6,52 @@ import { Button, Icon } from 'semantic-ui-react'
 import {
   actionCreators as keyObjectActionCreators,
   globalSelectors as keyObjectGlobalSelectors,
-} from 'domainModules/locality/keyObjectModule'
+} from 'coreModules/crudManager/keyObjectModule'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, { crudManagerId }) => {
   return {
-    listMode: keyObjectGlobalSelectors.get.listMode(state),
-    viewMode: keyObjectGlobalSelectors.get.viewMode(state),
+    viewMode: keyObjectGlobalSelectors.indexGet.viewMode(state, crudManagerId),
   }
 }
 
 const mapDispatchToProps = {
-  setListMode: keyObjectActionCreators.set.listMode,
-  setViewMode: keyObjectActionCreators.set.viewMode,
+  setViewMode: keyObjectActionCreators.indexSet.viewMode,
 }
 
 const propTypes = {
-  listMode: PropTypes.string.isRequired,
-  viewMode: PropTypes.string.isRequired,
+  crudManagerId: PropTypes.string.isRequired,
+  setViewMode: PropTypes.func.isRequired,
 }
 
 const defaultProps = {}
 
-const viewModes = ['split', 'single', 'modal']
-const listModes = ['tree', 'infinity-list', 'list']
-
 class ViewPicker extends Component {
   render() {
+    const { crudManagerId } = this.props
     return (
       <div style={{ marginBottom: 20 }}>
         <Button.Group>
           <Button
-            onClick={() => {
-              this.props.setViewMode('single')
-            }}
             icon
+            onClick={() => {
+              this.props.setViewMode(crudManagerId, 'single')
+            }}
           >
             <Icon name="stop" />
           </Button>
           <Button
-            onClick={() => {
-              this.props.setViewMode('split')
-            }}
             icon
+            onClick={() => {
+              this.props.setViewMode(crudManagerId, 'split')
+            }}
           >
             <Icon name="pause" />
           </Button>
           <Button
-            onClick={() => {
-              this.props.setViewMode('modal')
-            }}
             icon
+            onClick={() => {
+              this.props.setViewMode(crudManagerId, 'modal')
+            }}
           >
             <Icon name="eject" />
           </Button>

@@ -85,11 +85,8 @@ export const getNextCuratedLocalityIdFromFilter = createSelector(
     const currentIndex = curatedLocalitiesArray.findIndex(element => {
       return element.id === currentId
     })
-    console.log('currentIndex', currentIndex)
     const nextIndex = Number(currentIndex) + 1
-    console.log('nextIndex', nextIndex)
     const element = curatedLocalitiesArray[nextIndex]
-    console.log('element', element)
     return element.id
   }
 )

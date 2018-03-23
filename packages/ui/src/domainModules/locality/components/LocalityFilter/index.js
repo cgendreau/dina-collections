@@ -12,8 +12,8 @@ import { InputText } from 'coreModules/form/components'
 
 const mapStateToProps = state => {
   return {
-    filterGroup: keyObjectGlobalSelectors['filter.group'](state),
-    searchQuery: keyObjectGlobalSelectors['filter.searchQuery'](state),
+    filterGroup: keyObjectGlobalSelectors.get['filter.group'](state),
+    searchQuery: keyObjectGlobalSelectors.get['filter.searchQuery'](state),
   }
 }
 

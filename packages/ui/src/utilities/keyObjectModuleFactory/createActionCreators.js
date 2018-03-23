@@ -1,6 +1,64 @@
+const createDelActionCreators = delActionTypes => {
+  return Object.keys(delActionTypes).reduce((delActionCreators, key) => {
+    const actionType = delActionTypes[key].actionType
+
+    return {
+      ...delActionCreators,
+      [key]: () => {
+        return {
+          type: actionType,
+        }
+      },
+    }
+  }, {})
+}
+
+const createIndexDelActionCreators = delActionTypes => {
+  return Object.keys(delActionTypes).reduce((delActionCreators, key) => {
+    const actionType = delActionTypes[key].actionType
+
+    return {
+      ...delActionCreators,
+      [key]: index => {
+        if (index === undefined) {
+          throw new Error('Have to provide index')
+        }
+        return {
+          payload: {
+            index,
+          },
+          type: actionType,
+        }
+      },
+    }
+  }, {})
+}
+
+const createIndexSetActionCreators = setActionTypes => {
+  return Object.keys(setActionTypes).reduce((setActionCreators, key) => {
+    const actionType = setActionTypes[key].actionType
+
+    return {
+      ...setActionCreators,
+      [key]: (index, value) => {
+        if (index === undefined) {
+          throw new Error('Have to provide index')
+        }
+        return {
+          payload: {
+            index,
+            value,
+          },
+          type: actionType,
+        }
+      },
+    }
+  }, {})
+}
+
 const createSetActionCreators = setActionTypes => {
   return Object.keys(setActionTypes).reduce((setActionCreators, key) => {
-    const actionType = setActionTypes[key]
+    const actionType = setActionTypes[key].actionType
 
     return {
       ...setActionCreators,
@@ -14,24 +72,11 @@ const createSetActionCreators = setActionTypes => {
   }, {})
 }
 
-const createDelActionCreators = delActionTypes => {
-  return Object.keys(delActionTypes).reduce((delActionCreators, key) => {
-    const actionType = delActionTypes[key]
-
-    return {
-      ...delActionCreators,
-      [key]: () => {
-        return {
-          type: actionType,
-        }
-      },
-    }
-  }, {})
-}
-
-export default function createActionCreators(actionTypesMap) {
+export default function createActionCreators(keyMap) {
   return {
-    set: createSetActionCreators(actionTypesMap.set),
-    del: createDelActionCreators(actionTypesMap.del),
+    del: createDelActionCreators(keyMap.del),
+    indexDel: createIndexDelActionCreators(keyMap.indexDel),
+    indexSet: createIndexSetActionCreators(keyMap.indexSet),
+    set: createSetActionCreators(keyMap.set),
   }
 }

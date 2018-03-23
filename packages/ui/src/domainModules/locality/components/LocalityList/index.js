@@ -12,7 +12,7 @@ import {
 } from 'domainModules/locality/keyObjectModule'
 
 const mapStateToProps = state => {
-  const filter = keyObjectGlobalSelectors.filter(state)
+  const filter = keyObjectGlobalSelectors.get.filter(state)
   return {
     curatedLocalities: localityServiceSelectors.getCuratedLocalitiesArrayByFilter(
       state,
@@ -22,28 +22,31 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+  delFilterLimit: keyObjectActionCreators.del['filter.limit'],
   getCuratedLocalities: getCuratedLocalitiesAc,
   setFilterLimit: keyObjectActionCreators.set['filter.limit'],
-  delFilterLimit: keyObjectActionCreators.del['filter.limit'],
 }
 
 const propTypes = {
-  curatedLocalities: PropTypes.array.isRequired,
+  activeLocalityId: PropTypes.string,
+  curatedLocalities: PropTypes.array,
+  delFilterLimit: PropTypes.func.isRequired,
   getCuratedLocalities: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func,
+  onItemInteraction: PropTypes.func.isRequired,
+  setFilterLimit: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
+  activeLocalityId: '',
   curatedLocalities: [],
-  localityId: '',
   onItemClick: undefined,
 }
 
 const groupColorMap = {
-  country: 'teal',
-  province: 'blue',
   continent: 'violet',
+  country: 'teal',
   district: 'purple',
+  province: 'blue',
 }
 
 class LocalityList extends Component {
@@ -62,9 +65,9 @@ class LocalityList extends Component {
     this.props.delFilterLimit()
   }
 
-  handleItemClick(id, action) {
-    if (this.props.onItemClick) {
-      this.props.onItemClick(id, action)
+  handleItemClick(action, id) {
+    if (this.props.onItemInteraction) {
+      this.props.onItemInteraction(action, { id })
     }
   }
 
@@ -73,9 +76,9 @@ class LocalityList extends Component {
     return (
       <List
         divided
+        selection
         size="huge"
         style={{ minHeight: 505 }}
-        selection
         verticalAlign="middle"
       >
         {curatedLocalities.map(curatedLocality => {
@@ -96,7 +99,7 @@ class LocalityList extends Component {
                     icon
                     onClick={event => {
                       event.preventDefault()
-                      this.handleItemClick(curatedLocality.id, 'edit')
+                      this.handleItemClick('edit', curatedLocality.id)
                     }}
                   >
                     <Icon name="edit" />
@@ -105,7 +108,7 @@ class LocalityList extends Component {
                     icon
                     onClick={event => {
                       event.preventDefault()
-                      this.handleItemClick(curatedLocality.id, 'view')
+                      this.handleItemClick('inspect', curatedLocality.id)
                     }}
                   >
                     <Icon name="folder open" />

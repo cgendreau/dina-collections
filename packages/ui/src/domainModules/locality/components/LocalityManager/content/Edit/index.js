@@ -28,6 +28,7 @@ const mapDispatchToProps = {
 const propTypes = {
   curatedLocality: PropTypes.object,
   localityId: PropTypes.string.isRequired,
+  onItemInteraction: PropTypes.func.isRequired,
   updateCuratedLocality: PropTypes.func.isRequired,
 }
 
@@ -53,11 +54,7 @@ export class Edit extends Component {
     return (
       <Grid.Row>
         <Grid.Column width={16}>
-          <TempNavigation
-            onBack={this.props.onBack}
-            pickPrev={this.props.pickPrev}
-            pickNext={this.props.pickNext}
-          />
+          <TempNavigation onItemInteraction={this.props.onItemInteraction} />
         </Grid.Column>
         <Grid.Column width={16}>
           <Segment size="tiny" stacked style={{ minHeight: 505 }}>
@@ -65,8 +62,8 @@ export class Edit extends Component {
               <CuratedLocalityForm
                 displayBackButton
                 displayResetButton
-                onBack={this.props.onBack}
                 initialValues={initialValues}
+                onItemInteraction={this.props.onItemInteraction}
                 onSubmit={data => {
                   this.props
                     .updateCuratedLocality({
@@ -76,7 +73,7 @@ export class Edit extends Component {
                       },
                     })
                     .then(() => {
-                      this.props.onBack()
+                      this.props.onItemInteraction('submit-success')
                     })
                 }}
               />

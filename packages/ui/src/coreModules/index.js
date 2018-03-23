@@ -10,6 +10,7 @@ export const moduleOrder = [
   'logger',
   'notifications',
   'routing',
+  'crudManager',
   'size',
   'user',
   'keyboardShortcuts',

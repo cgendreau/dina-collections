@@ -13,7 +13,7 @@ const log = createLog('modules:user:ListForm')
 
 const mapStateToProps = state => {
   return {
-    listMode: keyObjectGlobalSelectors.listMode(state),
+    listMode: keyObjectGlobalSelectors.get.listMode(state),
   }
 }
 
@@ -28,20 +28,22 @@ export class List extends Component {
         <Grid.Column width={16}>
           <Segment size="tiny" stacked>
             {this.props.listMode === 'infinity-list' && (
-              <LocalityInfinityList onItemClick={this.props.onItemClick} />
+              <LocalityInfinityList
+                onItemInteraction={this.props.onItemInteraction}
+              />
             )}
 
             {this.props.listMode === 'list' && (
               <LocalityList
                 activeLocalityId={this.props.activeLocalityId}
-                onItemClick={this.props.onItemClick}
+                onItemInteraction={this.props.onItemInteraction}
               />
             )}
 
             {this.props.listMode === 'tree' && (
               <LocalityTree
                 activeLocalityId={this.props.activeLocalityId}
-                onItemClick={this.props.onItemClick}
+                onItemInteraction={this.props.onItemInteraction}
               />
             )}
           </Segment>

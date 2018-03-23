@@ -95,7 +95,7 @@ class App extends Component {
             />
             <Route
               component={ManageLocalities}
-              path={`${match.url}/localities/:localityId/view`}
+              path={`${match.url}/localities/:localityId/inspect`}
             />
             <Route component={Settings} exact path={`${match.url}/settings`} />
             <Route component={PageNotFound} />

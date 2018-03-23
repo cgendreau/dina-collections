@@ -10,7 +10,7 @@ import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/local
 
 const mapStateToProps = state => {
   return {
-    searchQuery: keyObjectGlobalSelectors['filter.searchQuery'](state),
+    searchQuery: keyObjectGlobalSelectors.get['filter.searchQuery'](state),
   }
 }
 

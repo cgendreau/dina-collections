@@ -1,36 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { Button, Dropdown, Grid, Form, Icon } from 'semantic-ui-react'
-import {
-  actionCreators as keyObjectActionCreators,
-  globalSelectors as keyObjectGlobalSelectors,
-} from 'domainModules/locality/keyObjectModule'
-
-import { InputText } from 'coreModules/form/components'
-
-const mapStateToProps = state => {
-  return {
-    filterGroup: keyObjectGlobalSelectors['filter.group'](state),
-    searchQuery: keyObjectGlobalSelectors['filter.searchQuery'](state),
-  }
-}
-
-const mapDispatchToProps = {
-  setFilterGroup: keyObjectActionCreators.set['filter.group'],
-  setListMode: keyObjectActionCreators.set.listMode,
-  setSearchQuery: keyObjectActionCreators.set['filter.searchQuery'],
-}
+import { Button, Grid, Form } from 'semantic-ui-react'
 
 const propTypes = {
-  filterGroup: PropTypes.string.isRequired,
-  searchQuery: PropTypes.string.isRequired,
-  setFilterGroup: PropTypes.func.isRequired,
-  setSearchQuery: PropTypes.func.isRequired,
+  onItemInteraction: PropTypes.func.isRequired,
+  showClose: PropTypes.bool.isRequired,
+  showPickNext: PropTypes.bool.isRequired,
+  showPickPrev: PropTypes.bool.isRequired,
 }
 
-const defaultProps = {}
+const defaultProps = {
+  showClose: true,
+  showPickNext: false,
+  showPickPrev: false,
+}
 
 class TmpNavigation extends Component {
   render() {
@@ -38,34 +21,36 @@ class TmpNavigation extends Component {
       <Form style={{ marginBottom: 10 }}>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={4} floated="left" textAlign="left">
+            <Grid.Column floated="left" textAlign="left" width={4}>
               <Button.Group>
-                {this.props.pickPrev && (
+                {this.props.showPickPrev && (
                   <Button
-                    onClick={() => {
-                      this.props.pickPrev()
-                    }}
-                    labelPosition="left"
-                    icon="left chevron"
                     content="Previous"
+                    icon="left chevron"
+                    labelPosition="left"
+                    onClick={() => {
+                      this.props.onItemInteraction('pickPrev')
+                    }}
+                  />
+                )}
+                {this.props.showClose && (
+                  <Button
+                    content="Close"
+                    icon="close"
+                    onClick={() => {
+                      this.props.onItemInteraction('close')
+                    }}
                   />
                 )}
 
-                <Button
-                  onClick={() => {
-                    this.props.onBack()
-                  }}
-                  icon="close"
-                  content="Close"
-                />
-                {this.props.pickNext && (
+                {this.props.showPickNext && (
                   <Button
-                    onClick={() => {
-                      this.props.pickNext()
-                    }}
-                    labelPosition="right"
-                    icon="right chevron"
                     content="Next"
+                    icon="right chevron"
+                    labelPosition="right"
+                    onClick={() => {
+                      this.props.onItemInteraction('pickNext')
+                    }}
                   />
                 )}
               </Button.Group>
@@ -80,6 +65,4 @@ class TmpNavigation extends Component {
 TmpNavigation.propTypes = propTypes
 TmpNavigation.defaultProps = defaultProps
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(
-  TmpNavigation
-)
+export default TmpNavigation
