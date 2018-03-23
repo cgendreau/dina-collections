@@ -12,7 +12,6 @@ export class ModalView extends Component {
       <React.Fragment>
         <Container>{backgroundContent}</Container>
         <Modal open={!!modalComponent} onClose={this.props.onBack}>
-          <Modal.Header>Some header</Modal.Header>
           <Modal.Content>{modalComponent}</Modal.Content>
         </Modal>
       </React.Fragment>

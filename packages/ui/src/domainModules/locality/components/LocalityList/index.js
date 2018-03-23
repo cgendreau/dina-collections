@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Icon, Label, List } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
@@ -53,7 +54,7 @@ class LocalityList extends Component {
   componentDidMount() {
     this.props.setFilterLimit(10)
     this.props.getCuratedLocalities({
-      queryParams: { relationships: ['parent'] },
+      queryParams: { relationships: ['all'] },
     })
   }
 
@@ -69,7 +70,6 @@ class LocalityList extends Component {
 
   render() {
     const { activeLocalityId, curatedLocalities } = this.props
-    console.log('activeLocalityId', activeLocalityId)
     return (
       <List
         divided
@@ -84,32 +84,36 @@ class LocalityList extends Component {
               active={activeLocalityId === curatedLocality.id}
               key={curatedLocality.id}
             >
-              <List.Content floated="right">
-                <Label
-                  color={groupColorMap[curatedLocality.group]}
-                  style={{ marginRight: 20 }}
-                >
-                  {curatedLocality.group}
-                </Label>
-                <Button
-                  icon
-                  onClick={() => {
-                    this.handleItemClick(curatedLocality.id, 'edit')
-                  }}
-                >
-                  <Icon name="edit" />
-                </Button>
-                <Button
-                  icon
-                  onClick={() => {
-                    this.handleItemClick(curatedLocality.id, 'view')
-                  }}
-                >
-                  <Icon name="folder open" />
-                </Button>
-              </List.Content>
+              <Link to={`/app/localities/${curatedLocality.id}/edit`}>
+                <List.Content floated="right">
+                  <Label
+                    color={groupColorMap[curatedLocality.group]}
+                    style={{ marginRight: 20 }}
+                  >
+                    {curatedLocality.group}
+                  </Label>
+                  <Button
+                    icon
+                    onClick={event => {
+                      event.preventDefault()
+                      this.handleItemClick(curatedLocality.id, 'edit')
+                    }}
+                  >
+                    <Icon name="edit" />
+                  </Button>
+                  <Button
+                    icon
+                    onClick={event => {
+                      event.preventDefault()
+                      this.handleItemClick(curatedLocality.id, 'view')
+                    }}
+                  >
+                    <Icon name="folder open" />
+                  </Button>
+                </List.Content>
+              </Link>
 
-              <List.Icon circular color="green" name="map" size="large" />
+              <List.Icon circular color="black" name="map" size="large" />
 
               <List.Content>{curatedLocality.name}</List.Content>
             </List.Item>

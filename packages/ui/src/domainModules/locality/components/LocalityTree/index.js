@@ -56,7 +56,7 @@ class Localities extends Component {
   componentWillMount() {
     this.props
       .getCuratedLocalitiesAc({
-        queryParams: { relationships: ['parent'] },
+        queryParams: { relationships: ['all'] },
       })
       .then(localities => {
         const subtitle = '123'

@@ -7,7 +7,6 @@ export default function redirectToPrev(currentId) {
       getState(),
       currentId
     )
-    console.log('nextId', nextId)
     dispatch(push(`/app/localities/${nextId}/edit`))
   }
 }

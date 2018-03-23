@@ -62,7 +62,14 @@ class LocalityManager extends Component {
     }
 
     if (mode === 'view') {
-      ActionComponent = <InspectContent localityId={localityId} />
+      ActionComponent = (
+        <InspectContent
+          pickPrev={this.props.pickPrev}
+          pickNext={this.props.pickNext}
+          onBack={this.props.onBack}
+          localityId={localityId}
+        />
+      )
     }
 
     if (viewMode === 'split') {

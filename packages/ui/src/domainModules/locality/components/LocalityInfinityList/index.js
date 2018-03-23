@@ -43,7 +43,7 @@ class LocalityList extends Component {
   }
   componentDidMount() {
     this.props.getCuratedLocalities({
-      queryParams: { relationships: ['parent'] },
+      queryParams: { relationships: ['all'] },
     })
   }
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import createLog from 'utilities/log'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createCuratedLocality as createCuratedLocalityAc } from 'domainModules/localityService/actionCreators'
-
 import CuratedLocalityForm from '../../../Form'
+import TempNavigation from '../../../TempNavigation'
 
 const log = createLog('modules:user:CreateForm')
 
@@ -22,24 +22,29 @@ export class Create extends Component {
   render() {
     log.render()
     return (
-      <Segment size="tiny" stacked>
-        <h1>Create</h1>
-
-        <CuratedLocalityForm
-          displayBackButton
-          displayResetButton
-          onBack={this.props.onBack}
-          onSubmit={data => {
-            this.props
-              .createCuratedLocality({
-                curatedLocality: data,
-              })
-              .then(() => {
-                this.props.onBack()
-              })
-          }}
-        />
-      </Segment>
+      <Grid.Row>
+        <Grid.Column width={16}>
+          <TempNavigation onBack={this.props.onBack} />
+        </Grid.Column>
+        <Grid.Column width={16}>
+          <Segment size="tiny" stacked style={{ minHeight: 505 }}>
+            <CuratedLocalityForm
+              displayBackButton
+              displayResetButton
+              onBack={this.props.onBack}
+              onSubmit={data => {
+                this.props
+                  .createCuratedLocality({
+                    curatedLocality: data,
+                  })
+                  .then(() => {
+                    this.props.onBack()
+                  })
+              }}
+            />
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
     )
   }
 }

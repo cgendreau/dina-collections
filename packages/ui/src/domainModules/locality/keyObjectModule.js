@@ -9,6 +9,7 @@ const {
 } = keyObjectModuleFactory({
   initialValues: {
     listMode: 'list',
+    viewMode: 'split',
   },
   keys: [
     'listMode',

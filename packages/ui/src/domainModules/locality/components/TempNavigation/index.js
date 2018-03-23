@@ -39,35 +39,35 @@ class TmpNavigation extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column width={4} floated="left" textAlign="left">
-              <Button.Group floated="left">
-                <Button
-                  onClick={() => {
-                    this.props.pickPrev()
-                  }}
-                  icon
-                >
-                  <Icon name="arrow left" />
-                </Button>
-                <Button
-                  onClick={() => {
-                    this.props.pickNext()
-                  }}
-                  icon
-                >
-                  <Icon name="arrow right" />
-                </Button>
-              </Button.Group>
-            </Grid.Column>
-            <Grid.Column width={4} floated="right" textAlign="right">
-              <Button.Group floated="right">
+              <Button.Group>
+                {this.props.pickPrev && (
+                  <Button
+                    onClick={() => {
+                      this.props.pickPrev()
+                    }}
+                    labelPosition="left"
+                    icon="left chevron"
+                    content="Previous"
+                  />
+                )}
+
                 <Button
                   onClick={() => {
                     this.props.onBack()
                   }}
-                  icon
-                >
-                  <Icon name="close" />
-                </Button>
+                  icon="close"
+                  content="Close"
+                />
+                {this.props.pickNext && (
+                  <Button
+                    onClick={() => {
+                      this.props.pickNext()
+                    }}
+                    labelPosition="right"
+                    icon="right chevron"
+                    content="Next"
+                  />
+                )}
               </Button.Group>
             </Grid.Column>
           </Grid.Row>
