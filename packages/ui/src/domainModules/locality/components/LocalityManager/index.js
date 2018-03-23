@@ -38,7 +38,10 @@ class LocalityManager extends Component {
     const displayList = !(viewMode === 'single' && mode !== 'list')
 
     const ListContentComponent = displayList ? (
-      <ListContent onItemClick={this.props.onItemClick} />
+      <ListContent
+        activeLocalityId={localityId}
+        onItemClick={this.props.onItemClick}
+      />
     ) : null
 
     let ActionComponent = null
@@ -49,7 +52,12 @@ class LocalityManager extends Component {
 
     if (mode === 'edit') {
       ActionComponent = (
-        <EditContent localityId={localityId} onBack={this.props.onBack} />
+        <EditContent
+          pickPrev={this.props.pickPrev}
+          pickNext={this.props.pickNext}
+          localityId={localityId}
+          onBack={this.props.onBack}
+        />
       )
     }
 

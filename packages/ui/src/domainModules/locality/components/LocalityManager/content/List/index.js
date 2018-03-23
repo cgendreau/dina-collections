@@ -4,6 +4,7 @@ import createLog from 'utilities/log'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
+import LocalityInfinityList from '../../../LocalityInfinityList'
 import LocalityList from '../../../LocalityList'
 import LocalityTree from '../../../LocalityTree'
 import LocalityFilter from '../../../LocalityFilter'
@@ -26,16 +27,26 @@ export class List extends Component {
         </Grid.Column>
         <Grid.Column width={16}>
           <Segment size="tiny" stacked>
+            {this.props.listMode === 'infinity-list' && (
+              <LocalityInfinityList onItemClick={this.props.onItemClick} />
+            )}
+
             {this.props.listMode === 'list' && (
-              <LocalityList onItemClick={this.props.onItemClick} />
+              <LocalityList
+                activeLocalityId={this.props.activeLocalityId}
+                onItemClick={this.props.onItemClick}
+              />
             )}
 
             {this.props.listMode === 'tree' && (
-               <LocalityTree onItemClick={this.props.onItemClick} />
+              <LocalityTree
+                activeLocalityId={this.props.activeLocalityId}
+                onItemClick={this.props.onItemClick}
+              />
             )}
           </Segment>
         </Grid.Column>
-        <Grid.Column width={16}>
+        <Grid.Column style={{ marginTop: 10 }} width={16}>
           <Link to="/app/localities/create">
             <Button>Create</Button>
           </Link>

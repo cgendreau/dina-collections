@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import createLog from 'utilities/log'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
 import { updateCuratedLocality as updateCuratedLocalityAc } from 'domainModules/localityService/actionCreators'
 import CuratedLocalityForm from '../../../Form'
+import TempNavigation from '../../../TempNavigation'
 
 const log = createLog('modules:user:EditForm')
 
@@ -50,30 +51,39 @@ export class Edit extends Component {
       : {}
     log.render()
     return (
-      <Segment size="tiny" stacked>
-        <h1>Edit</h1>
-
-        {curatedLocality && (
-          <CuratedLocalityForm
-            displayBackButton
-            displayResetButton
+      <Grid.Row>
+        <Grid.Column width={16}>
+          <TempNavigation
             onBack={this.props.onBack}
-            initialValues={initialValues}
-            onSubmit={data => {
-              this.props
-                .updateCuratedLocality({
-                  curatedLocality: {
-                    id: localityId,
-                    ...data,
-                  },
-                })
-                .then(() => {
-                  this.props.onBack()
-                })
-            }}
+            pickPrev={this.props.pickPrev}
+            pickNext={this.props.pickNext}
           />
-        )}
-      </Segment>
+        </Grid.Column>
+        <Grid.Column width={16}>
+          <Segment size="tiny" stacked style={{ minHeight: 505 }}>
+            {curatedLocality && (
+              <CuratedLocalityForm
+                displayBackButton
+                displayResetButton
+                onBack={this.props.onBack}
+                initialValues={initialValues}
+                onSubmit={data => {
+                  this.props
+                    .updateCuratedLocality({
+                      curatedLocality: {
+                        id: localityId,
+                        ...data,
+                      },
+                    })
+                    .then(() => {
+                      this.props.onBack()
+                    })
+                }}
+              />
+            )}
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
     )
   }
 }

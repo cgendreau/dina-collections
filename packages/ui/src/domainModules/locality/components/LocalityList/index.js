@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactList from 'react-list'
-import { Button, Icon, Item } from 'semantic-ui-react'
+import { Button, Icon, Label, List } from 'semantic-ui-react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
 import { getCuratedLocalities as getCuratedLocalitiesAc } from 'domainModules/localityService/actionCreators'
-import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
+import {
+  globalSelectors as keyObjectGlobalSelectors,
+  actionCreators as keyObjectActionCreators,
+} from 'domainModules/locality/keyObjectModule'
 
 const mapStateToProps = state => {
   const filter = keyObjectGlobalSelectors.filter(state)
@@ -20,6 +22,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getCuratedLocalities: getCuratedLocalitiesAc,
+  setFilterLimit: keyObjectActionCreators.set['filter.limit'],
+  delFilterLimit: keyObjectActionCreators.del['filter.limit'],
 }
 
 const propTypes = {
@@ -34,17 +38,27 @@ const defaultProps = {
   onItemClick: undefined,
 }
 
+const groupColorMap = {
+  country: 'teal',
+  province: 'blue',
+  continent: 'violet',
+  district: 'purple',
+}
+
 class LocalityList extends Component {
   constructor(props) {
     super(props)
-
-    this.renderItem = this.renderItem.bind(this)
     this.handleItemClick = this.handleItemClick.bind(this)
   }
   componentDidMount() {
+    this.props.setFilterLimit(10)
     this.props.getCuratedLocalities({
       queryParams: { relationships: ['parent'] },
     })
+  }
+
+  componentWillUnmount() {
+    this.props.delFilterLimit()
   }
 
   handleItemClick(id, action) {
@@ -53,54 +67,55 @@ class LocalityList extends Component {
     }
   }
 
-  renderItem(index) {
-    const curatedLocality = this.props.curatedLocalities[index]
-    return (
-      <Item
-        key={curatedLocality.id}
-        style={{
-          borderBottom: '1px solid rgba(34,36,38,.15)',
-          height: '50px',
-          paddingBottom: '5px',
-          paddingTop: '5px',
-        }}
-      >
-        <Item.Content>
-          <Item.Header as="h4">
-            {curatedLocality.name} ({curatedLocality.group})
-            <Button.Group basic floated="right" size="small">
-              <Button
-                icon
-                onClick={() => {
-                  this.handleItemClick(curatedLocality.id, 'edit')
-                }}
-              >
-                <Icon name="edit" />
-              </Button>
-              <Button
-                icon
-                onClick={() => {
-                  this.handleItemClick(curatedLocality.id, 'view')
-                }}
-              >
-                <Icon name="folder open" />
-              </Button>
-            </Button.Group>
-          </Item.Header>
-        </Item.Content>
-      </Item>
-    )
-  }
-
   render() {
+    const { activeLocalityId, curatedLocalities } = this.props
+    console.log('activeLocalityId', activeLocalityId)
     return (
-      <div style={{ maxHeight: 400, overflow: 'auto' }}>
-        <ReactList
-          itemRenderer={this.renderItem}
-          length={this.props.curatedLocalities.length}
-          type="uniform"
-        />
-      </div>
+      <List
+        divided
+        size="huge"
+        style={{ minHeight: 505 }}
+        selection
+        verticalAlign="middle"
+      >
+        {curatedLocalities.map(curatedLocality => {
+          return (
+            <List.Item
+              active={activeLocalityId === curatedLocality.id}
+              key={curatedLocality.id}
+            >
+              <List.Content floated="right">
+                <Label
+                  color={groupColorMap[curatedLocality.group]}
+                  style={{ marginRight: 20 }}
+                >
+                  {curatedLocality.group}
+                </Label>
+                <Button
+                  icon
+                  onClick={() => {
+                    this.handleItemClick(curatedLocality.id, 'edit')
+                  }}
+                >
+                  <Icon name="edit" />
+                </Button>
+                <Button
+                  icon
+                  onClick={() => {
+                    this.handleItemClick(curatedLocality.id, 'view')
+                  }}
+                >
+                  <Icon name="folder open" />
+                </Button>
+              </List.Content>
+
+              <List.Icon circular color="green" name="map" size="large" />
+
+              <List.Content>{curatedLocality.name}</List.Content>
+            </List.Item>
+          )
+        })}
+      </List>
     )
   }
 }

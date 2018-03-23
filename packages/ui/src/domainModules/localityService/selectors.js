@@ -78,6 +78,34 @@ export const getCuratedLocalitiesArrayByFilter = createSelector(
   }
 )
 
+export const getNextCuratedLocalityIdFromFilter = createSelector(
+  getCuratedLocalitiesArrayByFilter,
+  getSecondArgument,
+  (curatedLocalitiesArray, currentId) => {
+    const currentIndex = curatedLocalitiesArray.findIndex(element => {
+      return element.id === currentId
+    })
+    console.log('currentIndex', currentIndex)
+    const nextIndex = Number(currentIndex) + 1
+    console.log('nextIndex', nextIndex)
+    const element = curatedLocalitiesArray[nextIndex]
+    console.log('element', element)
+    return element.id
+  }
+)
+
+export const getPrevCuratedLocalityIdFromFilter = createSelector(
+  getCuratedLocalitiesArrayByFilter,
+  getSecondArgument,
+  (curatedLocalitiesArray, currentId) => {
+    const currentIdex = curatedLocalitiesArray.findIndex(element => {
+      return element.id === currentId
+    })
+
+    return curatedLocalitiesArray[Number(currentIdex) - 1].id
+  }
+)
+
 export const getCuratedLocality = createSelector(
   [getCuratedLocalities, getSecondArgument],
   (curatedLocalities, id) => {

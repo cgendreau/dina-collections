@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Dropdown, Form } from 'semantic-ui-react'
+import { Button, Dropdown, Grid, Form, Icon } from 'semantic-ui-react'
 import {
   actionCreators as keyObjectActionCreators,
   globalSelectors as keyObjectGlobalSelectors,
@@ -19,6 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setFilterGroup: keyObjectActionCreators.set['filter.group'],
+  setListMode: keyObjectActionCreators.set.listMode,
   setSearchQuery: keyObjectActionCreators.set['filter.searchQuery'],
 }
 
@@ -49,10 +50,10 @@ const dropdownOptions = [
 class LocalityListFilter extends Component {
   render() {
     return (
-      <div>
-        <Form>
-          <Form.Group widths="equal">
-            <Form.Input>
+      <Form style={{ marginBottom: 10 }}>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={4}>
               <InputText
                 icon="search"
                 input={{
@@ -63,12 +64,12 @@ class LocalityListFilter extends Component {
                 }}
                 placeholder="search"
                 size="small"
+                fluid
               />
-            </Form.Input>
-            <Form.Input>
+            </Grid.Column>
+            <Grid.Column width={4}>
               <Dropdown
                 icon="filter"
-                floating
                 labeled
                 button
                 className="icon"
@@ -80,11 +81,40 @@ class LocalityListFilter extends Component {
                   console.log('data', data.value)
                   this.props.setFilterGroup(data.value)
                 }}
+                style={{ minWidth: 140 }}
               />
-            </Form.Input>
-          </Form.Group>
-        </Form>
-      </div>
+            </Grid.Column>
+            <Grid.Column width={4} floated="right" textAlign="right">
+              <Button.Group floated="right">
+                <Button
+                  onClick={() => {
+                    this.props.setListMode('list')
+                  }}
+                  icon
+                >
+                  <Icon name="numbered list" />
+                </Button>
+                <Button
+                  onClick={() => {
+                    this.props.setListMode('infinity-list')
+                  }}
+                  icon
+                >
+                  <Icon name="list ul" />
+                </Button>
+                <Button
+                  onClick={() => {
+                    this.props.setListMode('tree')
+                  }}
+                  icon
+                >
+                  <Icon name="tree" />
+                </Button>
+              </Button.Group>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Form>
     )
   }
 }

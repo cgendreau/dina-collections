@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import createLog from 'utilities/log'
 
 const log = createLog('modules:user:Split')
@@ -9,14 +9,12 @@ export class Split extends Component {
     const { leftContent, rightContent } = this.props
     log.render()
     return (
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={8}>{leftContent}</Grid.Column>
-            <Grid.Column width={8}>{rightContent}</Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <Grid divided inverted stackable>
+        <Grid.Row>
+          <Grid.Column width={8}>{leftContent}</Grid.Column>
+          <Grid.Column width={8}>{rightContent}</Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Dropdown, Form } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import {
   actionCreators as keyObjectActionCreators,
   globalSelectors as keyObjectGlobalSelectors,
@@ -28,7 +28,7 @@ const propTypes = {
 const defaultProps = {}
 
 const viewModes = ['split', 'single', 'modal']
-const listModes = ['tree', 'list']
+const listModes = ['tree', 'infinity-list', 'list']
 const viewDropdownOptions = [
   ...viewModes.map(viewMode => {
     return {
@@ -50,43 +50,33 @@ const listDropdownOptions = [
 class ViewPicker extends Component {
   render() {
     return (
-      <div>
-        <Form>
-          <Form.Group widths="equal">
-            <Form.Input>
-              <Dropdown
-                button
-                className="icon"
-                floating
-                icon="filter"
-                labeled
-                onChange={(res, data) => {
-                  this.props.setViewMode(data.value)
-                }}
-                options={viewDropdownOptions}
-                placeholder="select view mode"
-                size="small"
-                value={this.props.viewMode}
-              />
-            </Form.Input>
-            <Form.Input>
-              <Dropdown
-                button
-                className="icon"
-                floating
-                icon="filter"
-                labeled
-                onChange={(res, data) => {
-                  this.props.setListMode(data.value)
-                }}
-                options={listDropdownOptions}
-                placeholder="select view mode"
-                size="small"
-                value={this.props.listMode}
-              />
-            </Form.Input>
-          </Form.Group>
-        </Form>
+      <div style={{ marginBottom: 20 }}>
+        <Button.Group>
+          <Button
+            onClick={() => {
+              this.props.setViewMode('single')
+            }}
+            icon
+          >
+            <Icon name="stop" />
+          </Button>
+          <Button
+            onClick={() => {
+              this.props.setViewMode('split')
+            }}
+            icon
+          >
+            <Icon name="pause" />
+          </Button>
+          <Button
+            onClick={() => {
+              this.props.setViewMode('modal')
+            }}
+            icon
+          >
+            <Icon name="eject" />
+          </Button>
+        </Button.Group>
       </div>
     )
   }

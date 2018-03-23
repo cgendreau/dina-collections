@@ -3,13 +3,18 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
 import { LocalityManager, ViewPicker } from 'domainModules/locality/components'
-
+import {
+  redirectToPrev,
+  redirectToNext,
+} from 'domainModules/locality/actionCreators'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 const mapDispatchToProps = {
   push,
+  redirectToNext,
+  redirectToPrev,
 }
 
 const propTypes = {
@@ -35,11 +40,17 @@ class ManageLocalities extends Component {
     }
 
     return (
-      <PageTemplate>
+      <PageTemplate container={false}>
         <ViewPicker />
         <LocalityManager
           onBack={() => {
             this.props.push(`/app/localities`)
+          }}
+          pickPrev={() => {
+            this.props.redirectToPrev(localityId)
+          }}
+          pickNext={() => {
+            this.props.redirectToNext(localityId)
           }}
           onItemClick={(itemId, action) => {
             if (action === 'edit') {

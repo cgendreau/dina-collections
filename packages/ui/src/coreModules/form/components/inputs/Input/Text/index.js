@@ -25,6 +25,7 @@ const TextInput = ({
   input,
   placeholder,
   type,
+  ...rest
 }) => {
   return (
     <Input
@@ -34,6 +35,7 @@ const TextInput = ({
       placeholder={placeholder}
       type={type}
       {...input}
+      {...rest}
     />
   )
 }
