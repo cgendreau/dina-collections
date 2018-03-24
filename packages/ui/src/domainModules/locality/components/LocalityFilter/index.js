@@ -53,7 +53,7 @@ class LocalityListFilter extends Component {
       <Form style={{ marginBottom: 10 }}>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={4}>
+            <Grid.Column width={8}>
               <InputText
                 icon="search"
                 input={{
@@ -67,7 +67,7 @@ class LocalityListFilter extends Component {
                 fluid
               />
             </Grid.Column>
-            <Grid.Column width={4}>
+            <Grid.Column width={8}>
               <Dropdown
                 icon="filter"
                 labeled
@@ -83,34 +83,6 @@ class LocalityListFilter extends Component {
                 }}
                 style={{ minWidth: 140 }}
               />
-            </Grid.Column>
-            <Grid.Column width={4} floated="right" textAlign="right">
-              <Button.Group floated="right">
-                <Button
-                  onClick={() => {
-                    this.props.setListMode('list')
-                  }}
-                  icon
-                >
-                  <Icon name="numbered list" />
-                </Button>
-                <Button
-                  onClick={() => {
-                    this.props.setListMode('infinity-list')
-                  }}
-                  icon
-                >
-                  <Icon name="list ul" />
-                </Button>
-                <Button
-                  onClick={() => {
-                    this.props.setListMode('tree')
-                  }}
-                  icon
-                >
-                  <Icon name="tree" />
-                </Button>
-              </Button.Group>
             </Grid.Column>
           </Grid.Row>
         </Grid>

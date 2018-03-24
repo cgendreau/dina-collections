@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Grid, Form } from 'semantic-ui-react'
+import { Button, Grid, Form, Segment } from 'semantic-ui-react'
 
 const propTypes = {
   onItemInteraction: PropTypes.func.isRequired,
@@ -11,23 +11,24 @@ const propTypes = {
 
 const defaultProps = {
   showClose: true,
-  showPickNext: false,
-  showPickPrev: false,
+  showPickNext: true,
+  showPickPrev: true,
 }
 
 class TmpNavigation extends Component {
   render() {
     return (
-      <Form style={{ marginBottom: 10 }}>
+      <Segment style={{ background: '#1d78b2' }}>
         <Grid>
           <Grid.Row>
-            <Grid.Column floated="left" textAlign="left" width={4}>
+            <Grid.Column width={8}>
+              <h1 style={{ color: 'white' }}>Argmentina</h1>
+            </Grid.Column>
+            <Grid.Column floated="right" textAlign="right" width={4}>
               <Button.Group>
                 {this.props.showPickPrev && (
                   <Button
-                    content="Previous"
                     icon="left chevron"
-                    labelPosition="left"
                     onClick={() => {
                       this.props.onItemInteraction('pickPrev')
                     }}
@@ -35,7 +36,6 @@ class TmpNavigation extends Component {
                 )}
                 {this.props.showClose && (
                   <Button
-                    content="Close"
                     icon="close"
                     onClick={() => {
                       this.props.onItemInteraction('close')
@@ -45,9 +45,7 @@ class TmpNavigation extends Component {
 
                 {this.props.showPickNext && (
                   <Button
-                    content="Next"
                     icon="right chevron"
-                    labelPosition="right"
                     onClick={() => {
                       this.props.onItemInteraction('pickNext')
                     }}
@@ -57,7 +55,7 @@ class TmpNavigation extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Form>
+      </Segment>
     )
   }
 }

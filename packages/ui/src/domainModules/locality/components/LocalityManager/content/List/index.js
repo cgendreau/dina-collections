@@ -7,7 +7,6 @@ import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/local
 import LocalityInfinityList from '../../../LocalityInfinityList'
 import LocalityList from '../../../LocalityList'
 import LocalityTree from '../../../LocalityTree'
-import LocalityFilter from '../../../LocalityFilter'
 
 const log = createLog('modules:user:ListForm')
 
@@ -22,9 +21,6 @@ export class List extends Component {
     log.render()
     return (
       <Grid.Row>
-        <Grid.Column width={16}>
-          <LocalityFilter />
-        </Grid.Column>
         <Grid.Column width={16}>
           <Segment size="tiny" stacked>
             {this.props.listMode === 'infinity-list' && (

@@ -52,12 +52,14 @@ export class Edit extends Component {
       : {}
     log.render()
     return (
-      <Grid.Row>
-        <Grid.Column width={16}>
-          <TempNavigation onItemInteraction={this.props.onItemInteraction} />
-        </Grid.Column>
-        <Grid.Column width={16}>
-          <Segment size="tiny" stacked style={{ minHeight: 505 }}>
+      <Segment size="tiny" stacked style={{ minHeight: 505 }}>
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <Grid.Column width={16}>
+              <TempNavigation
+                onItemInteraction={this.props.onItemInteraction}
+              />
+            </Grid.Column>
             {curatedLocality && (
               <CuratedLocalityForm
                 displayBackButton
@@ -78,9 +80,9 @@ export class Edit extends Component {
                 }}
               />
             )}
-          </Segment>
-        </Grid.Column>
-      </Grid.Row>
+          </Grid.Column>
+        </Grid.Row>
+      </Segment>
     )
   }
 }
