@@ -56,7 +56,7 @@ class ActionBar extends Component {
       <Form style={{ marginBottom: 10 }}>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={12}>
+            <Grid.Column width={14}>
               <Button.Group floated="left">
                 <Button
                   active={collectionBlockType === 'list'}
@@ -85,6 +85,7 @@ class ActionBar extends Component {
                 }}
                 placeholder="search"
                 size="small"
+                style={{ marginLeft: 10 }}
               />
               <Dropdown
                 button
@@ -97,12 +98,12 @@ class ActionBar extends Component {
                 options={dropdownOptions}
                 placeholder="select group"
                 size="small"
-                style={{ minWidth: 140 }}
+                style={{ marginLeft: 10, minWidth: 140 }}
                 value={this.props.filterGroup}
               />
             </Grid.Column>
 
-            <Grid.Column textAlign="left" width={4}>
+            <Grid.Column textAlign="left" width={2}>
               <Button.Group floated="right">
                 <Button
                   color="orange"

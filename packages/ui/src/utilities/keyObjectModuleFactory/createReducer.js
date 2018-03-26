@@ -78,7 +78,6 @@ export default function createReducer({ keyMap, initialValues = {} }) {
     ...indexSetActionHandlers,
     ...setActionHandlers,
   }
-  console.log('actionHandlers', actionHandlers)
 
   const getInitialValues = () => {
     return JSON.parse(JSON.stringify(initialValues))

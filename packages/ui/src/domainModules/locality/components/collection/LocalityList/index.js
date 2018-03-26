@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Grid, Icon, Label, List, Segment } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { List } from 'semantic-ui-react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
@@ -10,6 +9,7 @@ import {
   globalSelectors as keyObjectGlobalSelectors,
   actionCreators as keyObjectActionCreators,
 } from 'domainModules/locality/keyObjectModule'
+import ListItem from './ListItem'
 
 const mapStateToProps = state => {
   const filter = keyObjectGlobalSelectors.get.filter(state)
@@ -32,28 +32,16 @@ const propTypes = {
   curatedLocalities: PropTypes.array,
   delFilterLimit: PropTypes.func.isRequired,
   getCuratedLocalities: PropTypes.func.isRequired,
-  onItemInteraction: PropTypes.func.isRequired,
+  onInteraction: PropTypes.func.isRequired,
   setFilterLimit: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
   activeLocalityId: '',
   curatedLocalities: [],
-  onItemClick: undefined,
-}
-
-const groupColorMap = {
-  continent: 'violet',
-  country: 'teal',
-  district: 'purple',
-  province: 'blue',
 }
 
 class LocalityList extends Component {
-  constructor(props) {
-    super(props)
-    this.handleItemClick = this.handleItemClick.bind(this)
-  }
   componentDidMount() {
     this.props.setFilterLimit(10)
     this.props.getCuratedLocalities({
@@ -65,14 +53,8 @@ class LocalityList extends Component {
     this.props.delFilterLimit()
   }
 
-  handleItemClick(action, id) {
-    if (this.props.onItemInteraction) {
-      this.props.onItemInteraction(action, { id })
-    }
-  }
-
   render() {
-    const { activeLocalityId, curatedLocalities } = this.props
+    const { activeLocalityId, curatedLocalities, onInteraction } = this.props
     return (
       <List
         divided
@@ -83,43 +65,12 @@ class LocalityList extends Component {
       >
         {curatedLocalities.map(curatedLocality => {
           return (
-            <List.Item
-              active={activeLocalityId === curatedLocality.id}
+            <ListItem
+              activeLocalityId={activeLocalityId}
+              curatedLocality={curatedLocality}
               key={curatedLocality.id}
-            >
-              <Link to={`/app/localities/${curatedLocality.id}/edit`}>
-                <List.Content floated="right">
-                  <Label
-                    color={groupColorMap[curatedLocality.group]}
-                    style={{ marginRight: 20 }}
-                  >
-                    {curatedLocality.group}
-                  </Label>
-                  <Button
-                    icon
-                    onClick={event => {
-                      event.preventDefault()
-                      this.handleItemClick('edit', curatedLocality.id)
-                    }}
-                  >
-                    <Icon name="edit" />
-                  </Button>
-                  <Button
-                    icon
-                    onClick={event => {
-                      event.preventDefault()
-                      this.handleItemClick('inspect', curatedLocality.id)
-                    }}
-                  >
-                    <Icon name="folder open" />
-                  </Button>
-                </List.Content>
-              </Link>
-
-              <List.Icon circular color="black" name="map" size="large" />
-
-              <List.Content>{curatedLocality.name}</List.Content>
-            </List.Item>
+              onInteraction={onInteraction}
+            />
           )
         })}
       </List>

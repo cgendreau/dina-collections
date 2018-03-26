@@ -3,6 +3,7 @@ import { capitalizeFirstLetter } from 'common/es5/stringFormatters'
 import getSecondArgument from 'utilities/getSecondArgument'
 
 import {
+  ALL,
   CONTINENT,
   COUNTRY,
   DISTRICT,
@@ -55,11 +56,11 @@ export const getCuratedLocalitiesArrayByFilter = createSelector(
     if (searchQueryFilter) {
       const lowerCaseSearchQuery = searchQueryFilter.toLowerCase()
       const firstLetterMatches = curatedLocalitiesArray.filter(({ name }) => {
-        return name.toLowerCase().indexOf(lowerCaseSearchQuery) === 0
+        return name && name.toLowerCase().indexOf(lowerCaseSearchQuery) === 0
       })
 
       const otherMatches = curatedLocalitiesArray.filter(({ name }) => {
-        return name.toLowerCase().indexOf(lowerCaseSearchQuery) > 0
+        return name && name.toLowerCase().indexOf(lowerCaseSearchQuery) > 0
       })
 
       filteredCuratedLocalities = [...firstLetterMatches, ...otherMatches]
@@ -123,7 +124,9 @@ const createDropdownSelector = (groupFilter, numberOfResults = 6) => {
     (curatedLocalities, searchQuery = '') => {
       const lowerCaseSearchQuery = searchQuery.toLowerCase()
       const mappedGroupLocalities = Object.values(curatedLocalities)
-        .filter(({ group }) => group === groupFilter)
+        .filter(
+          ({ group }) => (groupFilter === 'all' ? true : group === groupFilter)
+        )
         .map(({ id, name }) => {
           return {
             key: id,
@@ -133,11 +136,11 @@ const createDropdownSelector = (groupFilter, numberOfResults = 6) => {
         })
 
       const firstLetterMatches = mappedGroupLocalities.filter(({ text }) => {
-        return text.toLowerCase().indexOf(lowerCaseSearchQuery) === 0
+        return text && text.toLowerCase().indexOf(lowerCaseSearchQuery) === 0
       })
 
       const otherMatches = mappedGroupLocalities.filter(({ text }) => {
-        return text.toLowerCase().indexOf(lowerCaseSearchQuery) > 0
+        return text && text.toLowerCase().indexOf(lowerCaseSearchQuery) > 0
       })
 
       return [...firstLetterMatches, ...otherMatches].slice(0, numberOfResults)
@@ -150,3 +153,4 @@ export const getDropdownContinentOptions = createDropdownSelector(CONTINENT, 15)
 export const getDropdownCountryOptions = createDropdownSelector(COUNTRY)
 export const getDropdownDistrictOptions = createDropdownSelector(DISTRICT)
 export const getDropdownProvinceOptions = createDropdownSelector(PROVINCE)
+export const getDropdownAllOptions = createDropdownSelector(ALL)

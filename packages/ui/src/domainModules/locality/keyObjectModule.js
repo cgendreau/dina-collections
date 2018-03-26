@@ -9,6 +9,10 @@ const {
 } = keyObjectModuleFactory({
   initialValues: {
     collectionBlockType: 'list',
+    filter: {
+      group: '',
+      searchQuery: '',
+    },
   },
   keys: [
     'collectionBlockType',

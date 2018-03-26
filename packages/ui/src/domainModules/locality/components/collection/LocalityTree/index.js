@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, Icon } from 'semantic-ui-react'
-import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
 import { getCuratedLocalities as getCuratedLocalitiesAc } from 'domainModules/localityService/actionCreators'
 import SortableTree, { getTreeFromFlatData } from 'react-sortable-tree'
 import 'react-sortable-tree/style.css'
@@ -20,6 +19,12 @@ const mapDispatchToProps = {
 
 const propTypes = {
   getCuratedLocalitiesAc: PropTypes.func.isRequired,
+  onInteraction: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string,
+}
+
+const defaultProps = {
+  searchQuery: '',
 }
 
 class Localities extends Component {
@@ -29,28 +34,6 @@ class Localities extends Component {
       treeData: [],
     }
     this.generateNodeProps = this.generateNodeProps.bind(this)
-  }
-  generateNodeProps({ node, path }) {
-    return {
-      buttons: [
-        <Button
-          icon
-          onClick={() => {
-            this.props.onItemClick(node.id, 'edit')
-          }}
-        >
-          <Icon name="edit" />
-        </Button>,
-        <Button
-          icon
-          onClick={() => {
-            this.props.onItemClick(node.id, 'view')
-          }}
-        >
-          <Icon name="folder open" />
-        </Button>,
-      ],
-    }
   }
 
   componentWillMount() {
@@ -70,8 +53,8 @@ class Localities extends Component {
           }
         })
         const parent = {
-          title: 'Earth',
           id: '0',
+          title: 'Earth',
         }
 
         const treeData = getTreeFromFlatData({
@@ -82,6 +65,35 @@ class Localities extends Component {
           treeData,
         })
       })
+  }
+
+  generateNodeProps({ node }) {
+    return {
+      buttons: [
+        <Button
+          icon
+          onClick={() => {
+            this.props.onInteraction('navigate', {
+              itemId: node.id,
+              target: 'edit',
+            })
+          }}
+        >
+          <Icon name="edit" />
+        </Button>,
+        <Button
+          icon
+          onClick={() => {
+            this.props.onInteraction('navigate', {
+              itemId: node.id,
+              target: 'inspect',
+            })
+          }}
+        >
+          <Icon name="folder open" />
+        </Button>,
+      ],
+    }
   }
   render() {
     const { treeData } = this.state
@@ -100,5 +112,6 @@ class Localities extends Component {
 }
 
 Localities.propTypes = propTypes
+Localities.defaultProps = defaultProps
 
 export default connect(mapStateToProps, mapDispatchToProps)(Localities)

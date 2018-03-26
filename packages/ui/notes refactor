@@ -1,3 +1,18 @@
+1. make tests pass
+2. finalize form
+  * navigation
+  * proper dropdowns
+3. repair tree
+4. refactor form into different edit and create
+5. Add all fields to inspect view
+6. collaps view when going to mobile (single view mode)
+* Separate inspect from block
+7. create mr
+
+6.
+
+
+
 ** Create hoc that fetch. size, allowed view modes, and current viewmode? Put in layout module? Should have middleware that updated currentViewmode based on screen change
 ** This layout module could potentially also keep track of sidebar
 ** Test block approach with info-sidebar open

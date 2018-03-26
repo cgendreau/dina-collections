@@ -21,7 +21,7 @@ export class Header extends Component {
               icon
               onClick={event => {
                 event.preventDefault()
-                onInteraction('layout-single-item')
+                onInteraction('layout-single-collection')
               }}
               size="tiny"
             >

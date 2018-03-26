@@ -1,6 +1,6 @@
 const createDelActionCreators = delActionTypes => {
   return Object.keys(delActionTypes).reduce((delActionCreators, key) => {
-    const actionType = delActionTypes[key].actionType
+    const { actionType } = delActionTypes[key]
 
     return {
       ...delActionCreators,
@@ -15,7 +15,7 @@ const createDelActionCreators = delActionTypes => {
 
 const createIndexDelActionCreators = delActionTypes => {
   return Object.keys(delActionTypes).reduce((delActionCreators, key) => {
-    const actionType = delActionTypes[key].actionType
+    const { actionType } = delActionTypes[key]
 
     return {
       ...delActionCreators,
@@ -36,7 +36,7 @@ const createIndexDelActionCreators = delActionTypes => {
 
 const createIndexSetActionCreators = setActionTypes => {
   return Object.keys(setActionTypes).reduce((setActionCreators, key) => {
-    const actionType = setActionTypes[key].actionType
+    const { actionType } = setActionTypes[key]
 
     return {
       ...setActionCreators,
@@ -58,7 +58,7 @@ const createIndexSetActionCreators = setActionTypes => {
 
 const createSetActionCreators = setActionTypes => {
   return Object.keys(setActionTypes).reduce((setActionCreators, key) => {
-    const actionType = setActionTypes[key].actionType
+    const { actionType } = setActionTypes[key]
 
     return {
       ...setActionCreators,

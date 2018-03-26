@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Icon } from 'semantic-ui-react'
 import { Block } from 'coreModules/layout/components'
-import LocalityList from '../../../LocalityList'
-import LocalityTree from '../../../LocalityTree'
+import LocalityList from '../../../collection/LocalityList'
+import LocalityTree from '../../../collection/LocalityTree'
 import ActionBar from './ActionBar'
+import Header from './Header'
 
 const propTypes = {
   collectionBlockType: PropTypes.string.isRequired,
@@ -28,34 +28,11 @@ const CollectionBlock = ({
 
   return (
     <Block>
-      <Block.Header title="Localities">
-        <Button.Group floated="right">
-          {layoutMode === 'split' && (
-            <Button
-              icon
-              onClick={event => {
-                event.preventDefault()
-                onInteraction('layout-single-collection')
-              }}
-              size="tiny"
-            >
-              <Icon name="stop" />
-            </Button>
-          )}
-          {layoutMode === 'single' && (
-            <Button
-              icon
-              onClick={event => {
-                event.preventDefault()
-                onInteraction('layout-split')
-              }}
-              size="tiny"
-            >
-              <Icon name="pause" />
-            </Button>
-          )}
-        </Button.Group>
-      </Block.Header>
+      <Header
+        layoutMode={layoutMode}
+        onInteraction={onInteraction}
+        title={`Collection - ${collectionBlockType}`}
+      />
       <Block.Content
         preContent={
           <ActionBar

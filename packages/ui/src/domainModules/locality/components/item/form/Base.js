@@ -1,48 +1,72 @@
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Button, Form, Grid, Message } from 'semantic-ui-react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
-// import formValidator from 'common/es5/error/validators/formValidator'
+import { connect } from 'react-redux'
 import formValidator from 'common/es5/error/validators/formValidator'
 import { ConnectedFormSchemaError } from 'coreModules/error/components'
 import createLog from 'utilities/log'
+import localityServiceSelectors from 'domainModules/localityService/globalSelectors'
+import { capitalizeFirstLetter } from 'common/es5/stringFormatters'
 import { createModuleTranslate } from 'coreModules/i18n/components'
 import FieldWrapper from 'coreModules/form/components/FieldWrapper'
 import { Input } from 'coreModules/form/components'
+import { ALL } from 'domainModules/localityService/constants'
+import LocalityDropdownSearch from 'domainModules/collectionMammals/components/LocalityDropdownSearch'
 
 const log = createLog('modules:user:EditForm')
 const ModuleTranslate = createModuleTranslate('locality')
 
-const mapDispatchToProps = {
-  // login,
+const propTypes = {
+  curatedLocalities: PropTypes.object.isRequired,
+  displayBackButton: PropTypes.bool,
+  displayResetButton: PropTypes.bool,
+  error: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  invalid: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  reset: PropTypes.func.isRequired,
+  submitFailed: PropTypes.bool.isRequired,
+  submitSucceeded: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
 }
 
-const propTypes = {}
+const defaultProps = {
+  curatedLocalities: {},
+  displayBackButton: false,
+  displayResetButton: false,
+  error: '',
+}
 
-const defaultProps = {}
+const mapStateToProps = state => {
+  return {
+    curatedLocalities: localityServiceSelectors.getCuratedLocalities(state),
+  }
+}
 
 export class Edit extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     log.render()
     const {
+      curatedLocalities,
       displayBackButton,
       displayResetButton,
       error,
       handleSubmit,
       invalid,
-      mode,
       pristine,
       reset,
       submitFailed,
       submitSucceeded,
       submitting,
     } = this.props
+    const formatLocalityName = id => {
+      return curatedLocalities[id]
+        ? capitalizeFirstLetter(curatedLocalities[id].name)
+        : ''
+    }
+
     return (
       <Form error={!!error} onSubmit={handleSubmit(this.props.onSubmit)}>
         <Grid textAlign="left" verticalAlign="top">
@@ -72,8 +96,11 @@ export class Edit extends Component {
             <Grid.Column mobile={8}>
               <FieldWrapper
                 autoComplete="off"
-                component={Input}
+                component={LocalityDropdownSearch}
+                format={formatLocalityName}
+                group={ALL}
                 label="Parent"
+                LocalityDropdownSearch
                 module="localities"
                 name="parent.id"
                 type="text"
@@ -224,4 +251,4 @@ export const EditForm = reduxForm({
   validate: formValidator({ model: 'curatedLocality' }),
 })(Edit)
 
-export default compose(connect(null, mapDispatchToProps))(EditForm)
+export default connect(mapStateToProps)(EditForm)

@@ -1,47 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { createCuratedLocality as createCuratedLocalityAc } from 'domainModules/localityService/actionCreators'
 import { Block } from 'coreModules/layout/components'
-import CuratedLocalityForm from '../../../Form'
+import CreateCuratedLocalityForm from '../../../item/form/Create'
 import Header from './Header'
-
-const mapDispatchToProps = {
-  createCuratedLocality: createCuratedLocalityAc,
-}
+import ActionBar from './ActionBar'
 
 const propTypes = {
-  createCuratedLocality: PropTypes.func.isRequired,
+  itemBlockType: PropTypes.string.isRequired,
   layoutMode: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
 }
 
 export class Create extends Component {
   render() {
-    const { layoutMode, onInteraction } = this.props
+    const { itemBlockType, layoutMode, onInteraction } = this.props
     return (
       <Block>
         <Header
           layoutMode={layoutMode}
           onInteraction={onInteraction}
-          title="Create"
+          title="Create new"
         />
-        <Block.Content>
-          <CuratedLocalityForm
-            displayBackButton
-            displayResetButton
-            onBack={this.props.onBack}
-            onSubmit={data => {
-              this.props
-                .createCuratedLocality({
-                  curatedLocality: data,
-                })
-                .then(() => {
-                  this.props.onBack()
-                })
-            }}
-          />
+        <Block.Content
+          preContent={
+            <ActionBar
+              itemBlockType={itemBlockType}
+              onInteraction={onInteraction}
+            />
+          }
+        >
+          <CreateCuratedLocalityForm onInteraction={onInteraction} />
         </Block.Content>
       </Block>
     )
@@ -50,4 +38,4 @@ export class Create extends Component {
 
 Create.propTypes = propTypes
 
-export default compose(connect(null, mapDispatchToProps))(Create)
+export default Create

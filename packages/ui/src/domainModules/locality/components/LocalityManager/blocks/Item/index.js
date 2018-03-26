@@ -10,14 +10,14 @@ const propTypes = {
 
 const ItemBlock = ({ itemBlockType, ...rest }) => {
   if (itemBlockType === 'create') {
-    return <CreateBlock {...rest} />
+    return <CreateBlock itemBlockType={itemBlockType} {...rest} />
   }
 
   if (itemBlockType === 'edit') {
-    return <EditBlock {...rest} />
+    return <EditBlock itemBlockType={itemBlockType} {...rest} />
   }
   if (itemBlockType === 'inspect') {
-    return <InspectBlock {...rest} />
+    return <InspectBlock itemBlockType={itemBlockType} {...rest} />
   }
   return null
 }

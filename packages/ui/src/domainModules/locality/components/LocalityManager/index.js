@@ -38,10 +38,6 @@ const propTypes = {
   setLayoutMode: PropTypes.func.isRequired,
 }
 
-const defaultProps = {
-  localityId: '',
-}
-
 const mapStateToProps = state => {
   return {
     collectionBlockType: globalSelectors.get.collectionBlockType(state),
@@ -82,10 +78,20 @@ class LocalityManager extends Component {
       }
 
       case 'navigate': {
-        const { target } = data
+        const { target, itemId } = data
 
         if (target === 'create') {
           this.props.push(`/app/localities/create`)
+        }
+        if (target === 'inspect' && itemId !== '') {
+          this.props.push(`/app/localities/${itemId}/inspect`)
+        }
+        if (target === 'edit' && itemId !== '') {
+          this.props.push(`/app/localities/${itemId}/edit`)
+        }
+
+        if (target === 'collection') {
+          this.props.push(`/app/localities`)
         }
 
         break
@@ -112,7 +118,7 @@ class LocalityManager extends Component {
         break
       }
       default: {
-        console.error(`Unknown interaction of type ${type}`)
+        throw new Error(`Unknown interaction of type ${type}`)
       }
     }
   }
@@ -155,7 +161,6 @@ class LocalityManager extends Component {
 }
 
 LocalityManager.propTypes = propTypes
-LocalityManager.defaultProps = defaultProps
 
 export default compose(
   withRouter,

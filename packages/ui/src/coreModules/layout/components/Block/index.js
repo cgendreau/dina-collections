@@ -12,7 +12,7 @@ const defaultProps = {}
 
 const Block = ({ children }) => {
   return (
-    <Segment size="tiny" stacked style={{ minHeight: 505 }}>
+    <Segment size="tiny" style={{ minHeight: 505 }}>
       {children}
     </Segment>
   )
