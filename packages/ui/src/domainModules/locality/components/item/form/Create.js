@@ -11,8 +11,6 @@ const mapDispatchToProps = {
 
 const propTypes = {
   createCuratedLocality: PropTypes.func.isRequired,
-  itemBlockType: PropTypes.string.isRequired,
-  layoutMode: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
 }
 
@@ -34,9 +32,10 @@ export class Create extends Component {
             .createCuratedLocality({
               curatedLocality: data,
             })
-            .then(event => {
-              event.preventDefault()
-              onInteraction('create-submit-success')
+            .then(result => {
+              onInteraction('create-submit-success', {
+                itemId: result.id,
+              })
             })
         }}
         {...rest}

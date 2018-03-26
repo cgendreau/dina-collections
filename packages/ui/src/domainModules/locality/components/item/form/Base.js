@@ -246,6 +246,7 @@ Edit.propTypes = propTypes
 Edit.defaultProps = defaultProps
 
 export const EditForm = reduxForm({
+  destroyOnUnmount: false,
   enableReinitialize: true,
   form: 'EditLocalities',
   validate: formValidator({ model: 'curatedLocality' }),

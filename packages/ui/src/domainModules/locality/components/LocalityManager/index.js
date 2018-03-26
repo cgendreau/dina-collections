@@ -97,26 +97,27 @@ class LocalityManager extends Component {
         break
       }
 
-      case 'edit': {
-        const { id } = data
-        if (!id) {
-          throw new Error('Id is required for edit')
+      case 'create-submit-success': {
+        const { itemId } = data
+        if (itemId) {
+          this.props.push(`/app/localities/${itemId}/inspect`)
+        } else {
+          this.props.push(`/app/localities`)
         }
-        this.props.push(`/app/localities/${id}/edit`)
+
         break
       }
-      case 'inspect': {
-        const { id } = data
-        if (!id) {
-          throw new Error('Id is required for inspect')
+      case 'edit-submit-success': {
+        const { itemId } = data
+        if (itemId) {
+          this.props.push(`/app/localities/${itemId}/inspect`)
+        } else {
+          this.props.push(`/app/localities`)
         }
-        this.props.push(`/app/localities/${id}/inspect`)
+
         break
       }
-      case 'close': {
-        this.props.push(`/app/localities`)
-        break
-      }
+
       default: {
         throw new Error(`Unknown interaction of type ${type}`)
       }

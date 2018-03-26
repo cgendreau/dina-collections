@@ -61,8 +61,10 @@ export class Edit extends Component {
                 ...data,
               },
             })
-            .then(() => {
-              onInteraction('edit-submit-success')
+            .then(result => {
+              onInteraction('edit-submit-success', {
+                itemId: result.id,
+              })
             })
         }}
       />

@@ -52,6 +52,7 @@ export class Inspect extends Component {
     if (!curatedLocality) {
       return null
     }
+
     return (
       <React.Fragment>
         <Table celled>
@@ -64,17 +65,57 @@ export class Inspect extends Component {
           {curatedLocality && (
             <Table.Body>
               <Table.Row>
+                <Table.Cell>Namn</Table.Cell>
+                <Table.Cell>{curatedLocality.name}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
                 <Table.Cell>id</Table.Cell>
                 <Table.Cell>{curatedLocality.id}</Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>Namn</Table.Cell>
-                <Table.Cell>{curatedLocality.name}</Table.Cell>
+                <Table.Cell>MaximumElevationInMeters</Table.Cell>
+                <Table.Cell>
+                  {curatedLocality.verticalPosition &&
+                    curatedLocality.verticalPosition.maximummElevationInMeters}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>MinimumElevationInMeters</Table.Cell>
+                <Table.Cell>
+                  {curatedLocality.verticalPosition &&
+                    curatedLocality.verticalPosition.minimumElevationInMeters}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>MaximumDepthInMeters</Table.Cell>
+                <Table.Cell>
+                  {curatedLocality.verticalPosition &&
+                    curatedLocality.verticalPosition.maximumDepthInMeters}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>MinimumDepthInMeters</Table.Cell>
+                <Table.Cell>
+                  {curatedLocality.verticalPosition &&
+                    curatedLocality.verticalPosition.minimumDepthInMeters}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>Latitude</Table.Cell>
+                <Table.Cell>{curatedLocality.latitude}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>Longitude</Table.Cell>
+                <Table.Cell>{curatedLocality.longitude}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>UncertaintyInMeters</Table.Cell>
+                <Table.Cell>{curatedLocality.uncertaintyInMeters}</Table.Cell>
               </Table.Row>
             </Table.Body>
           )}
         </Table>
-        <h2>Parent</h2>
+        <h2>Belongs to</h2>
         <Table celled>
           <Table.Header>
             <Table.Row>
@@ -96,7 +137,7 @@ export class Inspect extends Component {
           )}
         </Table>
 
-        <h2>Children</h2>
+        <h2>Contains</h2>
         <Table celled>
           <Table.Header>
             <Table.Row>
