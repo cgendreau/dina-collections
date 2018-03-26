@@ -2,19 +2,20 @@ export const moduleOrder = [
   'api',
   'bootstrap',
   'commonUi',
+  'crudManager',
   'devToolsExtension',
+  'documentation',
   'error',
   'form',
   'i18n',
+  'keyboardShortcuts',
+  'layout',
   'localStorage',
   'logger',
   'notifications',
   'routing',
-  'crudManager',
   'size',
   'user',
-  'keyboardShortcuts',
-  'documentation',
 ]
 
 export const type = 'module'

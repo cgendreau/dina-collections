@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Button, Dropdown, Grid, Form, Icon } from 'semantic-ui-react'
+import { Button, Dropdown, Grid, Form } from 'semantic-ui-react'
 import {
   actionCreators as keyObjectActionCreators,
   globalSelectors as keyObjectGlobalSelectors,
@@ -24,8 +24,9 @@ const mapDispatchToProps = {
 }
 
 const propTypes = {
-  onInteraction: PropTypes.func.isRequired,
+  collectionBlockType: PropTypes.string.isRequired,
   filterGroup: PropTypes.string.isRequired,
+  onInteraction: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   setFilterGroup: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
@@ -48,9 +49,9 @@ const dropdownOptions = [
   }),
 ]
 
-class LocalityListFilter extends Component {
+class ActionBar extends Component {
   render() {
-    const { onInteraction } = this.props
+    const { collectionBlockType, onInteraction } = this.props
     return (
       <Form style={{ marginBottom: 10 }}>
         <Grid>
@@ -58,6 +59,7 @@ class LocalityListFilter extends Component {
             <Grid.Column width={12}>
               <Button.Group floated="left">
                 <Button
+                  active={collectionBlockType === 'list'}
                   icon="numbered list"
                   onClick={event => {
                     event.preventDefault()
@@ -65,6 +67,7 @@ class LocalityListFilter extends Component {
                   }}
                 />
                 <Button
+                  active={collectionBlockType === 'tree'}
                   icon="tree"
                   onClick={event => {
                     event.preventDefault()
@@ -84,24 +87,31 @@ class LocalityListFilter extends Component {
                 size="small"
               />
               <Dropdown
-                icon="filter"
-                labeled
                 button
                 className="icon"
-                size="small"
-                placeholder="select group"
-                options={dropdownOptions}
-                value={this.props.filterGroup}
+                icon="filter"
+                labeled
                 onChange={(res, data) => {
                   this.props.setFilterGroup(data.value)
                 }}
+                options={dropdownOptions}
+                placeholder="select group"
+                size="small"
                 style={{ minWidth: 140 }}
+                value={this.props.filterGroup}
               />
             </Grid.Column>
 
             <Grid.Column textAlign="left" width={4}>
               <Button.Group floated="right">
-                <Button floaded="right" color="orange">
+                <Button
+                  color="orange"
+                  floaded="right"
+                  onClick={event => {
+                    event.preventDefault()
+                    onInteraction('navigate', { target: 'create' })
+                  }}
+                >
                   New
                 </Button>
               </Button.Group>
@@ -113,9 +123,7 @@ class LocalityListFilter extends Component {
   }
 }
 
-LocalityListFilter.propTypes = propTypes
-LocalityListFilter.defaultProps = defaultProps
+ActionBar.propTypes = propTypes
+ActionBar.defaultProps = defaultProps
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(
-  LocalityListFilter
-)
+export default compose(connect(mapStateToProps, mapDispatchToProps))(ActionBar)

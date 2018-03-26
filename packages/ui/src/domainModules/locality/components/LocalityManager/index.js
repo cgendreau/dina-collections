@@ -1,22 +1,41 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
-import { CrudManager } from 'coreModules/crudManager/components'
+import { compose } from 'redux'
+import {
+  actionCreators,
+  globalSelectors,
+} from 'domainModules/locality/keyObjectModule'
+import { Layout } from 'coreModules/layout/components'
+import { push } from 'react-router-redux'
+import { withLayout } from 'coreModules/layout/higherOrderComponents'
+import ItemBlock from './blocks/Item'
+import CollectionBlock from './blocks/Collection'
 
-// import SplitView from './views/Split'
-// import ModalView from './views/Modal'
-// import SingleView from './views/Single'
+const getItemBlockType = ({ localityId, url }) => {
+  let itemBlockType = null
+  if (localityId && url.indexOf('edit') > -1) {
+    itemBlockType = 'edit'
+  }
+  if (localityId && url.indexOf('inspect') > -1) {
+    itemBlockType = 'inspect'
+  }
 
-// import CreateContent from './content/Create'
-import EditContent from './content/Edit'
-// import InspectContent from './content/Inspect'
-import ListContent from './content/List'
+  if (url.indexOf('create') > -1) {
+    itemBlockType = 'create'
+  }
+
+  return itemBlockType
+}
 
 const propTypes = {
-  action: PropTypes.oneOf(['create', 'edit', 'inspect', 'explore']).isRequired,
-  localityId: PropTypes.string,
-  onItemInteraction: PropTypes.func.isRequired,
+  collectionBlockType: PropTypes.string.isRequired,
+  layoutMode: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
+  push: PropTypes.func.isRequired,
+  setCollectionBlockType: PropTypes.func.isRequired,
+  setLayoutMode: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
@@ -25,42 +44,111 @@ const defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    viewMode: keyObjectGlobalSelectors.get.viewMode(state),
+    collectionBlockType: globalSelectors.get.collectionBlockType(state),
   }
+}
+
+const mapDispatchToProps = {
+  push,
+  setCollectionBlockType: actionCreators.set.collectionBlockType,
 }
 
 class LocalityManager extends Component {
   constructor(props) {
     super(props)
-    this.renderEdit = this.renderEdit.bind(this)
-    this.renderExplore = this.renderExplore.bind(this)
+    this.handleInteraction = this.handleInteraction.bind(this)
   }
-  renderEdit() {
-    return (
-      <EditContent
-        localityId={this.props.localityId}
-        onItemInteraction={this.props.onItemInteraction}
-      />
-    )
-  }
-  renderExplore() {
-    return (
-      <ListContent
-        activeLocalityId={this.props.localityId}
-        onItemInteraction={this.props.onItemInteraction}
-      />
-    )
+
+  handleInteraction(type, data) {
+    switch (type) {
+      case 'layout-single-collection': {
+        this.props.setLayoutMode('single')
+        this.props.push(`/app/localities`)
+        break
+      }
+      case 'layout-split': {
+        this.props.setLayoutMode('split')
+        break
+      }
+
+      case 'layout-single-item': {
+        this.props.setLayoutMode('single')
+        break
+      }
+
+      case 'set-collection-block-type': {
+        this.props.setCollectionBlockType(data.type)
+        break
+      }
+
+      case 'navigate': {
+        const { target } = data
+
+        if (target === 'create') {
+          this.props.push(`/app/localities/create`)
+        }
+
+        break
+      }
+
+      case 'edit': {
+        const { id } = data
+        if (!id) {
+          throw new Error('Id is required for edit')
+        }
+        this.props.push(`/app/localities/${id}/edit`)
+        break
+      }
+      case 'inspect': {
+        const { id } = data
+        if (!id) {
+          throw new Error('Id is required for inspect')
+        }
+        this.props.push(`/app/localities/${id}/inspect`)
+        break
+      }
+      case 'close': {
+        this.props.push(`/app/localities`)
+        break
+      }
+      default: {
+        console.error(`Unknown interaction of type ${type}`)
+      }
+    }
   }
 
   render() {
-    const { action } = this.props
+    const {
+      collectionBlockType,
+      layoutMode,
+      match: { params = {}, url = '' } = {},
+    } = this.props
+    const { localityId } = params
+    const itemBlockType = getItemBlockType({ localityId, url })
+
+    const itemBlock = itemBlockType && (
+      <ItemBlock
+        itemBlockType={itemBlockType}
+        itemId={localityId}
+        layoutMode={layoutMode}
+        onInteraction={this.handleInteraction}
+      />
+    )
+    const collectionBlock =
+      layoutMode === 'single' && itemBlock ? null : (
+        <CollectionBlock
+          collectionBlockType={collectionBlockType}
+          itemId={localityId}
+          layoutMode={layoutMode}
+          onInteraction={this.handleInteraction}
+        />
+      )
+
     return (
-      <CrudManager
-        action={action}
-        crudManagerId="locality"
-        renderEdit={this.renderEdit}
-        renderExplore={this.renderExplore}
-        viewMode="single"
+      <Layout
+        layoutMode={layoutMode}
+        primaryBlock={collectionBlock || itemBlock}
+        secondaryBlock={collectionBlock && itemBlock}
       />
     )
   }
@@ -69,4 +157,8 @@ class LocalityManager extends Component {
 LocalityManager.propTypes = propTypes
 LocalityManager.defaultProps = defaultProps
 
-export default connect(mapStateToProps)(LocalityManager)
+export default compose(
+  withRouter,
+  withLayout,
+  connect(mapStateToProps, mapDispatchToProps)
+)(LocalityManager)

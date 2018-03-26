@@ -8,6 +8,7 @@ import * as error from './error'
 import * as form from './form'
 import * as i18n from './i18n'
 import * as keyboardShortcuts from './keyboardShortcuts'
+import * as layout from './layout'
 import * as localStorage from './localStorage'
 import * as logger from './logger'
 import * as notifications from './notifications'
@@ -20,6 +21,7 @@ const modules = [
   bootstrap,
   commonUi,
   crudManager,
+  layout,
   devToolsExtension,
   error,
   form,

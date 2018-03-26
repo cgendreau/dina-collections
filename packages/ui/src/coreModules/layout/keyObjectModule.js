@@ -1,4 +1,5 @@
 import keyObjectModuleFactory from 'utilities/keyObjectModuleFactory'
+import { MODULE_NAME as name } from './constants'
 
 const {
   actionCreators,
@@ -8,16 +9,9 @@ const {
   reducer,
 } = keyObjectModuleFactory({
   initialValues: {
-    collectionBlockType: 'list',
+    layoutMode: 'split',
   },
-  keys: [
-    'collectionBlockType',
-    'filter',
-    'filter.searchQuery',
-    'filter.limit',
-    'filter.group',
-  ],
-  name: 'locality',
+  keys: ['layoutMode'],
+  name,
 })
-
 export { actionCreators, actionTypes, constants, globalSelectors, reducer }
