@@ -2,26 +2,36 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { createCuratedLocality as createCuratedLocalityAc } from 'dataModules/localityService/actionCreators'
+import { createStorageLocation as createStorageLocationAc } from 'dataModules/storageService/actionCreators'
+import { ensureAllStorageLocationsFetched } from 'dataModules/storageService/higherOrderComponents'
 import {
   FORM_CANCEL,
   FORM_CREATE_SUCCESS,
-} from 'domainModules/locality/interactions'
+} from 'coreModules/crudBlocks/constants'
 
 import BaseForm from './Base'
 
 const mapDispatchToProps = {
-  createCuratedLocality: createCuratedLocalityAc,
+  createStorageLocation: createStorageLocationAc,
 }
 
 const propTypes = {
-  createCuratedLocality: PropTypes.func.isRequired,
+  allStorageLocationsFetched: PropTypes.bool,
+  createStorageLocation: PropTypes.func.isRequired,
   onInteraction: PropTypes.func.isRequired,
+}
+const defaultProps = {
+  allStorageLocationsFetched: undefined,
 }
 
 export class Create extends PureComponent {
   render() {
-    const { onInteraction, ...rest } = this.props
+    const { allStorageLocationsFetched, onInteraction, ...rest } = this.props
+
+    if (!allStorageLocationsFetched) {
+      return null
+    }
+
     return (
       <BaseForm
         displayBackButton
@@ -32,8 +42,8 @@ export class Create extends PureComponent {
         }}
         onSubmit={data => {
           this.props
-            .createCuratedLocality({
-              curatedLocality: data,
+            .createStorageLocation({
+              storageLocation: data,
             })
             .then(result => {
               onInteraction(FORM_CREATE_SUCCESS, {
@@ -48,5 +58,9 @@ export class Create extends PureComponent {
 }
 
 Create.propTypes = propTypes
+Create.defaultProps = defaultProps
 
-export default compose(connect(null, mapDispatchToProps))(Create)
+export default compose(
+  ensureAllStorageLocationsFetched(),
+  connect(null, mapDispatchToProps)
+)(Create)

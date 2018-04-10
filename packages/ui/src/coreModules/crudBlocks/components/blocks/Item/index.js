@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import { CREATE, EDIT, INSPECT } from '../../../constants'
 import CreateBlock from './Create'
 import EditBlock from './Edit'
 import InspectBlock from './Inspect'
 
 const propTypes = {
+  disableEdit: PropTypes.bool.isRequired,
   itemBlockType: PropTypes.string.isRequired,
   renderCreateBlockChild: PropTypes.func,
   renderEditBlockChild: PropTypes.func,
@@ -17,13 +20,14 @@ const defaultProps = {
 }
 
 const ItemBlock = ({
+  disableEdit,
   itemBlockType,
   renderCreateBlockChild,
   renderEditBlockChild,
   renderInspectBlockChild,
   ...rest
 }) => {
-  if (itemBlockType === 'create' && renderCreateBlockChild) {
+  if (itemBlockType === CREATE && renderCreateBlockChild) {
     return (
       <CreateBlock
         itemBlockType={itemBlockType}
@@ -33,7 +37,7 @@ const ItemBlock = ({
     )
   }
 
-  if (itemBlockType === 'edit' && renderEditBlockChild) {
+  if (itemBlockType === EDIT && renderEditBlockChild && !disableEdit) {
     return (
       <EditBlock
         itemBlockType={itemBlockType}
@@ -42,7 +46,7 @@ const ItemBlock = ({
       />
     )
   }
-  if (itemBlockType === 'inspect' && renderInspectBlockChild) {
+  if (itemBlockType === INSPECT && renderInspectBlockChild) {
     return (
       <InspectBlock
         itemBlockType={itemBlockType}

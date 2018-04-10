@@ -5,8 +5,8 @@ import { ConnectedFormSchemaError } from 'coreModules/error/components'
 import createLog from 'utilities/log'
 import { createModuleTranslate } from 'coreModules/i18n/components'
 
-const log = createLog('modules:user:EditForm')
-const ModuleTranslate = createModuleTranslate('locality')
+const log = createLog('modules:storage:BaseForm:FormActions')
+const ModuleTranslate = createModuleTranslate('storage')
 
 const propTypes = {
   displayBackButton: PropTypes.bool,
@@ -66,7 +66,7 @@ export class FormActions extends Component {
             </Button>
           )}
 
-          <ConnectedFormSchemaError form="EditLocalities" />
+          <ConnectedFormSchemaError form="editStorageLocations" />
           {invalid &&
             !error &&
             submitFailed && (

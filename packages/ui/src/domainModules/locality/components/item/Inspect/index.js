@@ -12,6 +12,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const { curatedLocality } = ownProps
+
   const parent =
     curatedLocality &&
     curatedLocality.parent &&
@@ -37,6 +38,7 @@ const propTypes = {
   children: PropTypes.array,
   curatedLocality: PropTypes.object,
   parent: PropTypes.object,
+  urlBasePath: PropTypes.string.isRequired,
 }
 
 const defaultProps = {
@@ -52,6 +54,7 @@ export class Inspect extends Component {
       children,
       curatedLocality,
       parent,
+      urlBasePath,
     } = this.props
     if (!curatedLocality || !allLocalitiesFetched) {
       return null
@@ -68,7 +71,7 @@ export class Inspect extends Component {
           {curatedLocality && (
             <Table.Body>
               <Table.Row>
-                <Table.Cell>Namn</Table.Cell>
+                <Table.Cell>Name</Table.Cell>
                 <Table.Cell>{curatedLocality.name}</Table.Cell>
               </Table.Row>
               <Table.Row>
@@ -130,7 +133,7 @@ export class Inspect extends Component {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
-                  <Link to={`/app/localities/${parent.id}/inspect`}>
+                  <Link to={`${urlBasePath}/${parent.id}/inspect`}>
                     {parent.id}
                   </Link>
                 </Table.Cell>
@@ -154,7 +157,7 @@ export class Inspect extends Component {
                 return (
                   <Table.Row key={child.id}>
                     <Table.Cell>
-                      <Link to={`/app/localities/${child.id}/inspect`}>
+                      <Link to={`${urlBasePath}/${child.id}/inspect`}>
                         {child.id}
                       </Link>
                     </Table.Cell>

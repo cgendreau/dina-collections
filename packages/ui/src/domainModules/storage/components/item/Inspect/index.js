@@ -4,58 +4,61 @@ import { Table } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import localityServiceSelectors from 'dataModules/localityService/globalSelectors'
+import storageServiceSelectors from 'dataModules/storageService/globalSelectors'
 import {
-  createGetCuratedLocalityById,
-  ensureAllLocalitiesFetched,
-} from 'dataModules/localityService/higherOrderComponents'
+  createGetStorageLocationById,
+  ensureAllStorageLocationsFetched,
+} from 'dataModules/storageService/higherOrderComponents'
 
 const mapStateToProps = (state, ownProps) => {
-  const { curatedLocality } = ownProps
+  const { storageLocation } = ownProps
   const parent =
-    curatedLocality &&
-    curatedLocality.parent &&
-    localityServiceSelectors.getCuratedLocality(
-      state,
-      curatedLocality.parent.id
-    )
+    storageLocation &&
+    storageLocation.parent &&
+    storageServiceSelectors.getStorageLocation(state, storageLocation.parent.id)
   const children =
-    curatedLocality &&
-    curatedLocality.children &&
-    curatedLocality.children.map(({ id }) => {
-      return localityServiceSelectors.getCuratedLocality(state, id)
+    storageLocation &&
+    storageLocation.children &&
+    storageLocation.children.map(({ id }) => {
+      return storageServiceSelectors.getStorageLocation(state, id)
     })
+
   return {
     children,
-    curatedLocality,
     parent,
+    storageLocation,
   }
 }
 
 const propTypes = {
-  allLocalitiesFetched: PropTypes.bool.isRequired,
+  allStorageLocationsFetched: PropTypes.bool,
   children: PropTypes.array,
-  curatedLocality: PropTypes.object,
   parent: PropTypes.object,
+  storageLocation: PropTypes.object,
+  urlBasePath: PropTypes.string.isRequired,
 }
 
 const defaultProps = {
+  allStorageLocationsFetched: undefined,
   children: [],
-  curatedLocality: undefined,
   parent: null,
+  storageLocation: undefined,
 }
 
 export class Inspect extends Component {
   render() {
     const {
-      allLocalitiesFetched,
+      allStorageLocationsFetched,
       children,
-      curatedLocality,
+      storageLocation,
       parent,
+      urlBasePath,
     } = this.props
-    if (!curatedLocality || !allLocalitiesFetched) {
+
+    if (!storageLocation || !allStorageLocationsFetched) {
       return null
     }
+
     return (
       <React.Fragment>
         <Table celled>
@@ -65,55 +68,19 @@ export class Inspect extends Component {
               <Table.HeaderCell>Value</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          {curatedLocality && (
+          {storageLocation && (
             <Table.Body>
               <Table.Row>
-                <Table.Cell>Namn</Table.Cell>
-                <Table.Cell>{curatedLocality.name}</Table.Cell>
+                <Table.Cell>Name</Table.Cell>
+                <Table.Cell>{storageLocation.name}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell>id</Table.Cell>
-                <Table.Cell>{curatedLocality.id}</Table.Cell>
+                <Table.Cell>{storageLocation.id}</Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>MaximumElevationInMeters</Table.Cell>
-                <Table.Cell>
-                  {curatedLocality.verticalPosition &&
-                    curatedLocality.verticalPosition.maximummElevationInMeters}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>MinimumElevationInMeters</Table.Cell>
-                <Table.Cell>
-                  {curatedLocality.verticalPosition &&
-                    curatedLocality.verticalPosition.minimumElevationInMeters}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>MaximumDepthInMeters</Table.Cell>
-                <Table.Cell>
-                  {curatedLocality.verticalPosition &&
-                    curatedLocality.verticalPosition.maximumDepthInMeters}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>MinimumDepthInMeters</Table.Cell>
-                <Table.Cell>
-                  {curatedLocality.verticalPosition &&
-                    curatedLocality.verticalPosition.minimumDepthInMeters}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Latitude</Table.Cell>
-                <Table.Cell>{curatedLocality.latitude}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Longitude</Table.Cell>
-                <Table.Cell>{curatedLocality.longitude}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>UncertaintyInMeters</Table.Cell>
-                <Table.Cell>{curatedLocality.uncertaintyInMeters}</Table.Cell>
+                <Table.Cell>Description</Table.Cell>
+                <Table.Cell>{storageLocation.description}</Table.Cell>
               </Table.Row>
             </Table.Body>
           )}
@@ -130,7 +97,7 @@ export class Inspect extends Component {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
-                  <Link to={`/app/localities/${parent.id}/inspect`}>
+                  <Link to={`${urlBasePath}/${parent.id}/inspect`}>
                     {parent.id}
                   </Link>
                 </Table.Cell>
@@ -154,7 +121,7 @@ export class Inspect extends Component {
                 return (
                   <Table.Row key={child.id}>
                     <Table.Cell>
-                      <Link to={`/app/localities/${child.id}/inspect`}>
+                      <Link to={`${urlBasePath}/${child.id}/inspect`}>
                         {child.id}
                       </Link>
                     </Table.Cell>
@@ -173,7 +140,7 @@ Inspect.propTypes = propTypes
 Inspect.defaultProps = defaultProps
 
 export default compose(
-  ensureAllLocalitiesFetched(),
-  createGetCuratedLocalityById(),
+  ensureAllStorageLocationsFetched(),
+  createGetStorageLocationById(),
   connect(mapStateToProps)
 )(Inspect)

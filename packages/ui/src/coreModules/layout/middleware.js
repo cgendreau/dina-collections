@@ -1,7 +1,7 @@
 import { SIZE_SET_BREAKPOINT } from 'coreModules/size/actionTypes'
 import { SIZE_SMALL } from 'coreModules/size/constants'
 import { actionCreators, selectors } from './keyObjectModule'
-import { LAYOUT_SINGLE } from './constants'
+import { SINGLE } from './constants'
 
 export default function layoutMiddleware() {
   return ({ dispatch, getState }) => next => action => {
@@ -14,9 +14,7 @@ export default function layoutMiddleware() {
 
           if (layoutStateKeys.length) {
             layoutStateKeys.forEach(name => {
-              dispatch(
-                actionCreators.set[':name.layoutMode'](LAYOUT_SINGLE, { name })
-              )
+              dispatch(actionCreators.set[':name.layoutMode'](SINGLE, { name }))
             })
           }
         }

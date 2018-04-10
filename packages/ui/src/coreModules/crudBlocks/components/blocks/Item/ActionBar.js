@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Grid } from 'semantic-ui-react'
 import {
+  CREATE,
+  EDIT,
+  INSPECT,
   SET_COLLECTION,
   SET_ITEM_CREATE,
   SET_ITEM_EDIT,
@@ -27,33 +30,33 @@ class ActionBar extends Component {
           <Grid.Column width={16}>
             <Button.Group>
               <Button
-                active={itemBlockType === 'create'}
+                active={itemBlockType === CREATE}
                 icon="plus"
                 onClick={() => {
-                  if (itemBlockType !== 'create') {
+                  if (itemBlockType !== CREATE) {
                     this.props.onInteraction(SET_ITEM_CREATE)
                   }
                 }}
               />
 
-              {itemBlockType !== 'create' && (
+              {itemBlockType !== CREATE && (
                 <Button
-                  active={itemBlockType === 'edit'}
+                  active={itemBlockType === EDIT}
                   icon="edit"
                   onClick={() => {
-                    if (itemBlockType === 'inspect') {
+                    if (itemBlockType === INSPECT) {
                       this.props.onInteraction(SET_ITEM_EDIT, { itemId })
                     }
                   }}
                 />
               )}
 
-              {itemBlockType !== 'create' && (
+              {itemBlockType !== CREATE && (
                 <Button
-                  active={itemBlockType === 'inspect'}
+                  active={itemBlockType === INSPECT}
                   icon="folder open"
                   onClick={() => {
-                    if (itemBlockType === 'edit') {
+                    if (itemBlockType === EDIT) {
                       this.props.onInteraction(SET_ITEM_INSPECT, { itemId })
                     }
                   }}

@@ -1,5 +1,12 @@
 export const MODULE_NAME = 'crudBlocks'
 
+export const CREATE = 'create'
+export const EDIT = 'edit'
+export const INSPECT = 'inspect'
+
+export const LIST = 'list'
+export const TREE = 'tree'
+
 export const FORM_CANCEL = 'FORM_CANCEL'
 export const FORM_CREATE_SUCCESS = 'FORM_CREATE_SUCCESS'
 export const FORM_EDIT_SUCCESS = 'FORM_EDIT_SUCCESS'

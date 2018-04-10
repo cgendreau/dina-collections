@@ -7,9 +7,11 @@ import { Button, Dropdown, Grid, Form } from 'semantic-ui-react'
 import { InputText } from 'coreModules/form/components'
 import { actionCreators, globalSelectors } from '../../../../keyObjectModule'
 import {
+  LIST,
   SET_COLLECTION_LIST,
   SET_COLLECTION_TREE,
   SET_ITEM_CREATE,
+  TREE,
 } from '../../../../constants'
 import AncestorTag from './AncestorTag'
 
@@ -73,7 +75,7 @@ class ActionBar extends Component {
             <Grid.Column width={16}>
               <Button.Group floated="left">
                 <Button
-                  active={collectionBlockType === 'list'}
+                  active={collectionBlockType === LIST}
                   content="List"
                   onClick={event => {
                     event.preventDefault()
@@ -81,7 +83,7 @@ class ActionBar extends Component {
                   }}
                 />
                 <Button
-                  active={collectionBlockType === 'tree'}
+                  active={collectionBlockType === TREE}
                   content="Tree"
                   onClick={event => {
                     event.preventDefault()

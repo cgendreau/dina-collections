@@ -1,39 +1,42 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Icon, Label, List } from 'semantic-ui-react'
+
 import {
   ITEM_CLICK,
   SET_ITEM_CREATE_CHILD,
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
-} from 'domainModules/locality/interactions'
+} from 'coreModules/crudBlocks/constants'
+import { GROUP_2, GROUP_3, GROUP_4 } from '../../../constants'
 
 const propTypes = {
-  activeLocalityId: PropTypes.string,
-  curatedLocality: PropTypes.object.isRequired,
+  activeStorageLocationId: PropTypes.string,
   cursorFocus: PropTypes.bool,
+  disableEdit: PropTypes.bool.isRequired,
   displayNavigationButtons: PropTypes.bool.isRequired,
   onInteraction: PropTypes.func.isRequired,
+  storageLocation: PropTypes.object.isRequired,
 }
 
 const defaultProps = {
-  activeLocalityId: '',
+  activeStorageLocationId: '',
   cursorFocus: false,
 }
 
 const groupColorMap = {
-  continent: 'violet',
-  country: 'teal',
-  district: 'purple',
-  province: 'blue',
+  [GROUP_2]: 'teal',
+  [GROUP_3]: 'purple',
+  [GROUP_4]: 'blue',
 }
 
 class ListItem extends Component {
   render() {
     const {
-      activeLocalityId,
-      curatedLocality,
+      activeStorageLocationId,
+      storageLocation,
       cursorFocus,
+      disableEdit,
       displayNavigationButtons,
       onInteraction,
     } = this.props
@@ -46,38 +49,39 @@ class ListItem extends Component {
 
     return (
       <List.Item
-        active={activeLocalityId === curatedLocality.id}
-        key={curatedLocality.id}
+        active={activeStorageLocationId === storageLocation.id}
+        key={storageLocation.id}
         onClick={event => {
           event.preventDefault()
           onInteraction(ITEM_CLICK, {
-            itemId: curatedLocality.id,
+            itemId: storageLocation.id,
           })
         }}
         style={style}
       >
         <List.Content floated="right">
           <Label
-            color={groupColorMap[curatedLocality.group]}
+            color={groupColorMap[storageLocation.group]}
             style={{ marginRight: 20 }}
           >
-            {curatedLocality.group}
+            {storageLocation.group}
           </Label>
-          {displayNavigationButtons && (
-            <Button
-              icon
-              onClick={event => {
-                event.preventDefault()
-                event.stopPropagation()
-                onInteraction(SET_ITEM_EDIT, {
-                  itemId: curatedLocality.id,
-                })
-              }}
-              size="tiny"
-            >
-              <Icon name="edit" />
-            </Button>
-          )}
+          {displayNavigationButtons &&
+            !disableEdit && (
+              <Button
+                icon
+                onClick={event => {
+                  event.preventDefault()
+                  event.stopPropagation()
+                  onInteraction(SET_ITEM_EDIT, {
+                    itemId: storageLocation.id,
+                  })
+                }}
+                size="tiny"
+              >
+                <Icon name="edit" />
+              </Button>
+            )}
           {displayNavigationButtons && (
             <Button
               icon
@@ -85,7 +89,7 @@ class ListItem extends Component {
                 event.preventDefault()
                 event.stopPropagation()
                 onInteraction(SET_ITEM_INSPECT, {
-                  itemId: curatedLocality.id,
+                  itemId: storageLocation.id,
                 })
               }}
               size="tiny"
@@ -100,7 +104,7 @@ class ListItem extends Component {
                 event.preventDefault()
                 event.stopPropagation()
                 onInteraction(SET_ITEM_CREATE_CHILD, {
-                  itemId: curatedLocality.id,
+                  itemId: storageLocation.id,
                 })
               }}
               size="tiny"
@@ -112,7 +116,7 @@ class ListItem extends Component {
         </List.Content>
 
         <List.Content>
-          <h3>{curatedLocality.name}</h3>
+          <h3>{storageLocation.name}</h3>
         </List.Content>
       </List.Item>
     )

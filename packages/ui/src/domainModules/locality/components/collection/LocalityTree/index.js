@@ -25,6 +25,7 @@ const mapDispatchToProps = {
 }
 
 const propTypes = {
+  disableEdit: PropTypes.bool.isRequired,
   getCuratedLocalitiesAc: PropTypes.func.isRequired,
   onInteraction: PropTypes.func.isRequired,
   searchQuery: PropTypes.string,
@@ -75,16 +76,18 @@ class Localities extends Component {
   generateNodeProps({ node }) {
     return {
       buttons: [
-        <Button
-          icon
-          onClick={() => {
-            this.props.onInteraction(SET_ITEM_EDIT, {
-              itemId: node.id,
-            })
-          }}
-        >
-          <Icon name="edit" />
-        </Button>,
+        this.props.disableEdit ? null : (
+          <Button
+            icon
+            onClick={() => {
+              this.props.onInteraction(SET_ITEM_EDIT, {
+                itemId: node.id,
+              })
+            }}
+          >
+            <Icon name="edit" />
+          </Button>
+        ),
         <Button
           icon
           onClick={() => {
@@ -95,13 +98,13 @@ class Localities extends Component {
         >
           <Icon name="folder open" />
         </Button>,
-      ],
+      ].filter(element => !!element),
     }
   }
   render() {
     const { treeData } = this.state
     return (
-      <div style={{ height: '400px' }}>
+      <div style={{ height: '95vh' }}>
         <SortableTree
           expandOnlySearchedNodes
           generateNodeProps={this.generateNodeProps}

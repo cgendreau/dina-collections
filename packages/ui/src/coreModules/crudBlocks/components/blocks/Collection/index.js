@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Block } from 'coreModules/layout/components'
+
+import { LIST, TREE } from '../../../constants'
 import ActionBar from './ActionBar'
 import Header from './Header'
 
 const propTypes = {
   collectionBlockType: PropTypes.string.isRequired,
+  disableEdit: PropTypes.bool.isRequired,
   displayNavigationButtons: PropTypes.bool,
   dropdownFilterOptions: PropTypes.array.isRequired,
   getAncestorsByParentId: PropTypes.func.isRequired,
@@ -24,6 +27,7 @@ const defaultProps = {
 
 const CollectionBlock = ({
   collectionBlockType,
+  disableEdit,
   displayNavigationButtons,
   dropdownFilterOptions,
   getAncestorsByParentId,
@@ -35,16 +39,18 @@ const CollectionBlock = ({
   ...rest
 }) => {
   let content
-  if (collectionBlockType === 'list' && renderList) {
+  if (collectionBlockType === LIST && renderList) {
     content = renderList({
+      disableEdit,
       displayNavigationButtons,
       name,
       onInteraction,
       ...rest,
     })
   }
-  if (collectionBlockType === 'tree' && renderTree) {
+  if (collectionBlockType === TREE && renderTree) {
     content = renderTree({
+      disableEdit,
       displayNavigationButtons,
       name,
       onInteraction,

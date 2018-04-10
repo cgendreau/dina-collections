@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, Icon } from 'semantic-ui-react'
-import { getCuratedLocalities as getCuratedLocalitiesAc } from 'dataModules/localityService/actionCreators'
 import SortableTree, { getTreeFromFlatData } from 'react-sortable-tree'
-import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
+
+import { getStorageLocations as getStorageLocationsAc } from 'dataModules/storageService/actionCreators'
+import { globalSelectors as keyObjectGlobalSelectors } from 'coreModules/crudBlocks/keyObjectModule'
 import {
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
-} from 'domainModules/locality/interactions'
+} from 'coreModules/crudBlocks/constants'
 
 const mapStateToProps = (state, { name }) => {
   return {
@@ -20,11 +21,12 @@ const mapStateToProps = (state, { name }) => {
 }
 
 const mapDispatchToProps = {
-  getCuratedLocalitiesAc,
+  getStorageLocationsAc,
 }
 
 const propTypes = {
-  getCuratedLocalitiesAc: PropTypes.func.isRequired,
+  disableEdit: PropTypes.bool.isRequired,
+  getStorageLocationsAc: PropTypes.func.isRequired,
   onInteraction: PropTypes.func.isRequired,
   searchQuery: PropTypes.string,
 }
@@ -33,7 +35,7 @@ const defaultProps = {
   searchQuery: '',
 }
 
-class Localities extends Component {
+class StorageLocationsTree extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -45,20 +47,21 @@ class Localities extends Component {
   componentWillMount() {
     // TODO refactor this
     this.props
-      .getCuratedLocalitiesAc({
+      .getStorageLocationsAc({
         queryParams: { relationships: ['all'] },
       })
-      .then(localities => {
-        const flatData = localities.map(locality => {
+      .then(storageLocations => {
+        const flatData = storageLocations.map(storageLocation => {
           return {
-            id: locality.id,
-            parentId: (locality.parent && locality.parent.id) || '0',
-            title: locality.name,
+            id: storageLocation.id,
+            parentId:
+              (storageLocation.parent && storageLocation.parent.id) || '0',
+            title: storageLocation.name,
           }
         })
         const parent = {
           id: '0',
-          title: 'Earth',
+          title: 'NRM ZOO',
         }
 
         const treeData = getTreeFromFlatData({
@@ -74,16 +77,18 @@ class Localities extends Component {
   generateNodeProps({ node }) {
     return {
       buttons: [
-        <Button
-          icon
-          onClick={() => {
-            this.props.onInteraction(SET_ITEM_EDIT, {
-              itemId: node.id,
-            })
-          }}
-        >
-          <Icon name="edit" />
-        </Button>,
+        this.props.disableEdit ? null : (
+          <Button
+            icon
+            onClick={() => {
+              this.props.onInteraction(SET_ITEM_EDIT, {
+                itemId: node.id,
+              })
+            }}
+          >
+            <Icon name="edit" />
+          </Button>
+        ),
         <Button
           icon
           onClick={() => {
@@ -94,13 +99,13 @@ class Localities extends Component {
         >
           <Icon name="folder open" />
         </Button>,
-      ],
+      ].filter(element => !!element),
     }
   }
   render() {
     const { treeData } = this.state
     return (
-      <div style={{ height: '400px' }}>
+      <div style={{ height: '95vh' }}>
         <SortableTree
           expandOnlySearchedNodes
           generateNodeProps={this.generateNodeProps}
@@ -113,7 +118,9 @@ class Localities extends Component {
   }
 }
 
-Localities.propTypes = propTypes
-Localities.defaultProps = defaultProps
+StorageLocationsTree.propTypes = propTypes
+StorageLocationsTree.defaultProps = defaultProps
 
-export default connect(mapStateToProps, mapDispatchToProps)(Localities)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  StorageLocationsTree
+)

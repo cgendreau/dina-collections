@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Block } from 'coreModules/layout/components'
 import { Button, Icon } from 'semantic-ui-react'
 
+import { SINGLE, SPLIT } from 'coreModules/layout/constants'
 import {
   SET_LAYOUT_SINGLE_COLLECTION,
   SET_LAYOUT_SPLIT,
@@ -21,7 +22,7 @@ export class Header extends Component {
     return (
       <Block.Header title={title}>
         <Button.Group floated="right">
-          {layoutMode === 'split' && (
+          {layoutMode === SPLIT && (
             <Button
               icon
               onClick={event => {
@@ -33,7 +34,7 @@ export class Header extends Component {
               <Icon name="maximize" />
             </Button>
           )}
-          {layoutMode === 'single' && (
+          {layoutMode === SINGLE && (
             <Button
               icon
               onClick={event => {

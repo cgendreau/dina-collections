@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import objectPath from 'object-path'
+
+import config from 'config'
 import localityServiceSelectors from '../globalSelectors'
 import { getCuratedLocality as getCuratedLocalityAc } from '../actionCreators'
 
@@ -12,6 +14,7 @@ const createGetCuratedLocalityById = (
 ) => ComposedComponent => {
   const mapStateToProps = (state, ownProps) => {
     const itemId = objectPath.get(ownProps, idPath)
+
     return {
       curatedLocality: !itemId
         ? null
@@ -25,44 +28,34 @@ const createGetCuratedLocalityById = (
   }
 
   const propTypes = {
-    allLocalitiesFetched: PropTypes.bool,
     curatedLocality: PropTypes.object,
     getCuratedLocality: PropTypes.func.isRequired,
     itemId: PropTypes.string,
   }
 
   const defaultProps = {
-    allLocalitiesFetched: undefined,
     curatedLocality: null,
     itemId: '',
   }
 
   class GetCuratedLocalityById extends Component {
     componentDidMount() {
-      const { allLocalitiesFetched } = this.props
-      if (allLocalitiesFetched === undefined) {
-        const { itemId } = this.props
-        if (itemId) {
-          this.props.getCuratedLocality({ id: itemId })
-        }
+      const { itemId } = this.props
+      if (itemId && !config.isTest) {
+        this.props.getCuratedLocality({ id: itemId })
       }
     }
-    componentWillReceiveProps(nextProps) {
-      const { allLocalitiesFetched } = this.props
-      const { itemId } = this.props
-      if (
-        allLocalitiesFetched === false &&
-        nextProps.allLocalitiesFetched === true
-      ) {
-        if (itemId) {
-          this.props.getCuratedLocality({ id: itemId })
-        }
-      }
 
-      if (nextProps.itemId && nextProps.itemId !== itemId) {
+    componentWillReceiveProps(nextProps) {
+      if (
+        nextProps.itemId &&
+        nextProps.itemId !== this.props.itemId &&
+        !config.isTest
+      ) {
         this.props.getCuratedLocality({ id: nextProps.itemId })
       }
     }
+
     render() {
       const { curatedLocality } = this.props
       return (

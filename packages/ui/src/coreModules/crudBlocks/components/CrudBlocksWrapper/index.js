@@ -6,41 +6,47 @@ import { compose } from 'redux'
 import { push } from 'react-router-redux'
 
 import { Layout } from 'coreModules/layout/components'
+import { SINGLE, SPLIT } from 'coreModules/layout/constants'
 import { withLayout } from 'coreModules/layout/higherOrderComponents'
 import { actionCreators, globalSelectors } from '../../keyObjectModule'
 import ItemBlock from '../blocks/Item'
 import CollectionBlock from '../blocks/Collection'
 
 import {
+  CREATE,
+  EDIT,
   FORM_CANCEL,
   FORM_CREATE_SUCCESS,
   FORM_EDIT_SUCCESS,
+  INSPECT,
   ITEM_CLICK,
-  SET_COLLECTION,
+  LIST,
   SET_COLLECTION_LIST,
   SET_COLLECTION_TREE,
-  SET_ITEM_CREATE,
+  SET_COLLECTION,
   SET_ITEM_CREATE_CHILD,
+  SET_ITEM_CREATE,
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
   SET_LAYOUT_SINGLE_COLLECTION,
   SET_LAYOUT_SINGLE_ITEM,
   SET_LAYOUT_SPLIT,
+  TREE,
 } from '../../constants'
 
 const getItemBlockType = ({ itemId, url }) => {
   let itemBlockType = null
 
-  if (itemId && url.indexOf('edit') > -1) {
-    itemBlockType = 'edit'
+  if (itemId && url.indexOf(EDIT) > -1) {
+    itemBlockType = EDIT
   }
 
-  if (itemId && url.indexOf('inspect') > -1) {
-    itemBlockType = 'inspect'
+  if (itemId && url.indexOf(INSPECT) > -1) {
+    itemBlockType = INSPECT
   }
 
-  if (url.indexOf('create') > -1) {
-    itemBlockType = 'create'
+  if (url.indexOf(CREATE) > -1) {
+    itemBlockType = CREATE
   }
 
   return itemBlockType
@@ -66,6 +72,7 @@ const mapDispatchToProps = {
 const propTypes = {
   collectionBlockType: PropTypes.string,
   customHandleInteraction: PropTypes.func,
+  disableEdit: PropTypes.bool,
   dropdownFilterOptions: PropTypes.array.isRequired,
   getAncestorsByParentId: PropTypes.func.isRequired,
   itemIdParamName: PropTypes.string.isRequired,
@@ -86,9 +93,10 @@ const propTypes = {
   urlBasePath: PropTypes.string.isRequired,
 }
 const defaultProps = {
-  collectionBlockType: 'list',
+  collectionBlockType: LIST,
   customHandleInteraction: undefined,
-  layoutMode: 'single',
+  disableEdit: false,
+  layoutMode: SINGLE,
   renderCreateBlockChild: undefined,
   renderEditBlockChild: undefined,
   renderInspectBlockChild: undefined,
@@ -104,8 +112,8 @@ class CrudBlocksWrapper extends Component {
 
   componentWillMount() {
     const { name, setCollectionBlockType, setLayoutMode } = this.props
-    setCollectionBlockType('list', { name })
-    setLayoutMode('single')
+    setCollectionBlockType(LIST, { name })
+    setLayoutMode(SINGLE)
   }
 
   handleInteraction(type, data = {}) {
@@ -125,29 +133,29 @@ class CrudBlocksWrapper extends Component {
 
     switch (type) {
       case SET_LAYOUT_SINGLE_COLLECTION: {
-        setLayoutMode('single')
+        setLayoutMode(SINGLE)
         routerPush(`${urlBasePath}`)
         break
       }
 
       case SET_LAYOUT_SPLIT: {
-        setLayoutMode('split')
+        setLayoutMode(SPLIT)
         break
       }
 
       case SET_LAYOUT_SINGLE_ITEM: {
-        setLayoutMode('single')
+        setLayoutMode(SINGLE)
         break
       }
 
       case SET_COLLECTION_LIST: {
-        setCollectionBlockType('list', { name })
+        setCollectionBlockType(LIST, { name })
         routerPush(`${urlBasePath}`)
         break
       }
 
       case SET_COLLECTION_TREE: {
-        setCollectionBlockType('tree', { name })
+        setCollectionBlockType(TREE, { name })
         routerPush(`${urlBasePath}`)
         break
       }
@@ -209,6 +217,7 @@ class CrudBlocksWrapper extends Component {
   render() {
     const {
       collectionBlockType,
+      disableEdit,
       dropdownFilterOptions,
       getAncestorsByParentId,
       layoutMode,
@@ -220,6 +229,7 @@ class CrudBlocksWrapper extends Component {
       renderInspectBlockChild,
       renderList,
       renderTree,
+      urlBasePath,
     } = this.props
 
     const itemId = params[itemIdParamName]
@@ -227,6 +237,7 @@ class CrudBlocksWrapper extends Component {
 
     const itemBlock = itemBlockType && (
       <ItemBlock
+        disableEdit={disableEdit}
         itemBlockType={itemBlockType}
         itemId={itemId}
         layoutMode={layoutMode}
@@ -234,12 +245,14 @@ class CrudBlocksWrapper extends Component {
         renderCreateBlockChild={renderCreateBlockChild}
         renderEditBlockChild={renderEditBlockChild}
         renderInspectBlockChild={renderInspectBlockChild}
+        urlBasePath={urlBasePath}
       />
     )
     const collectionBlock =
-      layoutMode === 'single' && itemBlock ? null : (
+      layoutMode === SINGLE && itemBlock ? null : (
         <CollectionBlock
           collectionBlockType={collectionBlockType}
+          disableEdit={disableEdit}
           dropdownFilterOptions={dropdownFilterOptions}
           getAncestorsByParentId={getAncestorsByParentId}
           itemId={itemId}

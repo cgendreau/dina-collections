@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
-import CrudBlocksWrapper from 'domainModules/locality/components/genericCrudManager/CrudBlocksWrapper'
+import { CrudBlocksWrapper } from 'coreModules/crudBlocks/components'
 
 import CreateForm from '../item/form/Create'
 import EditForm from '../item/form/Edit'
 import InspectView from '../item/Inspect'
-import LocalityList from '../collection/LocalityList'
-import LocalityTree from '../collection/LocalityTree'
+import StorageLocationsList from '../collection/StorageLocationsList'
+import StorageLocationsTree from '../collection/StorageLocationsTree'
+import globalSelectors from '../../globalSelectors'
+import { ALL, GROUP_2, GROUP_3, GROUP_4 } from '../../constants'
 
-import { ALL, CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../constants'
-
-const groups = [CONTINENT, COUNTRY, DISTRICT, PROVINCE]
+const groups = [GROUP_2, GROUP_3, GROUP_4]
 
 const DROPDOWN_FILTER_OPTIONS = [
   {
@@ -29,7 +29,7 @@ const DROPDOWN_FILTER_OPTIONS = [
 
 const propTypes = {}
 
-class LocalityManager extends Component {
+class StorageManager extends Component {
   static renderCreateBlockChild(props) {
     return <CreateForm {...props} />
   }
@@ -43,30 +43,31 @@ class LocalityManager extends Component {
   }
 
   static renderList(props) {
-    return <LocalityList {...props} />
+    return <StorageLocationsList {...props} />
   }
 
   static renderTree(props) {
-    return <LocalityTree {...props} />
+    return <StorageLocationsTree {...props} />
   }
 
   render() {
     return (
       <CrudBlocksWrapper
         dropdownFilterOptions={DROPDOWN_FILTER_OPTIONS}
-        itemIdParamName="localityId"
-        name="locality"
-        renderCreateBlockChild={LocalityManager.renderCreateBlockChild}
-        renderEditBlockChild={LocalityManager.renderEditBlockChild}
-        renderInspectBlockChild={LocalityManager.renderInspectBlockChild}
-        renderList={LocalityManager.renderList}
-        renderTree={LocalityManager.renderTree}
-        urlBasePath="/app/localities"
+        getAncestorsByParentId={globalSelectors.getStorageLocationAncestorsById}
+        itemIdParamName="storageLocationId"
+        name="storage"
+        renderCreateBlockChild={StorageManager.renderCreateBlockChild}
+        renderEditBlockChild={StorageManager.renderEditBlockChild}
+        renderInspectBlockChild={StorageManager.renderInspectBlockChild}
+        renderList={StorageManager.renderList}
+        renderTree={StorageManager.renderTree}
+        urlBasePath="/app/storageLocations"
       />
     )
   }
 }
 
-LocalityManager.propTypes = propTypes
+StorageManager.propTypes = propTypes
 
-export default LocalityManager
+export default StorageManager

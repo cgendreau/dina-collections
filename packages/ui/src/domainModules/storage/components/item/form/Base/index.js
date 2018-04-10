@@ -7,10 +7,11 @@ import formValidator from 'common/es5/error/validators/formValidator'
 import createLog from 'utilities/log'
 import FieldWrapper from 'coreModules/form/components/FieldWrapper'
 import { Input, DropdownSearch } from 'coreModules/form/components'
-import { CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../../../constants'
+import StorageLocationSearch from '../../../StorageLocationSearch'
+import { ALL, GROUP_1, GROUP_2, GROUP_3, GROUP_4 } from '../../../../constants'
 import FormActions from './FormActions'
 
-const log = createLog('modules:locality:BaseForm')
+const log = createLog('modules:storage:BaseForm')
 
 const propTypes = {
   displayBackButton: PropTypes.bool,
@@ -33,7 +34,7 @@ const defaultProps = {
   error: '',
 }
 
-const groups = [CONTINENT, COUNTRY, DISTRICT, PROVINCE]
+const groups = [GROUP_1, GROUP_2, GROUP_3, GROUP_4]
 
 const dropdownOptions = groups.map(group => {
   return {
@@ -72,7 +73,7 @@ export class BaseForm extends Component {
                   descriptionKey: 'nameDescription',
                 }}
                 label="Name"
-                module="localities"
+                module="storage"
                 name="name"
                 type="text"
               />
@@ -82,94 +83,34 @@ export class BaseForm extends Component {
                 autoComplete="off"
                 component={DropdownSearch}
                 label="Group"
-                module="localities"
+                module="storage"
                 name="group"
                 options={dropdownOptions}
                 type="dropdown-search-local"
               />
             </Grid.Column>
           </Grid.Row>
-
           <Grid.Row>
             <Grid.Column mobile={8}>
-              Elevatim
-              <Grid.Row>
-                <Grid.Column mobile={8}>
-                  <FieldWrapper
-                    autoComplete="off"
-                    component={Input}
-                    label="Min"
-                    module="localities"
-                    name="verticalPosition.minimumElevationInMeters"
-                    type="text"
-                  />
-                </Grid.Column>
-                <Grid.Column mobile={8}>
-                  <FieldWrapper
-                    autoComplete="off"
-                    component={Input}
-                    label="Max"
-                    module="localities"
-                    name="verticalPosition.maximumElevationInMeters"
-                    type="text"
-                  />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid.Column>
-            <Grid.Column mobile={8}>
-              Depth
-              <Grid.Row>
-                <Grid.Column mobile={8}>
-                  <FieldWrapper
-                    autoComplete="off"
-                    component={Input}
-                    label="Max"
-                    module="localities"
-                    name="verticalPosition.maximumDepthInMeters"
-                    type="text"
-                  />
-                </Grid.Column>
-                <Grid.Column mobile={8}>
-                  <FieldWrapper
-                    autoComplete="off"
-                    component={Input}
-                    label="Max"
-                    module="localities"
-                    name="verticalPosition.minimumDepthInMeters"
-                    type="text"
-                  />
-                </Grid.Column>
-              </Grid.Row>
+              <FieldWrapper
+                autoComplete="off"
+                component={StorageLocationSearch}
+                group={ALL}
+                label="Parent"
+                module="storage"
+                name="parentId"
+                type="text"
+              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column mobile={4}>
+            <Grid.Column>
               <FieldWrapper
                 autoComplete="off"
                 component={Input}
-                label="Latitude"
-                module="localities"
-                name="centralPosition.latitude"
-                type="text"
-              />
-            </Grid.Column>
-            <Grid.Column mobile={4}>
-              <FieldWrapper
-                autoComplete="off"
-                component={Input}
-                label="Longitude"
-                module="localities"
-                name="centralPosition.longitude"
-                type="text"
-              />
-            </Grid.Column>
-            <Grid.Column mobile={4}>
-              <FieldWrapper
-                autoComplete="off"
-                component={Input}
-                label="Uncertainty"
-                module="localities"
-                name="centralPosition.uncertaintyInMeters"
+                label="Description"
+                module="storage"
+                name="description"
                 type="text"
               />
             </Grid.Column>
@@ -197,6 +138,6 @@ BaseForm.defaultProps = defaultProps
 
 export default reduxForm({
   enableReinitialize: true,
-  form: 'EditLocalities',
-  validate: formValidator({ model: 'curatedLocality' }),
+  form: 'editStorageLocations',
+  validate: formValidator({ model: 'storageLocation' }),
 })(BaseForm)

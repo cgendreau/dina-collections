@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from 'common/es5/stringFormatters'
 import storageServiceSelectors from 'dataModules/storageService/globalSelectors'
 import getSecondArgument from 'utilities/getSecondArgument'
 
-import { ALL, LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4 } from './constants'
+import { ALL, GROUP_1, GROUP_2, GROUP_3, GROUP_4 } from './constants'
 
 const {
   getStorageLocations,
@@ -27,7 +27,7 @@ const getStorageLocationsArrayByFilter = createSelector(
   getSecondArgument,
   (storageLocationsArray, filter = {}) => {
     const {
-      level: levelFilter,
+      group: groupFilter,
       limit: limitFilter,
       offset = 0,
       parentId: parentIdFilter,
@@ -54,9 +54,9 @@ const getStorageLocationsArrayByFilter = createSelector(
       filteredStorageLocations = [...firstLetterMatches, ...otherMatches]
     }
 
-    if (levelFilter) {
+    if (groupFilter) {
       filteredStorageLocations = filteredStorageLocations.filter(
-        ({ level }) => level === levelFilter
+        ({ group }) => group === groupFilter
       )
     }
 
@@ -125,14 +125,14 @@ const getPrevStorageLocationIdFromFilter = createSelector(
   }
 )
 
-const createDropdownSelector = (levelFilter, numberOfResults = 6) => {
+const createDropdownSelector = (groupFilter, numberOfResults = 6) => {
   return createSelector(
     [getStorageLocations, getSecondArgument],
     (storageLocations, searchQuery = '') => {
       const lowerCaseSearchQuery = searchQuery.toLowerCase()
-      const mappedLevelStorageLocations = Object.values(storageLocations)
+      const mappedGroupStorageLocations = Object.values(storageLocations)
         .filter(
-          ({ level }) => (levelFilter === ALL ? true : level === levelFilter)
+          ({ group }) => (groupFilter === ALL ? true : group === groupFilter)
         )
         .map(({ id, name }) => {
           return {
@@ -142,7 +142,7 @@ const createDropdownSelector = (levelFilter, numberOfResults = 6) => {
           }
         })
 
-      const firstLetterMatches = mappedLevelStorageLocations.filter(
+      const firstLetterMatches = mappedGroupStorageLocations.filter(
         ({ text }) => {
           if (!searchQuery) {
             return true
@@ -151,7 +151,7 @@ const createDropdownSelector = (levelFilter, numberOfResults = 6) => {
         }
       )
 
-      const otherMatches = mappedLevelStorageLocations.filter(({ text }) => {
+      const otherMatches = mappedGroupStorageLocations.filter(({ text }) => {
         if (!searchQuery) {
           return false
         }
@@ -164,10 +164,10 @@ const createDropdownSelector = (levelFilter, numberOfResults = 6) => {
 }
 
 const getDropdownAllOptions = createDropdownSelector(ALL)
-const getDropdownLevel1Options = createDropdownSelector(LEVEL_1)
-const getDropdownLevel2Options = createDropdownSelector(LEVEL_2)
-const getDropdownLevel3Options = createDropdownSelector(LEVEL_3)
-const getDropdownLevel4Options = createDropdownSelector(LEVEL_4)
+const getDropdownGroup1Options = createDropdownSelector(GROUP_1)
+const getDropdownGroup2Options = createDropdownSelector(GROUP_2)
+const getDropdownGroup3Options = createDropdownSelector(GROUP_3)
+const getDropdownGroup4Options = createDropdownSelector(GROUP_4)
 
 const getStorageLocationOption = createSelector(
   [getStorageLocations, getSecondArgument],
@@ -186,10 +186,10 @@ const getStorageLocationOption = createSelector(
 
 export default {
   getDropdownAllOptions,
-  getDropdownLevel1Options,
-  getDropdownLevel2Options,
-  getDropdownLevel3Options,
-  getDropdownLevel4Options,
+  getDropdownGroup1Options,
+  getDropdownGroup2Options,
+  getDropdownGroup3Options,
+  getDropdownGroup4Options,
   getNextStorageLocationIdFromFilter,
   getPrevStorageLocationIdFromFilter,
   getStorageLocationAncestorsById,

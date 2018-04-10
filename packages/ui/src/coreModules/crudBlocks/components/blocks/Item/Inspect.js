@@ -10,6 +10,7 @@ const propTypes = {
   layoutMode: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
   renderChild: PropTypes.func.isRequired,
+  urlBasePath: PropTypes.string.isRequired,
 }
 
 export class InspectItemBlock extends Component {
@@ -20,6 +21,7 @@ export class InspectItemBlock extends Component {
       layoutMode,
       onInteraction,
       renderChild,
+      urlBasePath,
     } = this.props
     return (
       <Block>
@@ -39,7 +41,7 @@ export class InspectItemBlock extends Component {
             />
           }
         >
-          {renderChild({ itemId })}
+          {renderChild({ itemId, urlBasePath })}
         </Block.Content>
       </Block>
     )

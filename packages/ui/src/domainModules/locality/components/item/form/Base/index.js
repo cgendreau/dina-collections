@@ -79,7 +79,7 @@ export class BaseForm extends Component {
                   descriptionKey: 'nameDescription',
                 }}
                 label="Name"
-                module="localities"
+                module="locality"
                 name="name"
                 type="text"
               />
@@ -89,7 +89,7 @@ export class BaseForm extends Component {
                 autoComplete="off"
                 component={DropdownSearch}
                 label="Group"
-                module="localities"
+                module="locality"
                 name="group"
                 options={dropdownOptions}
                 type="dropdown-search-local"
@@ -103,7 +103,7 @@ export class BaseForm extends Component {
                 component={LocalityDropdownSearch}
                 group={ALL}
                 label="Parent"
-                module="localities"
+                module="locality"
                 name="parent.id"
                 type="text"
               />
@@ -118,7 +118,7 @@ export class BaseForm extends Component {
                     autoComplete="off"
                     component={Input}
                     label="Min"
-                    module="localities"
+                    module="locality"
                     name="verticalPosition.minimumElevationInMeters"
                     type="text"
                   />
@@ -128,7 +128,7 @@ export class BaseForm extends Component {
                     autoComplete="off"
                     component={Input}
                     label="Max"
-                    module="localities"
+                    module="locality"
                     name="verticalPosition.maximumElevationInMeters"
                     type="text"
                   />
@@ -143,7 +143,7 @@ export class BaseForm extends Component {
                     autoComplete="off"
                     component={Input}
                     label="Max"
-                    module="localities"
+                    module="locality"
                     name="verticalPosition.maximumDepthInMeters"
                     type="text"
                   />
@@ -153,7 +153,7 @@ export class BaseForm extends Component {
                     autoComplete="off"
                     component={Input}
                     label="Max"
-                    module="localities"
+                    module="locality"
                     name="verticalPosition.minimumDepthInMeters"
                     type="text"
                   />
@@ -167,7 +167,7 @@ export class BaseForm extends Component {
                 autoComplete="off"
                 component={Input}
                 label="Latitude"
-                module="localities"
+                module="locality"
                 name="centralPosition.latitude"
                 type="text"
               />
@@ -177,7 +177,7 @@ export class BaseForm extends Component {
                 autoComplete="off"
                 component={Input}
                 label="Longitude"
-                module="localities"
+                module="locality"
                 name="centralPosition.longitude"
                 type="text"
               />
@@ -187,7 +187,7 @@ export class BaseForm extends Component {
                 autoComplete="off"
                 component={Input}
                 label="Uncertainty"
-                module="localities"
+                module="locality"
                 name="centralPosition.uncertaintyInMeters"
                 type="text"
               />

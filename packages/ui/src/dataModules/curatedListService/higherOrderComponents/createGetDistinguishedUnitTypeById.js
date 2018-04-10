@@ -14,6 +14,7 @@ const createGetDistinguishedUnitTypeById = (
 ) => ComposedComponent => {
   const mapStateToProps = (state, ownProps) => {
     const itemId = objectPath.get(ownProps, idPath)
+
     return {
       distinguishedUnitType: !itemId
         ? null
@@ -27,44 +28,34 @@ const createGetDistinguishedUnitTypeById = (
   }
 
   const propTypes = {
-    allLocalitiesFetched: PropTypes.bool,
     distinguishedUnitType: PropTypes.object,
     getDistinguishedUnitType: PropTypes.func.isRequired,
     itemId: PropTypes.string,
   }
 
   const defaultProps = {
-    allLocalitiesFetched: undefined,
     distinguishedUnitType: null,
     itemId: '',
   }
 
   class GetDistinguishedUnitTypeById extends Component {
     componentDidMount() {
-      const { allLocalitiesFetched } = this.props
-      if (!config.isTest && allLocalitiesFetched === undefined) {
-        const { itemId } = this.props
-        if (itemId) {
-          this.props.getDistinguishedUnitType({ id: itemId })
-        }
+      const { itemId } = this.props
+      if (itemId && !config.isTest) {
+        this.props.getDistinguishedUnitType({ id: itemId })
       }
     }
-    componentWillReceiveProps(nextProps) {
-      const { allLocalitiesFetched } = this.props
-      const { itemId } = this.props
-      if (
-        allLocalitiesFetched === false &&
-        nextProps.allLocalitiesFetched === true
-      ) {
-        if (itemId) {
-          this.props.getDistinguishedUnitType({ id: itemId })
-        }
-      }
 
-      if (nextProps.itemId && nextProps.itemId !== itemId) {
+    componentWillReceiveProps(nextProps) {
+      if (
+        nextProps.itemId &&
+        nextProps.itemId !== this.props.itemId &&
+        !config.isTest
+      ) {
         this.props.getDistinguishedUnitType({ id: nextProps.itemId })
       }
     }
+
     render() {
       const { distinguishedUnitType } = this.props
       return (

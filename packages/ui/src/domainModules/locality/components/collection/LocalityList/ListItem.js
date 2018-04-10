@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Icon, Label, List } from 'semantic-ui-react'
+
 import {
   ITEM_CLICK,
   SET_ITEM_CREATE_CHILD,
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
 } from 'coreModules/crudBlocks/constants'
+import { CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../../constants'
 
 const propTypes = {
   activeLocalityId: PropTypes.string,
   curatedLocality: PropTypes.object.isRequired,
   cursorFocus: PropTypes.bool,
+  disableEdit: PropTypes.bool.isRequired,
   displayNavigationButtons: PropTypes.bool.isRequired,
   onInteraction: PropTypes.func.isRequired,
 }
@@ -22,10 +25,10 @@ const defaultProps = {
 }
 
 const groupColorMap = {
-  continent: 'violet',
-  country: 'teal',
-  district: 'purple',
-  province: 'blue',
+  [CONTINENT]: 'violet',
+  [COUNTRY]: 'teal',
+  [DISTRICT]: 'purple',
+  [PROVINCE]: 'blue',
 }
 
 class ListItem extends Component {
@@ -34,6 +37,7 @@ class ListItem extends Component {
       activeLocalityId,
       curatedLocality,
       cursorFocus,
+      disableEdit,
       displayNavigationButtons,
       onInteraction,
     } = this.props
@@ -63,21 +67,22 @@ class ListItem extends Component {
           >
             {curatedLocality.group}
           </Label>
-          {displayNavigationButtons && (
-            <Button
-              icon
-              onClick={event => {
-                event.preventDefault()
-                event.stopPropagation()
-                onInteraction(SET_ITEM_EDIT, {
-                  itemId: curatedLocality.id,
-                })
-              }}
-              size="tiny"
-            >
-              <Icon name="edit" />
-            </Button>
-          )}
+          {displayNavigationButtons &&
+            !disableEdit && (
+              <Button
+                icon
+                onClick={event => {
+                  event.preventDefault()
+                  event.stopPropagation()
+                  onInteraction(SET_ITEM_EDIT, {
+                    itemId: curatedLocality.id,
+                  })
+                }}
+                size="tiny"
+              >
+                <Icon name="edit" />
+              </Button>
+            )}
           {displayNavigationButtons && (
             <Button
               icon

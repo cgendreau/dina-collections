@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import { List } from 'semantic-ui-react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import localityServiceSelectors from 'dataModules/localityService/globalSelectors'
-import { ensureAllLocalitiesFetched } from 'dataModules/localityService/higherOrderComponents'
+
+import { ITEM_CLICK } from 'coreModules/crudBlocks/constants'
 import {
   globalSelectors as keyObjectGlobalSelectors,
   actionCreators as keyObjectActionCreators,
-} from '../../../keyObjectModule'
-import { CONTINENT } from '../../../constants'
-import localitySelectors from '../../../globalSelectors'
-import { ITEM_CLICK } from '../../../interactions'
+} from 'coreModules/crudBlocks/keyObjectModule'
+import { ensureAllStorageLocationsFetched } from 'dataModules/storageService/higherOrderComponents'
+import storageServiceSelectors from 'dataModules/storageService/globalSelectors'
+import storageSelectors from '../../../globalSelectors'
+import { GROUP_2 } from '../../../constants'
 import ListItem from './ListItem'
 
 const mapStateToProps = (state, { name }) => {
@@ -19,18 +20,20 @@ const mapStateToProps = (state, { name }) => {
   const filterParentId = (filter && filter.parentId) || undefined
   const filterParent =
     filterParentId &&
-    localityServiceSelectors.getCuratedLocality(state, filterParentId)
+    storageServiceSelectors.getStorageLocation(state, filterParentId)
 
-  const curatedLocalities = localitySelectors.getCuratedLocalitiesArrayByFilter(
+  const storageLocations = storageSelectors.getStorageLocationsArrayByFilter(
     state,
     filter
   )
-
+  console.log('filter', filter)
+  console.log('filterParent', filterParent)
+  console.log('storageLocations', storageLocations)
   return {
-    curatedLocalities,
     filter,
     filterParent,
-    numberOfCuratedLocalities: curatedLocalities.length,
+    numberOfStorageLocations: storageLocations.length,
+    storageLocations,
   }
 }
 
@@ -44,36 +47,37 @@ const mapDispatchToProps = {
 }
 
 const propTypes = {
-  activeLocalityId: PropTypes.string,
-  curatedLocalities: PropTypes.array,
+  activeStorageLocationId: PropTypes.string,
+  disableEdit: PropTypes.bool.isRequired,
   displayNavigationButtons: PropTypes.bool.isRequired,
   filter: PropTypes.object,
   filterParent: PropTypes.object,
   name: PropTypes.string.isRequired,
-  numberOfCuratedLocalities: PropTypes.number.isRequired,
+  numberOfStorageLocations: PropTypes.number.isRequired,
   onInteraction: PropTypes.func.isRequired,
   setFilter: PropTypes.func.isRequired,
   setFilterOffset: PropTypes.func.isRequired,
   setFilterParentId: PropTypes.func.isRequired,
   setFilterSearchGroup: PropTypes.func.isRequired,
   setFilterSearchSearchQuery: PropTypes.func.isRequired,
+  storageLocations: PropTypes.array,
 }
 
 const defaultProps = {
-  activeLocalityId: '',
-  curatedLocalities: [],
+  activeStorageLocationId: '',
   filter: {},
   filterParent: undefined,
+  storageLocations: [],
 }
 
-class LocalityList extends Component {
+class StorageLocationsList extends Component {
   constructor(props) {
     super(props)
     this.state = {
       cursorIndex: 0,
     }
 
-    this.getIndexFromOffsetAndNumberOfLocalities = this.getIndexFromOffsetAndNumberOfLocalities.bind(
+    this.getIndexFromOffsetAndNumberOfStorageLocationsLocalities = this.getIndexFromOffsetAndNumberOfStorageLocationsLocalities.bind(
       this
     )
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -84,7 +88,7 @@ class LocalityList extends Component {
     const { name } = this.props
     this.props.setFilter(
       {
-        group: 'continent',
+        group: GROUP_2,
         limit: 10,
         offset: 0,
         searchQuery: '',
@@ -101,10 +105,10 @@ class LocalityList extends Component {
     document.removeEventListener('keydown', this.handleKeyDown)
   }
 
-  getIndexFromOffsetAndNumberOfLocalities() {
-    const { filter: { offset }, numberOfCuratedLocalities } = this.props
+  getIndexFromOffsetAndNumberOfStorageLocationsLocalities() {
+    const { filter: { offset }, numberOfStorageLocations } = this.props
 
-    return Math.max(Math.min(offset, numberOfCuratedLocalities - 1), 0)
+    return Math.max(Math.min(offset, numberOfStorageLocations - 1), 0)
   }
 
   setCursorIndex(cursorIndex = 0) {
@@ -112,15 +116,15 @@ class LocalityList extends Component {
   }
 
   expandLocalityAtCursor() {
-    const { curatedLocalities, name } = this.props
+    const { storageLocations, name } = this.props
     const { cursorIndex } = this.state
-    const localityAtCursor = curatedLocalities[cursorIndex]
-    if (localityAtCursor) {
+    const storageLocationAtCursor = storageLocations[cursorIndex]
+    if (storageLocationAtCursor) {
       this.props.setFilterOffset(0, { name })
       this.setCursorIndex(0)
       this.props.setFilterSearchGroup('', { name })
       this.props.setFilterSearchSearchQuery('', { name })
-      this.props.setFilterParentId(localityAtCursor.id, { name })
+      this.props.setFilterParentId(storageLocationAtCursor.id, { name })
     }
   }
 
@@ -132,7 +136,7 @@ class LocalityList extends Component {
       this.props.setFilterSearchGroup('', { name })
       this.props.setFilterSearchSearchQuery('', { name })
       this.props.setFilterOffset(
-        this.getIndexFromOffsetAndNumberOfLocalities(),
+        this.getIndexFromOffsetAndNumberOfStorageLocationsLocalities(),
         { name }
       )
 
@@ -140,21 +144,25 @@ class LocalityList extends Component {
         this.props.setFilterParentId('', { name }) // don't use root as only parent filter
 
         if (!filter.group) {
-          this.props.setFilterSearchGroup(CONTINENT, { name })
+          this.props.setFilterSearchGroup(GROUP_2, { name })
         }
       } else {
-        this.setCursorIndex(this.getIndexFromOffsetAndNumberOfLocalities())
+        this.setCursorIndex(
+          this.getIndexFromOffsetAndNumberOfStorageLocationsLocalities()
+        )
         this.props.setFilterParentId(filterParentParentId, { name })
       }
     }
   }
 
   selectLocalityAtCursor() {
-    const { curatedLocalities } = this.props
+    const { storageLocations } = this.props
     const { cursorIndex } = this.state
-    const localityAtCursor = curatedLocalities[cursorIndex]
-    if (localityAtCursor) {
-      this.props.onInteraction(ITEM_CLICK, { itemId: localityAtCursor.id })
+    const storageLocationAtCursor = storageLocations[cursorIndex]
+    if (storageLocationAtCursor) {
+      this.props.onInteraction(ITEM_CLICK, {
+        itemId: storageLocationAtCursor.id,
+      })
     }
   }
 
@@ -177,11 +185,11 @@ class LocalityList extends Component {
     const {
       filter: { offset, limit },
       name,
-      numberOfCuratedLocalities,
+      numberOfStorageLocations,
     } = this.props
     const { cursorIndex } = this.state
 
-    if (cursorIndex === numberOfCuratedLocalities) {
+    if (cursorIndex === numberOfStorageLocations) {
       return null
     }
     if (cursorIndex === limit - 1) {
@@ -219,23 +227,26 @@ class LocalityList extends Component {
   render() {
     const { cursorIndex } = this.state
     const {
-      activeLocalityId,
-      curatedLocalities,
+      activeStorageLocationId,
+      disableEdit,
       displayNavigationButtons,
       onInteraction,
+      storageLocations,
     } = this.props
+
     return (
       <List divided selection size="small" verticalAlign="middle">
-        {curatedLocalities.map((curatedLocality, index) => {
+        {storageLocations.map((storageLocation, index) => {
           const cursorFocus = index === cursorIndex
           return (
             <ListItem
-              activeLocalityId={activeLocalityId}
-              curatedLocality={curatedLocality}
+              activeStorageLocationId={activeStorageLocationId}
               cursorFocus={cursorFocus}
+              disableEdit={disableEdit}
               displayNavigationButtons={displayNavigationButtons}
-              key={curatedLocality.id}
+              key={storageLocation.id}
               onInteraction={onInteraction}
+              storageLocation={storageLocation}
             />
           )
         })}
@@ -244,10 +255,10 @@ class LocalityList extends Component {
   }
 }
 
-LocalityList.propTypes = propTypes
-LocalityList.defaultProps = defaultProps
+StorageLocationsList.propTypes = propTypes
+StorageLocationsList.defaultProps = defaultProps
 
 export default compose(
-  ensureAllLocalitiesFetched(),
+  ensureAllStorageLocationsFetched(),
   connect(mapStateToProps, mapDispatchToProps)
-)(LocalityList)
+)(StorageLocationsList)

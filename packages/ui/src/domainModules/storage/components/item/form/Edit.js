@@ -2,43 +2,49 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { updateCuratedLocality as updateCuratedLocalityAc } from 'dataModules/localityService/actionCreators'
-import { createGetCuratedLocalityById } from 'dataModules/localityService/higherOrderComponents'
+import { updateStorageLocation as updateStorageLocationAc } from 'dataModules/storageService/actionCreators'
+import {
+  createGetStorageLocationById,
+  ensureAllStorageLocationsFetched,
+} from 'dataModules/storageService/higherOrderComponents'
 import {
   FORM_CANCEL,
   FORM_EDIT_SUCCESS,
-} from 'domainModules/locality/interactions'
+} from 'coreModules/crudBlocks/constants'
 import BaseForm from './Base'
 
 const mapDispatchToProps = {
-  updateCuratedLocality: updateCuratedLocalityAc,
+  updateStorageLocation: updateStorageLocationAc,
 }
 
 const propTypes = {
-  curatedLocality: PropTypes.object,
+  allStorageLocationsFetched: PropTypes.bool,
   itemId: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
-  updateCuratedLocality: PropTypes.func.isRequired,
+  storageLocation: PropTypes.object,
+  updateStorageLocation: PropTypes.func.isRequired,
 }
 
 const defaultProps = {
-  curatedLocality: undefined,
+  allStorageLocationsFetched: undefined,
+  storageLocation: undefined,
 }
 
 export class Edit extends PureComponent {
   render() {
-    const { curatedLocality, onInteraction, itemId } = this.props
-    const initialValues = curatedLocality && {
-      group: curatedLocality.group,
-      name: curatedLocality.name,
-      parent: curatedLocality.parent
-        ? {
-            id: curatedLocality.parent.id,
-          }
-        : {},
+    const {
+      allStorageLocationsFetched,
+      storageLocation,
+      onInteraction,
+      itemId,
+    } = this.props
+    const initialValues = storageLocation && {
+      group: storageLocation.group,
+      name: storageLocation.name,
+      parentId: storageLocation.parent && storageLocation.parent.id,
     }
 
-    if (!initialValues) {
+    if (!initialValues || !allStorageLocationsFetched) {
       return null
     }
 
@@ -54,8 +60,8 @@ export class Edit extends PureComponent {
         onInteraction={onInteraction}
         onSubmit={data => {
           this.props
-            .updateCuratedLocality({
-              curatedLocality: {
+            .updateStorageLocation({
+              storageLocation: {
                 id: itemId,
                 ...data,
               },
@@ -75,6 +81,7 @@ Edit.propTypes = propTypes
 Edit.defaultProps = defaultProps
 
 export default compose(
-  createGetCuratedLocalityById(),
+  ensureAllStorageLocationsFetched(),
+  createGetStorageLocationById(),
   connect(null, mapDispatchToProps)
 )(Edit)

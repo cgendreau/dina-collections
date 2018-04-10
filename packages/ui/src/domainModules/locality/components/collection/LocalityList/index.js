@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import { List } from 'semantic-ui-react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import localityServiceSelectors from 'dataModules/localityService/globalSelectors'
-import { ensureAllLocalitiesFetched } from 'dataModules/localityService/higherOrderComponents'
+
+import { ITEM_CLICK } from 'coreModules/crudBlocks/constants'
 import {
   globalSelectors as keyObjectGlobalSelectors,
   actionCreators as keyObjectActionCreators,
 } from 'coreModules/crudBlocks/keyObjectModule'
-import { ITEM_CLICK } from 'coreModules/crudBlocks/constants'
-import { CONTINENT } from '../../../constants'
+import { ensureAllLocalitiesFetched } from 'dataModules/localityService/higherOrderComponents'
+import localityServiceSelectors from 'dataModules/localityService/globalSelectors'
 import localitySelectors from '../../../globalSelectors'
+import { CONTINENT } from '../../../constants'
 import ListItem from './ListItem'
 
 const mapStateToProps = (state, { name }) => {
@@ -46,6 +47,7 @@ const mapDispatchToProps = {
 const propTypes = {
   activeLocalityId: PropTypes.string,
   curatedLocalities: PropTypes.array,
+  disableEdit: PropTypes.bool.isRequired,
   displayNavigationButtons: PropTypes.bool.isRequired,
   filter: PropTypes.object,
   filterParent: PropTypes.object,
@@ -84,7 +86,7 @@ class LocalityList extends Component {
     const { name } = this.props
     this.props.setFilter(
       {
-        group: 'continent',
+        group: CONTINENT,
         limit: 10,
         offset: 0,
         searchQuery: '',
@@ -221,6 +223,7 @@ class LocalityList extends Component {
     const {
       activeLocalityId,
       curatedLocalities,
+      disableEdit,
       displayNavigationButtons,
       onInteraction,
     } = this.props
@@ -233,6 +236,7 @@ class LocalityList extends Component {
               activeLocalityId={activeLocalityId}
               curatedLocality={curatedLocality}
               cursorFocus={cursorFocus}
+              disableEdit={disableEdit}
               displayNavigationButtons={displayNavigationButtons}
               key={curatedLocality.id}
               onInteraction={onInteraction}

@@ -144,6 +144,7 @@ export class AdvancedLocalityDropdownSearch extends Component {
         <Modal onClose={this.handleOnClose} open>
           <Modal.Content>
             <CreateBlock
+              disableEdit
               itemBlockType="create"
               layoutMode="modal"
               onInteraction={this.handleInteraction}
@@ -158,6 +159,7 @@ export class AdvancedLocalityDropdownSearch extends Component {
         <Modal onClose={this.handleOnClose} open>
           <Modal.Content>
             <InspectBlock
+              disableEdit
               itemBlockType="inspect"
               itemId={inspectItemId}
               layoutMode="modal"
@@ -174,6 +176,7 @@ export class AdvancedLocalityDropdownSearch extends Component {
           <Modal.Content>
             <CollectionBlock
               collectionBlockType={collectionBlockType}
+              disableEdit
               layoutMode="modal"
               onInteraction={this.handleInteraction}
             />

@@ -66,7 +66,7 @@ class AncestorTag extends Component {
           name="delete"
           onClick={event => {
             event.preventDefault()
-            setParentId('', name)
+            setParentId('', { name })
           }}
         />
       </Label>
