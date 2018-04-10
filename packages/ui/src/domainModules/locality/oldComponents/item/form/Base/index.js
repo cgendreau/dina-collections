@@ -44,7 +44,6 @@ const groups = [CONTINENT, COUNTRY, DISTRICT, PROVINCE]
 
 const dropdownOptions = groups.map(group => {
   return {
-    key: group,
     text: group,
     value: group,
   }

@@ -18,9 +18,7 @@ export const getCuratedLocalities = createSelector(getResources, resources => {
 export const getCuratedLocalitiesArray = createSelector(
   getCuratedLocalities,
   curatedLocalitiesObject => {
-    return Object.keys(curatedLocalitiesObject).map(key => {
-      return curatedLocalitiesObject[key]
-    })
+    return Object.values(curatedLocalitiesObject)
   }
 )
 

@@ -10,12 +10,9 @@ import {
   SET_ITEM_INSPECT,
 } from 'domainModules/locality/interactions'
 
-const mapStateToProps = (state, { name }) => {
+const mapStateToProps = state => {
   return {
-    searchQuery: keyObjectGlobalSelectors.get[':name.filter.searchQuery'](
-      state,
-      { name }
-    ),
+    searchQuery: keyObjectGlobalSelectors.get['filter.searchQuery'](state),
   }
 }
 

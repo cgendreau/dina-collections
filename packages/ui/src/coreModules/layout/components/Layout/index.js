@@ -13,6 +13,7 @@ const propTypes = {
 }
 
 const defaultProps = {
+  layoutMode: LAYOUT_SINGLE,
   secondaryBlock: null,
 }
 

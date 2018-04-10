@@ -14,8 +14,8 @@ import localitySelectors from '../../../globalSelectors'
 import { ITEM_CLICK } from '../../../interactions'
 import ListItem from './ListItem'
 
-const mapStateToProps = (state, { name }) => {
-  const filter = keyObjectGlobalSelectors.get[':name.filter'](state, { name })
+const mapStateToProps = state => {
+  const filter = keyObjectGlobalSelectors.get.filter(state)
   const filterParentId = (filter && filter.parentId) || undefined
   const filterParent =
     filterParentId &&
@@ -35,24 +35,22 @@ const mapStateToProps = (state, { name }) => {
 }
 
 const mapDispatchToProps = {
-  setFilter: keyObjectActionCreators.set[':name.filter'],
-  setFilterOffset: keyObjectActionCreators.set[':name.filter.offset'],
-  setFilterParentId: keyObjectActionCreators.set[':name.filter.parentId'],
-  setFilterSearchGroup: keyObjectActionCreators.set[':name.filter.group'],
-  setFilterSearchSearchQuery:
-    keyObjectActionCreators.set[':name.filter.searchQuery'],
+  setFilterLimit: keyObjectActionCreators.set['filter.limit'],
+  setFilterOffset: keyObjectActionCreators.set['filter.offset'],
+  setFilterParentId: keyObjectActionCreators.set['filter.parentId'],
+  setFilterSearchGroup: keyObjectActionCreators.set['filter.group'],
+  setFilterSearchSearchQuery: keyObjectActionCreators.set['filter.searchQuery'],
 }
 
 const propTypes = {
   activeLocalityId: PropTypes.string,
   curatedLocalities: PropTypes.array,
   displayNavigationButtons: PropTypes.bool.isRequired,
-  filter: PropTypes.object,
+  filter: PropTypes.object.isRequired,
   filterParent: PropTypes.object,
-  name: PropTypes.string.isRequired,
   numberOfCuratedLocalities: PropTypes.number.isRequired,
   onInteraction: PropTypes.func.isRequired,
-  setFilter: PropTypes.func.isRequired,
+  setFilterLimit: PropTypes.func.isRequired,
   setFilterOffset: PropTypes.func.isRequired,
   setFilterParentId: PropTypes.func.isRequired,
   setFilterSearchGroup: PropTypes.func.isRequired,
@@ -62,7 +60,6 @@ const propTypes = {
 const defaultProps = {
   activeLocalityId: '',
   curatedLocalities: [],
-  filter: {},
   filterParent: undefined,
 }
 
@@ -80,17 +77,9 @@ class LocalityList extends Component {
     this.setCursorIndex = this.setCursorIndex.bind(this)
   }
 
-  componentWillMount() {
-    this.props.setFilter(this.props.name, {
-      group: 'continent',
-      limit: 10,
-      offset: 0,
-      searchQuery: '',
-    })
-  }
-
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown)
+    this.props.setFilterLimit(10)
   }
 
   componentWillUnmount() {
@@ -112,11 +101,11 @@ class LocalityList extends Component {
     const { cursorIndex } = this.state
     const localityAtCursor = curatedLocalities[cursorIndex]
     if (localityAtCursor) {
-      this.props.setFilterOffset(this.props.name, 0)
+      this.props.setFilterOffset(0)
       this.setCursorIndex(0)
-      this.props.setFilterSearchGroup(this.props.name, '')
-      this.props.setFilterSearchSearchQuery(this.props.name, '')
-      this.props.setFilterParentId(this.props.name, localityAtCursor.id)
+      this.props.setFilterSearchGroup('')
+      this.props.setFilterSearchSearchQuery('')
+      this.props.setFilterParentId(localityAtCursor.id)
     }
   }
 
@@ -125,22 +114,19 @@ class LocalityList extends Component {
 
     if (filterParent && filterParent.parent && filterParent.parent.id) {
       const filterParentParentId = filterParent.parent.id
-      this.props.setFilterSearchGroup(this.props.name, '')
-      this.props.setFilterSearchSearchQuery(this.props.name, '')
-      this.props.setFilterOffset(
-        this.props.name,
-        this.getIndexFromOffsetAndNumberOfLocalities()
-      )
+      this.props.setFilterSearchGroup('')
+      this.props.setFilterSearchSearchQuery('')
+      this.props.setFilterOffset(this.getIndexFromOffsetAndNumberOfLocalities())
 
       if (filterParent.parent.id === '1') {
-        this.props.setFilterParentId(this.props.name, '') // don't use root as only parent filter
+        this.props.setFilterParentId('') // don't use root as only parent filter
 
         if (!filter.group) {
-          this.props.setFilterSearchGroup(this.props.name, CONTINENT)
+          this.props.setFilterSearchGroup(CONTINENT)
         }
       } else {
         this.setCursorIndex(this.getIndexFromOffsetAndNumberOfLocalities())
-        this.props.setFilterParentId(this.props.name, filterParentParentId)
+        this.props.setFilterParentId(filterParentParentId)
       }
     }
   }
@@ -158,7 +144,7 @@ class LocalityList extends Component {
     const { filter: { offset, limit } } = this.props
     const { cursorIndex } = this.state
     if (offset > 0 && cursorIndex === 0) {
-      this.props.setFilterOffset(this.props.name, Math.max(offset - 1, 0))
+      this.props.setFilterOffset(Math.max(offset - 1, 0))
       this.setState({
         cursorIndex: limit - 1,
       })
@@ -177,7 +163,7 @@ class LocalityList extends Component {
       return null
     }
     if (cursorIndex === limit - 1) {
-      return this.props.setFilterOffset(this.props.name, offset + 1)
+      return this.props.setFilterOffset(offset + 1)
     }
 
     return this.setState({

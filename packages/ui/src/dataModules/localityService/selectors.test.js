@@ -1,5 +1,6 @@
 import {
   getCuratedLocalities,
+  getCuratedLocalitiesArray,
   getCuratedLocality,
   getHasCuratedLocalities,
   getLocalState,
@@ -59,6 +60,35 @@ describe('dataModules/localityService/selectors', () => {
     expect(getCuratedLocality(state, 'a')).toEqual(
       state.resources.curatedLocalities.a
     )
+  })
+  it('returns curatedLocalities in array', () => {
+    expect(getCuratedLocalitiesArray(state)).toEqual([
+      {
+        group: 'continent',
+        id: 'idAsia',
+        name: 'asia',
+      },
+      {
+        group: 'country',
+        id: 'idCanada',
+        name: 'canada',
+      },
+      {
+        group: 'country',
+        id: 'idGermany',
+        name: 'germany',
+      },
+      {
+        group: 'province',
+        id: 'idOntario',
+        name: 'ontario',
+      },
+      {
+        group: 'country',
+        id: 'idSweden',
+        name: 'sweden',
+      },
+    ])
   })
 
   describe('getHasCuratedLocalities', () => {

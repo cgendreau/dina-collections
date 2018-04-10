@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 import { Modal, Button } from 'semantic-ui-react'
 import { change } from 'redux-form'
 
-import CreateBlock from 'domainModules/locality/components/genericCrudManager/blocks/Item/Create'
-import InspectBlock from 'domainModules/locality/components/genericCrudManager/blocks/Item/Inspect'
-import CollectionBlock from 'domainModules/locality/components/genericCrudManager/blocks/Collection'
 import {
   FORM_CANCEL,
   FORM_CREATE_SUCCESS,
@@ -18,6 +15,9 @@ import {
   SET_ITEM_INSPECT,
 } from '../../interactions'
 import LocalityDropdownSearch from '../LocalityDropdownSearch'
+import CreateBlock from '../LocalityManager/blocks/Item/Create'
+import InspectBlock from '../LocalityManager/blocks/Item/Inspect'
+import CollectionBlock from '../LocalityManager/blocks/Collection'
 
 const mapDispatchToProps = {
   change,
