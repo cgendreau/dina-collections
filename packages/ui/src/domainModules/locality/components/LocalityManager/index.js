@@ -1,12 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import {
-  actionCreators as keyObjectActionCreators,
-  globalSelectors,
-} from 'domainModules/locality/keyObjectModule'
-import { push } from 'react-router-redux'
 
 import CrudBlocksWrapper from 'domainModules/locality/components/genericCrudManager/CrudBlocksWrapper'
 
@@ -36,20 +28,6 @@ const DROPDOWN_FILTER_OPTIONS = [
 ]
 
 const propTypes = {}
-
-// const mapStateToProps = state => {
-//   return {
-//     collectionBlockType: globalSelectors.get.collectionBlockType(state),
-//   }
-// }
-
-// const mapDispatchToProps = {
-//   push,
-//   setCollectionBlockType: keyObjectActionCreators.set.collectionBlockType,
-//   setFilterGroup: keyObjectActionCreators.set['filter.group'],
-//   setParentFilterId: keyObjectActionCreators.set['filter.parentId'],
-//   setSearchQuery: keyObjectActionCreators.set['filter.searchQuery'],
-// }
 
 class LocalityManager extends Component {
   static renderCreateBlockChild(props) {
@@ -94,4 +72,4 @@ class LocalityManager extends Component {
 
 LocalityManager.propTypes = propTypes
 
-export default compose()(LocalityManager)
+export default LocalityManager

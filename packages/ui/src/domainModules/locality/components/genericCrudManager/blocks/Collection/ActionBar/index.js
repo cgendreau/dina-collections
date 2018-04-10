@@ -95,7 +95,7 @@ class ActionBar extends Component {
                 icon="search"
                 input={{
                   onChange: event => {
-                    this.props.setSearchQuery(name, event.target.value)
+                    this.props.setSearchQuery(event.target.value, { name })
                   },
                   value: this.props.searchQuery,
                 }}
@@ -108,7 +108,7 @@ class ActionBar extends Component {
                 icon="filter"
                 labeled
                 onChange={(res, data) => {
-                  this.props.setFilterGroup(name, data.value)
+                  this.props.setFilterGroup(data.value, { name })
                 }}
                 options={dropdownFilterOptions}
                 placeholder="select group"

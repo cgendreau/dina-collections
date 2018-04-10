@@ -75,14 +75,12 @@ class LocalityDropdownSearch extends Component {
         getSearchQuery={state => {
           return globalSelectors.get[
             'localityDropdown.:identifier.searchQuery'
-          ](state, {
-            identifier: group,
-          })
+          ](state, { identifier: group })
         }}
         getSelectedOption={localitySelectors.getCuratedLocalityOption}
         input={input}
         onSearchChange={({ searchQuery }) => {
-          updateSearchQuery(group, searchQuery)
+          updateSearchQuery(searchQuery, { identifier: group })
         }}
         type="dropdown-search-connect"
       />

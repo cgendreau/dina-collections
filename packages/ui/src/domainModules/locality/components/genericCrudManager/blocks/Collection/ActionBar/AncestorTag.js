@@ -54,7 +54,7 @@ class AncestorTag extends Component {
                   link
                   onClick={event => {
                     event.preventDefault()
-                    setParentId(name, ancestor.id)
+                    setParentId(ancestor.id, { name })
                   }}
                 >
                   {ancestor.name}
@@ -67,7 +67,7 @@ class AncestorTag extends Component {
           name="delete"
           onClick={event => {
             event.preventDefault()
-            setParentId('')
+            setParentId('', name)
           }}
         />
       </Label>

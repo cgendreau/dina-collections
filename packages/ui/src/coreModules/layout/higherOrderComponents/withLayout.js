@@ -34,11 +34,13 @@ const withLayout = (layoutName = 'default') => ComposedComponent => {
     }
 
     setLayoutMode(value) {
-      return this.props.setLayoutMode(this.props.name || layoutName, value)
+      return this.props.setLayoutMode(value, {
+        name: this.props.name || layoutName,
+      })
     }
 
     setLayoutModeByName(name, value) {
-      return this.props.setLayoutMode(name, value)
+      return this.props.setLayoutMode(value, { name })
     }
 
     render() {

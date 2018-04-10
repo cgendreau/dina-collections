@@ -82,7 +82,7 @@ class LocalityDropdownSearch extends Component {
         getSelectedOption={localitySelectors.getCuratedLocalityOption}
         input={input}
         onSearchChange={({ searchQuery }) => {
-          updateSearchQuery(group, searchQuery)
+          updateSearchQuery(searchQuery, { identifier: group })
         }}
         type="dropdown-search-connect"
       />

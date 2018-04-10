@@ -13,9 +13,9 @@ export default function layoutMiddleware() {
           const layoutStateKeys = Object.keys(layoutState)
 
           if (layoutStateKeys.length) {
-            layoutStateKeys.forEach(key => {
+            layoutStateKeys.forEach(name => {
               dispatch(
-                actionCreators.set[':name.layoutMode'](key, LAYOUT_SINGLE)
+                actionCreators.set[':name.layoutMode'](LAYOUT_SINGLE, { name })
               )
             })
           }

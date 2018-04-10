@@ -106,8 +106,9 @@ class CrudBlocksWrapper extends Component {
   }
 
   componentWillMount() {
-    this.props.setCollectionBlockType(this.props.name, 'list')
-    this.props.setLayoutMode('single')
+    const { name, setCollectionBlockType, setLayoutMode } = this.props
+    setCollectionBlockType('list', { name })
+    setLayoutMode('single')
   }
 
   handleInteraction(type, data = {}) {
@@ -143,13 +144,13 @@ class CrudBlocksWrapper extends Component {
       }
 
       case SET_COLLECTION_LIST: {
-        setCollectionBlockType(name, 'list')
+        setCollectionBlockType('list', { name })
         routerPush(`${urlBasePath}`)
         break
       }
 
       case SET_COLLECTION_TREE: {
-        setCollectionBlockType(name, 'tree')
+        setCollectionBlockType('tree', { name })
         routerPush(`${urlBasePath}`)
         break
       }
@@ -166,9 +167,9 @@ class CrudBlocksWrapper extends Component {
       }
 
       case ITEM_CLICK: {
-        setSearchQuery(name, '')
-        setFilterGroup(name, '')
-        setParentFilterId(name, itemId)
+        setSearchQuery('', { name })
+        setFilterGroup('', { name })
+        setParentFilterId(itemId, { name })
         break
       }
 

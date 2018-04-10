@@ -81,12 +81,16 @@ class LocalityList extends Component {
   }
 
   componentWillMount() {
-    this.props.setFilter(this.props.name, {
-      group: 'continent',
-      limit: 10,
-      offset: 0,
-      searchQuery: '',
-    })
+    const { name } = this.props
+    this.props.setFilter(
+      {
+        group: 'continent',
+        limit: 10,
+        offset: 0,
+        searchQuery: '',
+      },
+      { name }
+    )
   }
 
   componentDidMount() {
@@ -108,39 +112,39 @@ class LocalityList extends Component {
   }
 
   expandLocalityAtCursor() {
-    const { curatedLocalities } = this.props
+    const { curatedLocalities, name } = this.props
     const { cursorIndex } = this.state
     const localityAtCursor = curatedLocalities[cursorIndex]
     if (localityAtCursor) {
-      this.props.setFilterOffset(this.props.name, 0)
+      this.props.setFilterOffset(0, { name })
       this.setCursorIndex(0)
-      this.props.setFilterSearchGroup(this.props.name, '')
-      this.props.setFilterSearchSearchQuery(this.props.name, '')
-      this.props.setFilterParentId(this.props.name, localityAtCursor.id)
+      this.props.setFilterSearchGroup('', { name })
+      this.props.setFilterSearchSearchQuery('', { name })
+      this.props.setFilterParentId(localityAtCursor.id, { name })
     }
   }
 
   selectParent() {
-    const { filter, filterParent } = this.props
+    const { filter, filterParent, name } = this.props
 
     if (filterParent && filterParent.parent && filterParent.parent.id) {
       const filterParentParentId = filterParent.parent.id
-      this.props.setFilterSearchGroup(this.props.name, '')
-      this.props.setFilterSearchSearchQuery(this.props.name, '')
+      this.props.setFilterSearchGroup('', { name })
+      this.props.setFilterSearchSearchQuery('', { name })
       this.props.setFilterOffset(
-        this.props.name,
-        this.getIndexFromOffsetAndNumberOfLocalities()
+        this.getIndexFromOffsetAndNumberOfLocalities(),
+        { name }
       )
 
       if (filterParent.parent.id === '1') {
-        this.props.setFilterParentId(this.props.name, '') // don't use root as only parent filter
+        this.props.setFilterParentId('', { name }) // don't use root as only parent filter
 
         if (!filter.group) {
-          this.props.setFilterSearchGroup(this.props.name, CONTINENT)
+          this.props.setFilterSearchGroup(CONTINENT, { name })
         }
       } else {
         this.setCursorIndex(this.getIndexFromOffsetAndNumberOfLocalities())
-        this.props.setFilterParentId(this.props.name, filterParentParentId)
+        this.props.setFilterParentId(filterParentParentId, { name })
       }
     }
   }
@@ -155,10 +159,10 @@ class LocalityList extends Component {
   }
 
   moveCursorUp() {
-    const { filter: { offset, limit } } = this.props
+    const { filter: { offset, limit }, name } = this.props
     const { cursorIndex } = this.state
     if (offset > 0 && cursorIndex === 0) {
-      this.props.setFilterOffset(this.props.name, Math.max(offset - 1, 0))
+      this.props.setFilterOffset(Math.max(offset - 1, 0), { name })
       this.setState({
         cursorIndex: limit - 1,
       })
@@ -170,14 +174,18 @@ class LocalityList extends Component {
   }
 
   moveCursorDown() {
-    const { filter: { offset, limit }, numberOfCuratedLocalities } = this.props
+    const {
+      filter: { offset, limit },
+      name,
+      numberOfCuratedLocalities,
+    } = this.props
     const { cursorIndex } = this.state
 
     if (cursorIndex === numberOfCuratedLocalities) {
       return null
     }
     if (cursorIndex === limit - 1) {
-      return this.props.setFilterOffset(this.props.name, offset + 1)
+      return this.props.setFilterOffset(offset + 1, { name })
     }
 
     return this.setState({
