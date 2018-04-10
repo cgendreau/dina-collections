@@ -16,6 +16,7 @@ import PageNotFound from '../pageNotFound/Async'
 import RegisterMammal from '../registerMammal/Async'
 import Settings from '../settings/Async'
 import ManageLocalities from '../manageLocalities/Async'
+import Searchkit from '../searchkit/Async'
 
 const NAVIGATION_SIDEBAR_ITEMS = [
   {
@@ -100,6 +101,11 @@ class App extends Component {
             <Route
               component={ManageLocalities}
               path={`${match.url}/localities/:localityId/inspect`}
+            />
+            <Route
+              component={Searchkit}
+              exact
+              path={`${match.url}/mammals/search`}
             />
             <Route component={Settings} exact path={`${match.url}/settings`} />
             <Route component={PageNotFound} />

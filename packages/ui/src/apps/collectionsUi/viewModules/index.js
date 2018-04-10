@@ -11,6 +11,7 @@ export const moduleOrder = [
   'settings',
   'docs',
   'pageNotFound',
+  'searchkit',
 ]
 
 export const type = 'view'

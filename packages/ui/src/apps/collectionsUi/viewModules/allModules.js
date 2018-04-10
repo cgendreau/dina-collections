@@ -10,6 +10,7 @@ import * as settings from './settings'
 import * as docs from './docs'
 import * as pageNotFound from './pageNotFound'
 import * as manageLocalities from './manageLocalities'
+import * as searchkit from './searchkit'
 
 const modules = [
   publicModule,
@@ -24,6 +25,7 @@ const modules = [
   settings,
   docs,
   pageNotFound,
+  searchkit,
 ]
 
 export default modules

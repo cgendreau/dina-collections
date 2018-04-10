@@ -1,7 +1,8 @@
 const now = require('performance-now')
-
+const express = require('express')
 const startTime = now()
 const openApiSpec = require('common/dist/openApi.json')
+const SearchkitExpress = require('searchkit-express')
 const createLog = require('../../utilities/log')
 const createServiceRouter = require('../../lib/serviceRouter')
 const createApp = require('../../lib/app')
@@ -58,12 +59,25 @@ initializeSequelize({
             config,
             connectors,
           })
+          const testRouter = express.Router()
+
+          const searchkitRouter = SearchkitExpress.createRouter({
+            host: 'http://localhost:9200',
+            index: 'specimen',
+            queryProcessor: (query, req, res) => {
+              console.log(query)
+              return query
+            },
+          })
+          testRouter.use('/api/specimen-search', searchkitRouter)
+
           const app = createApp({
             auth,
             config,
             openApiSpec,
-            routers: [serviceRouter],
+            routers: [testRouter, serviceRouter],
           })
+
           log.info(`App configured after: ${now() - startTime} milliseconds`)
           return app.listen(config.api.port, () => {
             log.info(

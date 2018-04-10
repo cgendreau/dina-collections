@@ -17,11 +17,11 @@ module.exports = function serviceRouterFactory({ auth, config, connectors }) {
       config,
     }
   )
-  const ensureMediaTypeMiddleware = ensureMediaTypeMiddlewareFactory()
+  // const ensureMediaTypeMiddleware = ensureMediaTypeMiddlewareFactory()
 
   const serviceRouter = express.Router({ mergeParams: true })
 
-  serviceRouter.use(ensureMediaTypeMiddleware)
+  // serviceRouter.use(ensureMediaTypeMiddleware)
   serviceRouter.use(authorizeMiddleware)
   log.info('Registering service routes')
   const scopedLog = log.scope()
