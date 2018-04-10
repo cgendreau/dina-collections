@@ -7,14 +7,7 @@ import formValidator from 'common/es5/error/validators/formValidator'
 import createLog from 'utilities/log'
 import FieldWrapper from 'coreModules/form/components/FieldWrapper'
 import { Input, DropdownSearch } from 'coreModules/form/components'
-import LocalityDropdownSearch from '../../../../components/LocalityDropdownSearch'
-import {
-  ALL,
-  CONTINENT,
-  COUNTRY,
-  DISTRICT,
-  PROVINCE,
-} from '../../../../constants'
+import { CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../../../constants'
 import FormActions from './FormActions'
 
 const log = createLog('modules:locality:BaseForm')
@@ -40,7 +33,7 @@ const defaultProps = {
   error: '',
 }
 
-const groups = [ALL, CONTINENT, COUNTRY, DISTRICT, PROVINCE]
+const groups = [CONTINENT, COUNTRY, DISTRICT, PROVINCE]
 
 const dropdownOptions = groups.map(group => {
   return {
@@ -96,19 +89,7 @@ export class BaseForm extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column mobile={8}>
-              <FieldWrapper
-                autoComplete="off"
-                component={LocalityDropdownSearch}
-                group={ALL}
-                label="Parent"
-                module="localities"
-                name="parent.id"
-                type="text"
-              />
-            </Grid.Column>
-          </Grid.Row>
+
           <Grid.Row>
             <Grid.Column mobile={8}>
               Elevatim

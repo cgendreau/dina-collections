@@ -7,16 +7,15 @@ import { Breadcrumb, Label, Icon } from 'semantic-ui-react'
 import {
   actionCreators as keyObjectActionCreators,
   globalSelectors as keyObjectGlobalSelectors,
-} from '../../../../../keyObjectModule'
-import globalSelectors from '../../../../../globalSelectors'
+} from '../../../../keyObjectModule'
 
-const mapStateToProps = (state, { name }) => {
+const mapStateToProps = (state, { getAncestorsByParentId, name }) => {
   const parentFilterId = keyObjectGlobalSelectors.get[':name.filter.parentId'](
     state,
     { name }
   )
   const ancestors = parentFilterId
-    ? globalSelectors.getCuratedLocalityAncestorsById(state, parentFilterId)
+    ? getAncestorsByParentId(state, parentFilterId)
     : undefined
   return {
     ancestors,

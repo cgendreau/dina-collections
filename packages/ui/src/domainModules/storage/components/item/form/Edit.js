@@ -7,7 +7,7 @@ import { createGetCuratedLocalityById } from 'dataModules/localityService/higher
 import {
   FORM_CANCEL,
   FORM_EDIT_SUCCESS,
-} from 'coreModules/crudBlocks/constants'
+} from 'domainModules/locality/interactions'
 import BaseForm from './Base'
 
 const mapDispatchToProps = {

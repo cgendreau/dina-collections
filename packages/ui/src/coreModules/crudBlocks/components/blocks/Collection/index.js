@@ -8,6 +8,7 @@ const propTypes = {
   collectionBlockType: PropTypes.string.isRequired,
   displayNavigationButtons: PropTypes.bool,
   dropdownFilterOptions: PropTypes.array.isRequired,
+  getAncestorsByParentId: PropTypes.func.isRequired,
   layoutMode: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ const CollectionBlock = ({
   collectionBlockType,
   displayNavigationButtons,
   dropdownFilterOptions,
+  getAncestorsByParentId,
   layoutMode,
   name,
   onInteraction,
@@ -63,6 +65,7 @@ const CollectionBlock = ({
             collectionBlockType={collectionBlockType}
             displayNavigationButtons={displayNavigationButtons}
             dropdownFilterOptions={dropdownFilterOptions}
+            getAncestorsByParentId={getAncestorsByParentId}
             name={name}
             onInteraction={onInteraction}
           />

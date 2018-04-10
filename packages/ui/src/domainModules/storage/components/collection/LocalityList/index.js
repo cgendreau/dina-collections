@@ -8,10 +8,10 @@ import { ensureAllLocalitiesFetched } from 'dataModules/localityService/higherOr
 import {
   globalSelectors as keyObjectGlobalSelectors,
   actionCreators as keyObjectActionCreators,
-} from 'coreModules/crudBlocks/keyObjectModule'
-import { ITEM_CLICK } from 'coreModules/crudBlocks/constants'
+} from '../../../keyObjectModule'
 import { CONTINENT } from '../../../constants'
 import localitySelectors from '../../../globalSelectors'
+import { ITEM_CLICK } from '../../../interactions'
 import ListItem from './ListItem'
 
 const mapStateToProps = (state, { name }) => {

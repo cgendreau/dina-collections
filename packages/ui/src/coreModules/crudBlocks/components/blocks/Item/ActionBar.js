@@ -6,7 +6,7 @@ import {
   SET_ITEM_CREATE,
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
-} from 'domainModules/locality/interactions'
+} from '../../../constants'
 
 const propTypes = {
   itemBlockType: PropTypes.string.isRequired,

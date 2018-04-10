@@ -4,9 +4,9 @@ import { Block } from 'coreModules/layout/components'
 import { Button, Icon } from 'semantic-ui-react'
 
 import {
-  SET_LAYOUT_SINGLE_ITEM,
+  SET_LAYOUT_SINGLE_COLLECTION,
   SET_LAYOUT_SPLIT,
-} from 'domainModules/locality/interactions'
+} from '../../../constants'
 
 const propTypes = {
   layoutMode: PropTypes.string.isRequired,
@@ -26,7 +26,7 @@ export class Header extends Component {
               icon
               onClick={event => {
                 event.preventDefault()
-                onInteraction(SET_LAYOUT_SINGLE_ITEM)
+                onInteraction(SET_LAYOUT_SINGLE_COLLECTION)
               }}
               size="tiny"
             >

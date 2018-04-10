@@ -7,12 +7,17 @@ const {
   globalSelectors,
   reducer,
 } = keyObjectModuleFactory({
-  actionPrefix: 'LOCALITY',
-  initialValues: {
-    localityDropdown: {},
-  },
-  keys: ['localityDropdown.:identifier.searchQuery'],
-  name: 'locality',
+  actionPrefix: 'CRUD_BLOCKS',
+  keys: [
+    ':name.collectionBlockType',
+    ':name.filter',
+    ':name.filter.group',
+    ':name.filter.limit',
+    ':name.filter.searchQuery',
+    ':name.filter.parentId',
+    ':name.filter.offset',
+  ],
+  name: 'crudBlocks',
 })
 
 export { actionCreators, actionTypes, constants, globalSelectors, reducer }

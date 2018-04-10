@@ -1,10 +1,11 @@
 import {
   getLocalState,
-  getResources,
-  getPhysicalUnits,
-  getStorageLocations,
   getPhysicalUnit,
+  getPhysicalUnits,
+  getResources,
   getStorageLocation,
+  getStorageLocations,
+  getStorageLocationsArray,
 } from './selectors'
 
 describe('dataModules/storageService/selectors', () => {
@@ -45,5 +46,8 @@ describe('dataModules/storageService/selectors', () => {
     expect(getStorageLocation(state, 'd')).toEqual(
       state.resources.storageLocations.d
     )
+  })
+  it('returns storageLocations in array', () => {
+    expect(getStorageLocationsArray(state)).toEqual([{ id: 'c' }, { id: 'd' }])
   })
 })

@@ -4,35 +4,31 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Button, Dropdown, Grid, Form } from 'semantic-ui-react'
 
-import {
-  actionCreators as keyObjectActionCreators,
-  globalSelectors as keyObjectGlobalSelectors,
-} from 'domainModules/locality/keyObjectModule'
+import { InputText } from 'coreModules/form/components'
+import { actionCreators, globalSelectors } from '../../../../keyObjectModule'
 import {
   SET_COLLECTION_LIST,
   SET_COLLECTION_TREE,
   SET_ITEM_CREATE,
-} from 'domainModules/locality/interactions'
-import { InputText } from 'coreModules/form/components'
+} from '../../../../constants'
 import AncestorTag from './AncestorTag'
 
 const mapStateToProps = (state, { name }) => {
   return {
-    filterGroup: keyObjectGlobalSelectors.get[':name.filter.group'](state, {
+    filterGroup: globalSelectors.get[':name.filter.group'](state, {
       name,
     }),
-    searchQuery: keyObjectGlobalSelectors.get[':name.filter.searchQuery'](
-      state,
-      { name }
-    ),
+    searchQuery: globalSelectors.get[':name.filter.searchQuery'](state, {
+      name,
+    }),
   }
 }
 
 const mapDispatchToProps = {
-  setFilterGroup: keyObjectActionCreators.set[':name.filter.group'],
-  setListMode: keyObjectActionCreators.set.listMode,
-  setParentId: keyObjectActionCreators.set[':name.filter.parentId'],
-  setSearchQuery: keyObjectActionCreators.set[':name.filter.searchQuery'],
+  setFilterGroup: actionCreators.set[':name.filter.group'],
+  setListMode: actionCreators.set.listMode,
+  setParentId: actionCreators.set[':name.filter.parentId'],
+  setSearchQuery: actionCreators.set[':name.filter.searchQuery'],
 }
 
 const propTypes = {
@@ -46,6 +42,7 @@ const propTypes = {
     }).isRequired
   ).isRequired,
   filterGroup: PropTypes.string,
+  getAncestorsByParentId: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   onInteraction: PropTypes.func.isRequired,
   searchQuery: PropTypes.string,
@@ -65,6 +62,7 @@ class ActionBar extends Component {
       displayNavigationButtons,
       dropdownFilterOptions,
       filterGroup,
+      getAncestorsByParentId,
       name,
       onInteraction,
     } = this.props
@@ -125,12 +123,15 @@ class ActionBar extends Component {
                   }}
                   style={{ marginLeft: 10 }}
                 >
-                  New locality
+                  New
                 </Button>
               )}
             </Grid.Column>
             <Grid.Column verticalAlign="bottom" width={14}>
-              <AncestorTag name={name} />
+              <AncestorTag
+                getAncestorsByParentId={getAncestorsByParentId}
+                name={name}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

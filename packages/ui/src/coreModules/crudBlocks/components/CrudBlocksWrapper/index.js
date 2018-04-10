@@ -7,12 +7,9 @@ import { push } from 'react-router-redux'
 
 import { Layout } from 'coreModules/layout/components'
 import { withLayout } from 'coreModules/layout/higherOrderComponents'
-import {
-  actionCreators as keyObjectActionCreators,
-  globalSelectors,
-} from 'domainModules/locality/keyObjectModule'
-import ItemBlock from 'domainModules/locality/components/genericCrudManager/blocks/Item'
-import CollectionBlock from 'domainModules/locality/components/genericCrudManager/blocks/Collection'
+import { actionCreators, globalSelectors } from '../../keyObjectModule'
+import ItemBlock from '../blocks/Item'
+import CollectionBlock from '../blocks/Collection'
 
 import {
   FORM_CANCEL,
@@ -29,7 +26,7 @@ import {
   SET_LAYOUT_SINGLE_COLLECTION,
   SET_LAYOUT_SINGLE_ITEM,
   SET_LAYOUT_SPLIT,
-} from '../../../interactions'
+} from '../../constants'
 
 const getItemBlockType = ({ itemId, url }) => {
   let itemBlockType = null
@@ -60,17 +57,17 @@ const mapStateToProps = (state, { name }) => {
 
 const mapDispatchToProps = {
   routerPush: push,
-  setCollectionBlockType:
-    keyObjectActionCreators.set[':name.collectionBlockType'],
-  setFilterGroup: keyObjectActionCreators.set[':name.filter.group'],
-  setParentFilterId: keyObjectActionCreators.set[':name.filter.parentId'],
-  setSearchQuery: keyObjectActionCreators.set[':name.filter.searchQuery'],
+  setCollectionBlockType: actionCreators.set[':name.collectionBlockType'],
+  setFilterGroup: actionCreators.set[':name.filter.group'],
+  setParentFilterId: actionCreators.set[':name.filter.parentId'],
+  setSearchQuery: actionCreators.set[':name.filter.searchQuery'],
 }
 
 const propTypes = {
   collectionBlockType: PropTypes.string,
   customHandleInteraction: PropTypes.func,
   dropdownFilterOptions: PropTypes.array.isRequired,
+  getAncestorsByParentId: PropTypes.func.isRequired,
   itemIdParamName: PropTypes.string.isRequired,
   layoutMode: PropTypes.string,
   match: PropTypes.object.isRequired,
@@ -213,6 +210,7 @@ class CrudBlocksWrapper extends Component {
     const {
       collectionBlockType,
       dropdownFilterOptions,
+      getAncestorsByParentId,
       layoutMode,
       itemIdParamName,
       match: { params = {}, url = '' } = {},
@@ -243,6 +241,7 @@ class CrudBlocksWrapper extends Component {
         <CollectionBlock
           collectionBlockType={collectionBlockType}
           dropdownFilterOptions={dropdownFilterOptions}
+          getAncestorsByParentId={getAncestorsByParentId}
           itemId={itemId}
           layoutMode={layoutMode}
           name={name}

@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button, Icon } from 'semantic-ui-react'
-import SortableTree, { getTreeFromFlatData } from 'react-sortable-tree'
-
 import { getCuratedLocalities as getCuratedLocalitiesAc } from 'dataModules/localityService/actionCreators'
-import { globalSelectors as keyObjectGlobalSelectors } from 'coreModules/crudBlocks/keyObjectModule'
+import SortableTree, { getTreeFromFlatData } from 'react-sortable-tree'
+import { globalSelectors as keyObjectGlobalSelectors } from 'domainModules/locality/keyObjectModule'
 import {
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
-} from 'coreModules/crudBlocks/constants'
+} from 'domainModules/locality/interactions'
 
 const mapStateToProps = (state, { name }) => {
   return {

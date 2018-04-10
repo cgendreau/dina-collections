@@ -6,7 +6,7 @@ import {
   SET_ITEM_CREATE_CHILD,
   SET_ITEM_EDIT,
   SET_ITEM_INSPECT,
-} from 'coreModules/crudBlocks/constants'
+} from 'domainModules/locality/interactions'
 
 const propTypes = {
   activeLocalityId: PropTypes.string,

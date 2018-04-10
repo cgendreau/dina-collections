@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-import { CrudBlocksWrapper } from 'coreModules/crudBlocks/components'
+import CrudBlocksWrapper from 'domainModules/locality/components/genericCrudManager/CrudBlocksWrapper'
 
-import globalSelectors from '../../globalSelectors'
-import { ALL, CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../constants'
 import CreateForm from '../item/form/Create'
 import EditForm from '../item/form/Edit'
 import InspectView from '../item/Inspect'
 import LocalityList from '../collection/LocalityList'
 import LocalityTree from '../collection/LocalityTree'
+
+import { ALL, CONTINENT, COUNTRY, DISTRICT, PROVINCE } from '../../constants'
 
 const groups = [CONTINENT, COUNTRY, DISTRICT, PROVINCE]
 
@@ -54,7 +54,6 @@ class LocalityManager extends Component {
     return (
       <CrudBlocksWrapper
         dropdownFilterOptions={DROPDOWN_FILTER_OPTIONS}
-        getAncestorsByParentId={globalSelectors.getCuratedLocalityAncestorsById}
         itemIdParamName="localityId"
         name="locality"
         renderCreateBlockChild={LocalityManager.renderCreateBlockChild}
