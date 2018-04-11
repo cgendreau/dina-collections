@@ -1,76 +1,76 @@
-const connectDb = require('../db')
-const config = require('../../../apps/core/config')
-
 const dbDescribe = require('../../../utilities/test/dbDescribe')
-
-const index = 'test'
-const type = 'test'
-
-const setupIndex = (elasticsearch, mappings) => {
-  return elasticsearch.indices
-    .exists({ index })
-    .then(exists => {
-      if (exists) {
-        return elasticsearch.indices.delete({ index }).then(() => {
-          return false
-        })
-      }
-      return exists
-    })
-    .then(exists => {
-      if (!exists) {
-        return elasticsearch.indices.create({ index })
-      }
-      return true
-    })
-    .then(() => {
-      if (!mappings) {
-        return elasticsearch
-      }
-      return elasticsearch.indices.putMapping(mappings)
-    })
-}
-
-const addSampleData = (elasticsearch, items) => {
-  const body = items.reduce((rows, item) => {
-    rows.push({
-      index: { _id: item.id, _index: index, _type: type },
-    })
-    rows.push(item)
-    return rows
-  }, [])
-  return elasticsearch
-    .bulk({
-      body,
-      refresh: true,
-    })
-    .then(() => {
-      return true
-    })
-}
-
-const setup = ({ items, mappings }) => {
-  return connectDb({ config }).then(elasticsearch => {
-    return setupIndex(elasticsearch, mappings).then(() => {
-      return addSampleData(elasticsearch, items).then(() => {
-        return elasticsearch
-      })
-    })
-  })
-}
-
-const search = ({ elasticsearch, body, sort = 'id:desc' }) => {
-  return elasticsearch.search({
-    body,
-    index,
-    sort,
-    type,
-  })
-}
+const { search, setup } = require('./utilities')
 
 dbDescribe('lib/elasticsearch/db', () => {
   let elasticsearch
-  describe('noMappings', () => {
+  describe('noMappings simple structure', () => {
+    beforeAll(() => {
+      const items = [
+        {
+          id: 1,
+          price: 10,
+          productID: 'XHDK-A-1293-#fJ3',
+        },
+        {
+          id: 2,
+          price: 20,
+          productID: 'KDKE-B-9947-#kL5',
+        },
+        {
+          id: 3,
+          price: 30,
+          productID: 'JODL-X-1937-#pV7',
+        },
+      ]
+      const mappings = undefined
+      return setup({ items, mappings }).then(createdClient => {
+        elasticsearch = createdClient
+      })
+    })
+
+    describe('search', () => {
+      it('Fetch all if only plain body provided', () => {
+        const body = {}
+        return search({ body, elasticsearch }).then(res => {
+          expect(res.hits.hits.length).toBe(3)
+        })
+      })
+      it('Matches one item with constant_score if match exist', () => {
+        const body = {
+          query: {
+            constant_score: {
+              filter: {
+                term: {
+                  price: 20,
+                },
+              },
+            },
+          },
+        }
+        return search({ body, elasticsearch }).then(res => {
+          expect(res.hits.hits.length).toBe(1)
+        })
+      })
+      it('Matches 0 item with constant_score if match dont exist', () => {
+        const body = {
+          query: {
+            constant_score: {
+              filter: {
+                term: {
+                  price: 21,
+                },
+              },
+            },
+          },
+        }
+        return search({ body, elasticsearch }).then(res => {
+          expect(res.hits.hits.length).toBe(0)
+        })
+      })
+    })
+  })
+
+  describe('noMappings array structure', () => {
     beforeAll(() => {
       const items = [
         {
