@@ -10,6 +10,7 @@ module.exports = function connectDb({ config }) {
 
   const client = new elasticsearch.Client({
     host,
+    // log: 'trace',
   })
 
   return client
