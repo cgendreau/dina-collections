@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-
+const bodybuilder = require('bodybuilder')
 const dbDescribe = require('../../../utilities/test/dbDescribe')
 const { search, setup } = require('./utilities')
 
@@ -97,44 +97,13 @@ dbDescribe('lib/elasticsearch/db/arrayStructure/noNestedFields', () => {
     })
   })
   it('Matches 1 item with identifiers.value: 11111', () => {
-    const body = {
-      query: {
-        term: {
-          'identifiers.value': '11111',
-        },
-      },
-    }
+    const body = bodybuilder()
+      .filter('term', 'identifiers.value', '11111')
+      .build()
+
     return search({ body, elasticsearch }).then(res => {
       expect(res.hits.hits.length).toBe(1)
       expect(res.hits.hits[0]._source.id).toBe(1)
-    })
-  })
-  it('Matches 3 items with identifiers.type: catalogNumber', () => {
-    const body = {
-      query: {
-        term: {
-          'identifiers.type': 'catalogNumber',
-        },
-      },
-    }
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(3)
-    })
-  })
-  it('Dont take object capsulation into consideration', () => {
-    // without nested object mapping the data is flattened
-    const body = {
-      query: {
-        bool: {
-          filter: [
-            { term: { 'identifiers.type': 'catalogNumber' } },
-            { term: { 'identifiers.value': '31112' } },
-          ],
-        },
-      },
-    }
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(1)
     })
   })
 })
@@ -169,127 +138,89 @@ dbDescribe('lib/elasticsearch/db/arrayStructure/nestedFields', () => {
       elasticsearch = createdClient
     })
   })
-  it('Fetch all if only plain body provided', () => {
-    const body = {}
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(3)
-    })
-  })
-  it('Matches 1 item with identifiers.value: 11111', () => {
-    const body = {
-      query: {
-        nested: {
-          path: 'identifiers',
-          query: {
-            term: {
-              'identifiers.value': '11111',
-            },
-          },
-        },
-      },
-    }
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(1)
-      expect(res.hits.hits[0]._source.id).toBe(1)
-    })
-  })
-  it('Matches 3 items with identifiers.type: catalogNumber', () => {
-    const body = {
-      query: {
-        nested: {
-          path: 'identifiers',
-          query: {
-            term: {
-              'identifiers.type': 'catalogNumber',
-            },
-          },
-        },
-      },
-    }
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(3)
-    })
-  })
-  it('Take object capsulation into consideration', () => {
-    // without nested object mapping the data is flattened
-    const body = {
-      query: {
-        nested: {
-          path: 'identifiers',
-          query: {
-            bool: {
-              filter: [
-                { term: { 'identifiers.type': 'catalogNumber' } },
-                { term: { 'identifiers.value': '31112' } },
-              ],
-            },
-          },
-        },
-      },
-    }
-
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(0)
-    })
-  })
-  it('Take object capsulation into consideration and match', () => {
-    // without nested object mapping the data is flattened
-    const body = {
-      query: {
-        nested: {
-          path: 'identifiers',
-          query: {
-            bool: {
-              filter: [
-                { term: { 'identifiers.type': 'catalogNumber' } },
-                { term: { 'identifiers.value': '21111' } },
-              ],
-            },
-          },
-        },
-      },
-    }
-
-    return search({ body, elasticsearch }).then(res => {
-      expect(res.hits.hits.length).toBe(1)
-    })
-  })
   it('Deep nested query match', () => {
-    // without nested object mapping the data is flattened
-    const body = {
-      query: {
-        bool: {
-          filter: [
-            {
-              nested: {
-                path: 'identifiers',
-                query: {
-                  bool: {
-                    filter: [
-                      { term: { 'identifiers.type': 'catalogNumber' } },
-                      { term: { 'identifiers.value': '21111' } },
-                    ],
-                  },
-                },
-              },
-            },
-            {
-              nested: {
-                path: 'collectionItems',
-                query: {
-                  bool: {
-                    filter: [
-                      { term: { 'collectionItems.preparationType': 'bone' } },
-                      { term: { 'collectionItems.preparationValue': '30' } },
-                    ],
-                  },
-                },
-              },
-            },
-          ],
-        },
-      },
+    // const identifierTypeQuery = b =>
+    //   b.query('term', 'identifiers.type', 'catalogNumber')
+
+    // const identifierValueQuery = b =>
+    //   b.query('term', 'identifiers.value', '21111')
+
+    const identifiersQuery = b => {
+      return b
+        .query('term', 'identifiers.type', 'catalogNumber')
+        .query('term', 'identifiers.value', '21111')
     }
+    const collectionItemsQuery = b => {
+      return b
+        .query('term', 'collectionItems.preparationType', 'bone')
+        .query('term', 'collectionItems.preparationValue', '30')
+    }
+
+    const body = bodybuilder()
+      .query('nested', { path: 'identifiers' }, identifiersQuery)
+      .query('nested', { path: 'collectionItems' }, collectionItemsQuery)
+      .build()
+
+    // const body = {
+    //   query: {
+    //     nested: {
+    //       path: 'identifiers',
+    //       query: {
+    //         bool: {
+    //           filter: [
+    //             {
+    //               term: {
+    //                 'identifiers.type': 'catalogNumber',
+    //               },
+    //             },
+    //             {
+    //               term: {
+    //                 'identifiers.value': '21111',
+    //               },
+    //             },
+    //           ],
+    //         },
+    //       },
+    //     },
+    //   },
+    // }
+
+    console.log('body', JSON.stringify(body, null, 2))
+    // without nested object mapping the data is flattened
+    // const body = {
+    //   query: {
+    //     bool: {
+    //       filter: [
+    //         {
+    //           nested: {
+    //             path: 'identifiers',
+    //             query: {
+    //               bool: {
+    //                 filter: [
+    //                   { term: { 'identifiers.type': 'catalogNumber' } },
+    //                   { term: { 'identifiers.value': '21111' } },
+    //                 ],
+    //               },
+    //             },
+    //           },
+    //         },
+    //         {
+    //           nested: {
+    //             path: 'collectionItems',
+    //             query: {
+    //               bool: {
+    //                 filter: [
+    //                   { term: { 'collectionItems.preparationType': 'bone' } },
+    //                   { term: { 'collectionItems.preparationValue': '30' } },
+    //                 ],
+    //               },
+    //             },
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   },
+    // }
 
     return search({ body, elasticsearch }).then(res => {
       expect(res.hits.hits.length).toBe(1)

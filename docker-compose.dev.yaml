@@ -93,6 +93,11 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
+  mirage:
+    image: appbaseio/mirage
+    ports:
+      - 3030:3030
+
 volumes:
   postgres_data:
   es_data:

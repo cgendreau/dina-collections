@@ -1,79 +1,101 @@
-import React from 'react'
-
+import React, { Component } from 'react'
+import Tree from './Components/Tree'
 // import PropTypes from 'prop-types'
-import {
-  ActionBar,
-  ActionBarRow,
-  HierarchicalMenuFilter,
-  Hits,
-  HitsStats,
-  Layout,
-  LayoutBody,
-  LayoutResults,
-  NoHits,
-  RefinementListFilter,
-  ResetFilters,
-  SearchBox,
-  SearchkitComponent,
-  SearchkitManager,
-  SearchkitProvider,
-  SelectedFilters,
-  SideBar,
-  TopBar,
-} from 'searchkit'
+
 import { Icon } from 'semantic-ui-react'
 import PageTemplate from 'coreModules/commonUi/components/PageTemplate'
 
-const searchkit = new SearchkitManager('/api/specimen-search')
+// const Item = props => {
+//   return (
+//     <div style={{ marginBottom: 20, widht: '100%', float: 'left' }}>
+//       {props && JSON.stringify(props)}
+//     </div>
+//   )
+// }
 
-const Item = props => {
-  return (
-    <div style={{ marginBottom: 20, widht: '100%', float: 'left' }}>
-      {props && JSON.stringify(props)}
-    </div>
-  )
-}
+// class Condition extends Component {
+//   render() {
+//     const { condition } = this.props
+//     console.log('condition', condition)
+//     return <div>Condition {JSON.stringify(condition)}</div>
+//   }
+// }
 
-const Settings = props => {
-  return (
-    <SearchkitProvider searchkit={searchkit}>
-      <div style={{ paddingLeft: 100 }}>
-        <Layout>
-          <TopBar style={{ left: 100 }}>
-            <SearchBox />
-          </TopBar>
-          <LayoutBody>
-            <SideBar>
-              <HierarchicalMenuFilter
-                fields={['identifiers.identifier.identifierType']}
-                id="categories"
-                title="Categories"
-              />
-            </SideBar>
-            <LayoutResults>
-              <ActionBar>
-                <ActionBarRow>
-                  <HitsStats />
-                </ActionBarRow>
+// class Rule extends Component {
+//   render() {
+//     const { rule } = this.props
 
-                <ActionBarRow>
-                  <SelectedFilters />
-                  <ResetFilters />
-                </ActionBarRow>
-              </ActionBar>
-              <Hits hitsPerPage={10} itemComponent={Item} mod="sk-hits-grid" />
-              <NoHits />
-            </LayoutResults>
-          </LayoutBody>
-        </Layout>
-      </div>
-    </SearchkitProvider>
-  )
+//     return (
+//       <div>
+//         <span>Rule {rule.ruleType}</span>
+//         <div style={{ marginLeft: 20 }}>
+//           {(rule.content || []).map(item => {
+//             return <Node node={item} />
+//           })}
+//         </div>
+//         <button>New condition</button>
+//         <button>New Rule</button>
+//       </div>
+//     )
+//   }
+// }
+
+// class Node extends Component {
+//   render() {
+//     const { node } = this.props
+//     const { type } = node
+//     console.log('node', node)
+//     if (type === 'rule') {
+//       return <Rule rule={node} />
+//     }
+
+//     if (type === 'condition') {
+//       return <Condition condition={node} />
+//     }
+
+//     return null
+//   }
+// }
+
+// class Tree extends Component {
+//   render() {
+//     const { treeRoot } = this.props
+//     return <Node node={treeRoot} />
+//   }
+// }
+
+class Test extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tree: {
+        type: 'rule',
+        ruleType: 'and',
+        content: [
+          {
+            type: 'condition',
+            conditionType: 'identifierCatalogNumber',
+            params: {
+              value: '1234',
+            },
+          },
+        ],
+      },
+    }
+  }
+  render() {
+    const tree = this.state.tree
+    return (
+      <PageTemplate>
+        <Tree treeRoot={tree} />
+      </PageTemplate>
+    )
+  }
 }
 
 // Settings.propTypes = propTypes
 
-export default Settings
+export default Test
 
 // <RefinementListFilter
 //   field="actors.raw"

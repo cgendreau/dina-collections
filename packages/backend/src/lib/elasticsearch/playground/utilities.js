@@ -26,7 +26,7 @@ const setupIndex = (elasticsearch, mappings) => {
         return elasticsearch
       }
       return elasticsearch.indices
-        .putMapping({ index, type, body: mappings })
+        .putMapping({ body: mappings, index, type })
         .then(() => {
           return elasticsearch
         })
@@ -61,11 +61,10 @@ const setup = ({ items, mappings }) => {
   })
 }
 
-const search = ({ elasticsearch, body, sort = 'id:desc' }) => {
+const search = ({ elasticsearch, body }) => {
   return elasticsearch.search({
     body,
     index,
-    sort,
     type,
   })
 }

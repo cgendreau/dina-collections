@@ -66,7 +66,9 @@ class Start extends Component {
             </NavLink>
           </Container>
         </Segment>
-
+        <Segment className="markdown-body" size="large" padded="very">
+          <Markdown fallbackLanguage="en" textKey="modules.start.test" />
+        </Segment>
         <Segment style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="top">
             <Grid.Row>
@@ -111,7 +113,7 @@ class Start extends Component {
                 <Segment padded="very">
                   <Markdown
                     fallbackLanguage="en"
-                    textKey="modules.start.changelog"
+                    textKey="modules.start.test"
                   />
                 </Segment>
               </Grid.Column>
