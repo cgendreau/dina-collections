@@ -7884,6 +7884,24 @@
           "parentVersionId": {
             "type": "string",
             "x-summary": ""
+          },
+          "acceptedTaxonName": {
+            "$ref": "#/components/schemas/taxonName",
+            "x-summary": ""
+          },
+          "synonyms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/taxonName"
+            },
+            "x-summary": ""
+          },
+          "vernacularNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/taxonName"
+            },
+            "x-summary": ""
           }
         },
         "x-category": "taxonomyService",
@@ -12994,20 +13012,18 @@
         "x-examples": {
           "primary": {
             "data": {
-              "type": "preparationType",
+              "type": "identifierType",
               "attributes": {
-                "category": "skin",
-                "name": "preparation name"
+                "name": "catalogNumber"
               }
             }
           }
         },
         "example": {
           "data": {
-            "type": "preparationType",
+            "type": "identifierType",
             "attributes": {
-              "category": "skin",
-              "name": "preparation name"
+              "name": "catalogNumber"
             }
           }
         },
@@ -14316,7 +14332,7 @@
               "type": "physicalObject",
               "attributes": {
                 "normalStorageLocationText": "string",
-                "storedUnderTaxonName": "Sorex minutus"
+                "storageLocationText": "Sorex minutus"
               }
             }
           }
@@ -14326,7 +14342,7 @@
             "type": "physicalObject",
             "attributes": {
               "normalStorageLocationText": "string",
-              "storedUnderTaxonName": "Sorex minutus"
+              "storageLocationText": "Sorex minutus"
             }
           }
         },
