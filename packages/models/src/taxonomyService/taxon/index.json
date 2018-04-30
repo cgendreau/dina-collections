@@ -12,6 +12,38 @@
     },
     "parentVersionId": {
       "type": "string"
+    },
+    "acceptedTaxonName": {
+      "$ref": "__ROOT__taxonName"
+    },
+    "synonyms": {
+      "type": "array",
+      "items": {
+        "$ref": "__ROOT__taxonName"
+      }
+    },
+    "vernacularNames": {
+      "type": "array",
+      "items": {
+        "$ref": "__ROOT__taxonName"
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "taxonNames": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "__ROOT__taxonName",
+                "x-reference-type": "external"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
