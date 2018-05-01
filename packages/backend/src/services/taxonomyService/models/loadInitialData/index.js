@@ -11,13 +11,17 @@ module.exports = function loadInitialData({ models }) {
         const { id, parentId, ...rest } = taxon
 
         const resource = {
-          doc: deleteNullProperties(rest),
-          id,
-          relationships: {
-            taxonNames: [],
+          doc: {
+            relationships: {
+              acceptedTaxonName: { data: null },
+              synonyms: { data: [] },
+              vernacularNames: { data: [] },
+            },
+            synonyms: [],
+            vernacularNames: [],
+            ...deleteNullProperties(rest),
           },
-          synonyms: [],
-          vernacularNames: [],
+          id,
           versionId: id,
         }
 
@@ -61,17 +65,19 @@ module.exports = function loadInitialData({ models }) {
         if (acceptedToTaxonId) {
           resource.acceptedToTaxonVersionId = acceptedToTaxonId
 
-          taxaByIdMap[acceptedToTaxonId].acceptedTaxonName = relatedTaxonName
-          taxaByIdMap[acceptedToTaxonId].relationships.taxonNames.push(
-            relatedTaxonName
-          )
+          taxaByIdMap[
+            acceptedToTaxonId
+          ].doc.acceptedTaxonName = relatedTaxonName
+          taxaByIdMap[
+            acceptedToTaxonId
+          ].doc.relationships.acceptedTaxonName.data = relatedTaxonName
         }
 
         if (synonymToTaxonId) {
           resource.synonymToTaxonVersionId = synonymToTaxonId
 
-          taxaByIdMap[synonymToTaxonId].synonyms.push(relatedTaxonName)
-          taxaByIdMap[synonymToTaxonId].relationships.taxonNames.push(
+          taxaByIdMap[synonymToTaxonId].doc.synonyms.push(relatedTaxonName)
+          taxaByIdMap[synonymToTaxonId].doc.relationships.synonyms.data.push(
             relatedTaxonName
           )
         }
@@ -79,12 +85,12 @@ module.exports = function loadInitialData({ models }) {
         if (vernacularToTaxonId) {
           resource.vernacularToTaxonVersionId = vernacularToTaxonId
 
-          taxaByIdMap[vernacularToTaxonId].vernacularNames.push(
+          taxaByIdMap[vernacularToTaxonId].doc.vernacularNames.push(
             relatedTaxonName
           )
-          taxaByIdMap[vernacularToTaxonId].relationships.taxonNames.push(
-            relatedTaxonName
-          )
+          taxaByIdMap[
+            vernacularToTaxonId
+          ].doc.relationships.vernacularNames.data.push(relatedTaxonName)
         }
 
         return resource

@@ -1511,7 +1511,26 @@
       "relationships": {
         "type": "object",
         "properties": {
-          "taxonNames": {
+          "acceptedTaxonName": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "$ref": "taxonName"
+              }
+            }
+          },
+          "synonyms": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "taxonName"
+                }
+              }
+            }
+          },
+          "vernacularNames": {
             "type": "object",
             "properties": {
               "data": {
@@ -1539,6 +1558,10 @@
         "type": "string",
         "x-summary": ""
       },
+      "type": {
+        "type": "string",
+        "x-summary": ""
+      },
       "versionId": {
         "type": "string",
         "x-summary": ""
@@ -1561,18 +1584,6 @@
         "x-summary": ""
       },
       "rubinNumber": {
-        "type": "string",
-        "x-summary": ""
-      },
-      "acceptedToTaxonVersionId": {
-        "type": "string",
-        "x-summary": ""
-      },
-      "synonymToTaxonVersionId": {
-        "type": "string",
-        "x-summary": ""
-      },
-      "vernacularToTaxonVersionId": {
         "type": "string",
         "x-summary": ""
       }

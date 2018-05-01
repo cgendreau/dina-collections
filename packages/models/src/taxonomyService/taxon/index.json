@@ -31,7 +31,28 @@
     "relationships": {
       "type": "object",
       "properties": {
-        "taxonNames": {
+        "acceptedTaxonName": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "__ROOT__taxonName",
+              "x-reference-type": "external"
+            }
+          }
+        },
+        "synonyms": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "__ROOT__taxonName",
+                "x-reference-type": "external"
+              }
+            }
+          }
+        },
+        "vernacularNames": {
           "type": "object",
           "properties": {
             "data": {

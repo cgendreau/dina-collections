@@ -17,11 +17,30 @@ module.exports = {
       relationKey: 'parent',
       type: 'updateRelationHasOne',
     },
-    {
-      connect: true,
-      relationKey: 'acceptedTaxonName',
-      type: 'updateRelationHasOne',
-    },
+    // {
+    //   relationKey: 'acceptedTaxonName',
+    //   type: 'getRelationHasOne',
+    // },
+    // {
+    //   relationKey: 'acceptedTaxonName',
+    //   type: 'updateRelationHasOne',
+    // },
+    // {
+    //   relationKey: 'synonyms',
+    //   type: 'getRelationHasMany',
+    // },
+    // {
+    //   relationKey: 'synonyms',
+    //   type: 'updateRelationHasMany',
+    // },
+    // {
+    //   relationKey: 'vernacularNames',
+    //   type: 'getRelationHasMany',
+    // },
+    // {
+    //   relationKey: 'vernacularNames',
+    //   type: 'updateRelationHasMany',
+    // },
     {
       connect: true,
       includeRelations: true,
@@ -37,6 +56,7 @@ module.exports = {
     acceptedTaxonName: {
       format: 'object',
       resource: 'taxonName',
+      storeInDocument: true,
     },
     children: {
       format: 'array',
@@ -49,10 +69,12 @@ module.exports = {
     synonyms: {
       format: 'array',
       resource: 'taxonName',
+      storeInDocument: true,
     },
     vernacularNames: {
       format: 'array',
       resource: 'taxonName',
+      storeInDocument: true,
     },
   },
   resource: 'taxon',

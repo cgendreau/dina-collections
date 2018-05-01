@@ -1,7 +1,10 @@
 const { Op } = require('sequelize')
 
 module.exports = function buildWhereFactory({ request }) {
-  const { queryParams: { filter: { name } = {} } } = request
+  const {
+    queryParams: { filter: { name } = {} },
+    relationships: { acceptedToTaxon, synonymToTaxon, vernacularToTaxon } = {},
+  } = request
 
   let where = {}
 

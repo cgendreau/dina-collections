@@ -7916,6 +7916,10 @@
             "type": "string",
             "x-summary": ""
           },
+          "type": {
+            "type": "string",
+            "x-summary": ""
+          },
           "versionId": {
             "type": "string",
             "x-summary": ""
@@ -7938,18 +7942,6 @@
             "x-summary": ""
           },
           "rubinNumber": {
-            "type": "string",
-            "x-summary": ""
-          },
-          "acceptedToTaxonVersionId": {
-            "type": "string",
-            "x-summary": ""
-          },
-          "synonymToTaxonVersionId": {
-            "type": "string",
-            "x-summary": ""
-          },
-          "vernacularToTaxonVersionId": {
             "type": "string",
             "x-summary": ""
           }

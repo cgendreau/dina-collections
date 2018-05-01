@@ -15,28 +15,13 @@ module.exports = {
     },
     {
       connect: true,
-      relationKey: 'acceptedToTaxon',
-      type: 'updateRelationHasOne',
-    },
-    {
-      connect: true,
-      relationKey: 'synonymToTaxon',
-      type: 'updateRelationHasOne',
-    },
-    {
-      connect: true,
-      relationKey: 'vernacularToTaxon',
-      type: 'updateRelationHasOne',
-    },
-    {
-      connect: true,
-      includeRelations: true,
+      // includeRelations: true,
       type: 'getOne',
     },
     {
       buildWhere,
       connect: true,
-      includeRelations: true,
+      // includeRelations: true,
       queryParams: {
         'filter[name]': {
           description:
@@ -50,19 +35,19 @@ module.exports = {
       type: 'getMany',
     },
   ],
-  relations: {
-    acceptedToTaxon: {
-      format: 'object',
-      resource: 'taxon',
-    },
-    synonymToTaxon: {
-      format: 'object',
-      resource: 'taxon',
-    },
-    vernacularToTaxon: {
-      format: 'object',
-      resource: 'taxon',
-    },
-  },
+  // relations: {
+  //   acceptedToTaxon: {
+  //     format: 'object',
+  //     resource: 'taxon',
+  //   },
+  //   synonymToTaxon: {
+  //     format: 'object',
+  //     resource: 'taxon',
+  //   },
+  //   vernacularToTaxon: {
+  //     format: 'object',
+  //     resource: 'taxon',
+  //   },
+  // },
   resource: 'taxonName',
 }

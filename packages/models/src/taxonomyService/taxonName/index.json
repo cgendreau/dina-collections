@@ -4,6 +4,9 @@
     "id": {
       "type": "string"
     },
+    "type": {
+      "type": "string"
+    },
     "versionId": {
       "type": "string"
     },
@@ -22,15 +25,6 @@
       "description": "Taxon rank"
     },
     "rubinNumber": {
-      "type": "string"
-    },
-    "acceptedToTaxonVersionId": {
-      "type": "string"
-    },
-    "synonymToTaxonVersionId": {
-      "type": "string"
-    },
-    "vernacularToTaxonVersionId": {
       "type": "string"
     }
   }
