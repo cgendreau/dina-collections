@@ -56,10 +56,10 @@
         "en": "Acquisition date"
       },
       "handedInByAgent": {
-        "en": "Handed in by (agent)"
-      },
-      "handedInByAgentText": {
-        "en": "Handed in by (stated)"
+        "en": "Interpreted name or agent",
+        "textV": {
+          "en": "Handed in by (stated)"
+        }
       }
     },
     "collectingInformation": {
@@ -275,6 +275,9 @@
         "en": "Public",
         "sv": "Publikt"
       },
+      "remarks": {
+        "en": "remarks"
+      },
       "readOnly": {
         "en": "Read only"
       }
@@ -318,8 +321,15 @@
       }
     }
   },
-
   "headers": {
+    "acquisition": {
+      "en": "acquisition",
+      "sv": ""
+    },
+    "basicInformation": {
+      "en": "basic information",
+      "sv": ""
+    },
     "collectingInformation": {
       "en": "collecting information"
     },
@@ -336,6 +346,10 @@
     },
     "features": {
       "en": "Feature observations"
+    },
+    "identifiers": {
+      "en": "identifiers",
+      "sv": ""
     },
     "newSpecimen": {
       "en": "New specimen",
@@ -579,8 +593,8 @@
     }
   },
   "formSectionTitles": {
-    "generalInformation": {
-      "en": "General information",
+    "basicInformation": {
+      "en": "basic information",
       "sv": ""
     },
     "taxonomy": {
@@ -604,9 +618,6 @@
       "sv": ""
     }
   },
-  "identifiers": {
-    "en": "Identifiers"
-  },
   "identifierType": {
     "en": "Identifier type"
   },
@@ -614,6 +625,26 @@
     "en": "Value"
   },
   "remarks": {
+    "emptyState": {
+      "acquisition": {
+        "en": "add acquisition remarks",
+        "sv": ""
+      },
+      "specimen": {
+        "en": "add remarks for the entire specimen",
+        "sv": ""
+      }
+    },
+    "resultPrefix": {
+      "acquisition": {
+        "en": "acquisition remarks",
+        "sv": ""
+      },
+      "specimen": {
+        "en": "specimen remarks",
+        "sv": ""
+      }
+    },
     "en": "Remarks"
   },
   "remove": {
@@ -666,7 +697,6 @@
       }
     }
   },
-
   "recordHistoryEvent": {
     "recordedByAgentT": {
       "en": "Recorded by (stated)"
@@ -680,6 +710,14 @@
     "add": {
       "en": "Add",
       "sv": "Lägg till"
+    },
+    "addAcquisition": {
+      "en": "add acquisition",
+      "sv": ""
+    },
+    "addAgent": {
+      "en": "add agent/name",
+      "sv": ""
     },
     "addCatalogNumber": {
       "en": "Add catalog number",

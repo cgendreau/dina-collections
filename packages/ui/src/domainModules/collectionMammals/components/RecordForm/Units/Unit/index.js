@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
+import { Grid } from 'semantic-ui-react'
 
 import { Field } from 'coreModules/form/components'
 import { injectFormPartStatus } from 'coreModules/form/higherOrderComponents'
@@ -21,6 +22,17 @@ const propTypes = {
 }
 
 class Unit extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = { showInitiallyHiddenParts: false }
+
+    this.showInitiallyHiddenParts = this.showInitiallyHiddenParts.bind(this)
+  }
+
+  showInitiallyHiddenParts() {
+    this.setState({ showInitiallyHiddenParts: true })
+  }
+
   render() {
     const {
       changeFieldValue,
@@ -32,41 +44,64 @@ class Unit extends PureComponent {
       setChildInvalid,
     } = this.props
 
+    const { showInitiallyHiddenParts } = this.state
+
     return (
-      <React.Fragment>
-        {childSpecs.map(({ componentName, name, ...rest }) => {
-          const Component = Parts[componentName]
+      <Grid.Row className="relaxed">
+        {childSpecs.map(
+          (
+            {
+              componentName,
+              hideWhenShowingInitiallyHidden,
+              initiallyHidden,
+              name,
+              ...rest
+            },
+            index
+          ) => {
+            const Component = Parts[componentName]
 
-          if (!Component) {
-            throw new Error(`Missing component for part ${componentName}`)
-          }
+            if (!Component) {
+              throw new Error(`Missing component for part ${componentName}`)
+            }
 
-          if (name) {
+            if (
+              (initiallyHidden && !showInitiallyHiddenParts) ||
+              (hideWhenShowingInitiallyHidden && showInitiallyHiddenParts)
+            ) {
+              return null
+            }
+
+            if (name) {
+              return (
+                <Field
+                  autoComplete="off"
+                  key={name}
+                  module="collectionMammals"
+                  {...rest}
+                  component={Component}
+                  name={name}
+                  setChildDirty={setChildDirty}
+                  setChildInvalid={setChildInvalid}
+                />
+              )
+            }
+
             return (
-              <Field
-                autoComplete="off"
+              <Component
+                key={`${componentName}-${index}`} // eslint-disable-line react/no-array-index-key
                 module="collectionMammals"
                 {...rest}
-                component={Component}
-                name={name}
-                setChildDirty={setChildDirty}
-                setChildInvalid={setChildInvalid}
+                changeFieldValue={changeFieldValue}
+                formName={formName}
+                formValueSelector={formValueSelector}
+                onClick={this.showInitiallyHiddenParts}
+                removeArrayFieldByIndex={removeArrayFieldByIndex}
               />
             )
           }
-
-          return (
-            <Component
-              module="collectionMammals"
-              {...rest}
-              changeFieldValue={changeFieldValue}
-              formName={formName}
-              formValueSelector={formValueSelector}
-              removeArrayFieldByIndex={removeArrayFieldByIndex}
-            />
-          )
-        })}
-      </React.Fragment>
+        )}
+      </Grid.Row>
     )
   }
 }

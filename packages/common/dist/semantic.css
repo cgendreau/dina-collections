@@ -4997,7 +4997,7 @@ a {
 .ui.basic.button.shadowless {
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0) inset !important;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0) inset !important;
-  padding: 5px 10px;
+  padding: 0.5em;
 }
 /*!
  * # Semantic UI 2.2.13 - Container
@@ -21270,6 +21270,15 @@ ol.ui.horizontal.list li:before,
 /*******************************
          Site Overrides
 *******************************/
+
+/*
+* Relaxed rows with more margin between columns (default is zero margin)
+*/
+
+.ui.grid > .row.relaxed > .column {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
 /*
  * # Semantic - Menu
  * http://github.com/semantic-org/semantic-ui/

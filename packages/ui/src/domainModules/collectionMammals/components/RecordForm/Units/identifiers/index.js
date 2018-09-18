@@ -1,7 +1,8 @@
 export default [
   {
-    componentName: 'H1',
-    textKey: 'identifiers',
+    as: 'h2',
+    componentName: 'TranslatedHeader',
+    textKey: 'headers.identifiers',
   },
   {
     componentName: 'IdentifiersTable',

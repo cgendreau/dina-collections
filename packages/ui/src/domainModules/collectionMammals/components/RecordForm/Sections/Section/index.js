@@ -42,6 +42,7 @@ class Section extends PureComponent {
                 childSpecs={unitSpecs[unitName]}
                 formName={formName}
                 formValueSelector={formValueSelector}
+                key={unitName}
                 name={unitName}
                 removeArrayFieldByIndex={removeArrayFieldByIndex}
                 setChildDirty={setChildDirty}
