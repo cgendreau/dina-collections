@@ -8,6 +8,9 @@ import FilterForm from './filter/Form'
 import buildFilterQuery from './filter/buildFilterQuery'
 import tableColumnSpecifications from './tableColumnSpecifications'
 
+const relationshipsToCheckBeforeDelete = ['acceptedToTaxon', 'synonymToTaxon']
+const sortOrder = ['attributes.name:asc']
+
 const propTypes = {
   itemId: PropTypes.string,
   onNavigation: PropTypes.func.isRequired,
@@ -16,8 +19,6 @@ const propTypes = {
 const defaultProps = {
   itemId: undefined,
 }
-
-const sortOrder = ['attributes.name:asc']
 
 class TaxonNameManager extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class TaxonNameManager extends Component {
         buildFilterQuery={buildFilterQuery}
         fetchIncludeAfterUpdate={include}
         onInteraction={this.handleInteraction}
+        relationshipsToCheckBeforeDelete={relationshipsToCheckBeforeDelete}
         renderCreateForm={this.renderCreateForm}
         renderEditForm={this.renderEditForm}
         renderFilterForm={this.renderFilterForm}

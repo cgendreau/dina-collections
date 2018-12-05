@@ -56,6 +56,18 @@
             }
           }
         },
+        "curatorialTaxon": {
+          "type": "object",
+          "x-key-stored-in-model": "specimen",
+          "x-key-type": "json",
+          "x-path": ["individual.taxonInformation.curatorialTaxon"],
+          "properties": {
+            "data": {
+              "$ref": "__ROOT__taxon",
+              "x-reference-type": "external"
+            }
+          }
+        },
         "establishmentMeansTypes": {
           "type": "object",
           "x-key-stored-in-model": "specimen",
@@ -183,21 +195,6 @@
             }
           }
         },
-        "taxa": {
-          "type": "object",
-          "x-key-stored-in-model": "specimen",
-          "x-key-type": "json",
-          "x-path": ["individual.taxonInformation.curatorialTaxon"],
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "$ref": "__ROOT__taxon",
-                "x-reference-type": "external"
-              }
-            }
-          }
-        },
         "taxonNames": {
           "type": "object",
           "x-key-stored-in-model": "specimen",
@@ -234,6 +231,10 @@
         "$ref": "__ROOT__causeOfDeathType",
         "x-reference-type": "external"
       }
+    },
+    "curatorialTaxon": {
+      "$ref": "__ROOT__taxon",
+      "x-reference-type": "external"
     },
     "establishmentMeansTypes": {
       "type": "array",
@@ -288,13 +289,6 @@
       "type": "array",
       "items": {
         "$ref": "__ROOT__resourceActivity",
-        "x-reference-type": "external"
-      }
-    },
-    "taxa": {
-      "type": "array",
-      "items": {
-        "$ref": "__ROOT__taxon",
         "x-reference-type": "external"
       }
     },

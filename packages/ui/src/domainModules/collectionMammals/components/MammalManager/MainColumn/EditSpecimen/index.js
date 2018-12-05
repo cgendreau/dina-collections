@@ -119,12 +119,12 @@ export default compose(
   createGetNestedItemById({
     idPath: 'match.params.specimenId',
     include: [
+      'curatorialTaxon.acceptedTaxonName',
       'featureTypes',
       'normalizedAgents',
       'physicalObjects.storageLocation',
       'places',
       'resourceActivities',
-      'taxa.acceptedTaxonName',
       'taxonNames',
     ],
     nestedItemKey: 'nestedSpecimen',

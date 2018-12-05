@@ -12,7 +12,9 @@ const {
   keys: [
     ':formName',
     'sectionNavigation.:formName.activeFormSectionIndex',
+    'sectionNavigation.:formName.header',
     'sectionNavigation.:formName.showAllFormSections',
+    'sectionNavigation.:formName.subHeader',
   ],
   name,
 })

@@ -26,15 +26,29 @@ module.exports = function fetchJsonExternalRelationships({
 
   const promises = remoteRelations.map(relation => {
     const { targetResource, targetAs } = relation
-    const request = {
-      queryParams: {
-        filter: {
-          relationshipId: srcId,
-          relationshipType: resource,
+
+    let request
+
+    if (targetResource === 'resourceActivity') {
+      request = {
+        queryParams: {
+          filter: {
+            relationshipId: srcId,
+            relationshipType: resource,
+          },
+          includeFields: ['id'],
         },
-        includeFields: ['id'],
-      },
+      }
+    } else {
+      request = {
+        queryParams: {
+          filter: {
+            [resource]: srcId,
+          },
+        },
+      }
     }
+
     return serviceInteractor
       .getMany({
         request,

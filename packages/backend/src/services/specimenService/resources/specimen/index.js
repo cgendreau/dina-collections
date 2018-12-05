@@ -80,6 +80,14 @@ module.exports = {
       type: 'updateRelationship',
     },
     {
+      relationKey: 'curatorialTaxon',
+      type: 'getRelationship',
+    },
+    {
+      relationKey: 'curatorialTaxon',
+      type: 'updateRelationship',
+    },
+    {
       relationKey: 'establishmentMeansTypes',
       type: 'getRelationship',
     },

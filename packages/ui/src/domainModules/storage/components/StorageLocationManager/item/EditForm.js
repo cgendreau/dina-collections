@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 
+import { capitalizeFirstLetter } from 'common/es5/stringFormatters'
 import { createGetNestedItemById } from 'coreModules/crud/higherOrderComponents'
 import BaseForm from './BaseForm'
 
@@ -30,7 +31,7 @@ export class Edit extends PureComponent {
       return null
     }
 
-    const { name, resourceActivities } = nestedItem
+    const { group, name, resourceActivities } = nestedItem
 
     return (
       <BaseForm
@@ -39,6 +40,7 @@ export class Edit extends PureComponent {
         displayResetButton
         form="storageLocationEdit"
         formSectionNavigationHeader={name}
+        formSectionNavigationSubHeader={capitalizeFirstLetter(group)}
         initialValues={nestedItem}
         onClose={event => {
           event.preventDefault()

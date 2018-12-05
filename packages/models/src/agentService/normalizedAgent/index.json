@@ -95,6 +95,20 @@
             }
           }
         },
+        "specimens": {
+          "type": "object",
+          "x-key-stored-in-model": "specimen",
+          "x-key-type": "json",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "__ROOT__specimen",
+                "x-reference-type": "external"
+              }
+            }
+          }
+        },
         "user": {
           "type": "object",
           "x-key-stored-in-model": "normalizedAgent",

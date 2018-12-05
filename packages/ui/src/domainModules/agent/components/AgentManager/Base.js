@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ResourceManager } from 'coreModules/resourceManager/components'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 
+import { actionCreators as crudActionCreators } from 'coreModules/crud'
+import { ResourceManager } from 'coreModules/resourceManager/components'
 import CreateForm from './item/CreateForm'
 import EditForm, { include } from './item/EditForm'
 import FilterForm from './filter/Form'
@@ -10,7 +13,15 @@ import transformOutput from './item/BaseForm/transformations/output'
 import tableColumnSpecifications from './tableColumnSpecifications'
 import ItemTitle from './ItemTitle'
 
+const relationshipsToCheckBeforeDelete = ['specimens']
+const sortOrder = ['attributes.name:asc']
+
+const mapDispatchToProps = {
+  getAgent: crudActionCreators.normalizedAgent.getOne,
+}
+
 const propTypes = {
+  getAgent: PropTypes.func.isRequired,
   itemId: PropTypes.string,
   onNavigation: PropTypes.func.isRequired,
 }
@@ -18,8 +29,6 @@ const propTypes = {
 const defaultProps = {
   itemId: undefined,
 }
-
-const sortOrder = ['attributes.name:asc']
 
 class AgentManager extends Component {
   constructor(props) {
@@ -73,6 +82,7 @@ class AgentManager extends Component {
         fetchIncludeAfterUpdate={include}
         ItemTitle={ItemTitle}
         onInteraction={this.handleInteraction}
+        relationshipsToCheckBeforeDelete={relationshipsToCheckBeforeDelete}
         renderCreateForm={this.renderCreateForm}
         renderEditForm={this.renderEditForm}
         renderFilterForm={this.renderFilterForm}
@@ -89,4 +99,4 @@ class AgentManager extends Component {
 AgentManager.propTypes = propTypes
 AgentManager.defaultProps = defaultProps
 
-export default AgentManager
+export default compose(connect(undefined, mapDispatchToProps))(AgentManager)

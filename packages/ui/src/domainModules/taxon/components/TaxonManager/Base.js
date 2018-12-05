@@ -9,14 +9,11 @@ import buildFilterQuery from './filter/buildFilterQuery'
 import tableColumnSpecifications from './tableColumnSpecifications'
 import ItemTitle from './ItemTitle'
 
-const propTypes = {
-  itemId: PropTypes.string,
-  onNavigation: PropTypes.func.isRequired,
-}
-
-const defaultProps = {
-  itemId: undefined,
-}
+const relationshipsToCheckBeforeDelete = [
+  'children',
+  'specimens',
+  'storageLocations',
+]
 
 const baseTreeFilter = {
   parentId: '1',
@@ -49,6 +46,15 @@ const itemFetchOptions = {
   include: ['acceptedTaxonName'],
   relationships: ['acceptedTaxonName', 'children'],
   resolveRelationships: ['taxonName'],
+}
+
+const propTypes = {
+  itemId: PropTypes.string,
+  onNavigation: PropTypes.func.isRequired,
+}
+
+const defaultProps = {
+  itemId: undefined,
 }
 
 class TaxonManager extends Component {
@@ -92,6 +98,7 @@ class TaxonManager extends Component {
         itemFetchOptions={itemFetchOptions}
         ItemTitle={ItemTitle}
         onInteraction={this.handleInteraction}
+        relationshipsToCheckBeforeDelete={relationshipsToCheckBeforeDelete}
         renderCreateForm={this.renderCreateForm}
         renderEditForm={this.renderEditForm}
         renderFilterForm={this.renderFilterForm}

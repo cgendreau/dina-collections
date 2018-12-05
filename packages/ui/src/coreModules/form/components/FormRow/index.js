@@ -47,6 +47,14 @@ const mapDispatchToProps = {
     formSupportKeyObjectActionCreators.set[
       'sectionNavigation.:formName.activeFormSectionIndex'
     ],
+  setFormHeader:
+    formSupportKeyObjectActionCreators.set[
+      'sectionNavigation.:formName.header'
+    ],
+  setFormSubHeader:
+    formSupportKeyObjectActionCreators.set[
+      'sectionNavigation.:formName.subHeader'
+    ],
   setShowAllFormSections:
     formSupportKeyObjectActionCreators.set[
       'sectionNavigation.:formName.showAllFormSections'
@@ -77,6 +85,8 @@ const propTypes = {
     }).isRequired
   ).isRequired,
   setActiveFormSectionIndex: PropTypes.func.isRequired,
+  setFormHeader: PropTypes.func.isRequired,
+  setFormSubHeader: PropTypes.func.isRequired,
   setShowAllFormSections: PropTypes.func.isRequired,
   showAllFormSections: PropTypes.bool,
   showSectionsInNavigation: PropTypes.bool,
@@ -105,6 +115,23 @@ class FormRow extends PureComponent {
 
   componentWillMount() {
     this.handleSectionIdUpdate()
+  }
+
+  componentDidMount() {
+    const {
+      formName,
+      formSectionNavigationHeader,
+      formSectionNavigationSubHeader,
+    } = this.props
+
+    if (formSectionNavigationHeader) {
+      this.props.setFormHeader(formSectionNavigationHeader, {
+        formName,
+      })
+    }
+    if (formSectionNavigationSubHeader) {
+      this.props.setFormSubHeader(formSectionNavigationSubHeader, { formName })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -187,6 +214,8 @@ class FormRow extends PureComponent {
       case 'formSectionView': {
         const { extractedProps } = extractProps({
           keys: [
+            'formSectionNavigationHeader',
+            'formSectionNavigationSubHeader',
             ...Object.keys(formSectionViewPropTypes),
             ...this.props.passthroughProps,
           ],

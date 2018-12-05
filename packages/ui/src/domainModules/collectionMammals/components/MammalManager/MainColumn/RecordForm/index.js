@@ -87,13 +87,13 @@ const defaultProps = {
 class RecordForm extends Component {
   constructor(props) {
     super(props)
-    this.setFormRef = this.setFormRef.bind(this)
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.changeFieldValue = this.changeFieldValue.bind(this)
-    this.removeArrayFieldByIndex = this.removeArrayFieldByIndex.bind(this)
-    this.handleUndoChanges = this.handleUndoChanges.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleSubmitFromModal = this.handleSubmitFromModal.bind(this)
+    this.handleUndoChanges = this.handleUndoChanges.bind(this)
+    this.removeArrayFieldByIndex = this.removeArrayFieldByIndex.bind(this)
     this.renderRow = this.renderRow.bind(this)
+    this.setFormRef = this.setFormRef.bind(this)
   }
 
   setFormRef(element) {

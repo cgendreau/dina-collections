@@ -1,4 +1,7 @@
 const createGetManyFilterSpecifications = require('../../../../../../lib/data/filters/utilities/createGetManyFilterSpecifications')
+const createJsonRelationshipFilter = require('../../../../../../lib/data/filters/factories/createJsonRelationshipFilter')
+
+const resource = 'specimen'
 
 const filters = createGetManyFilterSpecifications({
   custom: {
@@ -37,6 +40,27 @@ const filters = createGetManyFilterSpecifications({
         }
       },
     },
+    normalizedAgent: createJsonRelationshipFilter({
+      relationshipKey: 'normalizedAgents',
+      relationshipResource: 'normalizedAgent',
+      resource,
+    }),
+    physicalObject: createJsonRelationshipFilter({
+      relationshipKey: 'physicalObjects',
+      relationshipResource: 'physicalObject',
+      resource,
+    }),
+    place: createJsonRelationshipFilter({
+      relationshipKey: 'places',
+      relationshipResource: 'place',
+      resource,
+    }),
+    taxon: createJsonRelationshipFilter({
+      oneOrMany: 'one',
+      relationshipKey: 'curatorialTaxon',
+      relationshipResource: 'taxon',
+      resource,
+    }),
   },
 })
 

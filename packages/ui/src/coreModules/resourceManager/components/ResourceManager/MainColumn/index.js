@@ -25,6 +25,7 @@ const propTypes = {
   createItemActive: PropTypes.bool.isRequired,
   editItemActive: PropTypes.bool.isRequired,
   fetchIncludeAfterUpdate: PropTypes.arrayOf(PropTypes.string),
+  fetchRelationshipsBeforeDelete: PropTypes.func,
   isPicker: PropTypes.bool.isRequired,
   onFormTabClick: PropTypes.func.isRequired,
   onInteraction: PropTypes.func.isRequired,
@@ -40,6 +41,7 @@ const propTypes = {
 
 const defaultProps = {
   fetchIncludeAfterUpdate: undefined,
+  fetchRelationshipsBeforeDelete: undefined,
   recordNavigationHeight: emToPixels(4.25),
   recordOptionsHeight: emToPixels(3.5625),
   transformOutput: undefined,
@@ -209,9 +211,11 @@ class MainColumn extends Component {
         const { extractedProps } = extractProps({
           keys: [
             'fetchIncludeAfterUpdate',
+            'fetchRelationshipsBeforeDelete',
             'itemId',
             'ItemTitle',
             'onInteraction',
+            'relationshipsToCheckBeforeDelete',
             'renderEditForm',
             'resource',
             'itemFetchOptions',

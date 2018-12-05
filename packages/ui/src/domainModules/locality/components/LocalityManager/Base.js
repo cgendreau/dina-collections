@@ -8,6 +8,8 @@ import FilterForm from './filter/Form'
 import buildFilterQuery from './filter/buildFilterQuery'
 import tableColumnSpecifications from './tableColumnSpecifications'
 
+const relationshipsToCheckBeforeDelete = ['children', 'specimens']
+
 const propTypes = {
   itemId: PropTypes.string,
   onNavigation: PropTypes.func.isRequired,
@@ -74,6 +76,7 @@ class LocalityManager extends Component {
         buildFilterQuery={buildFilterQuery}
         fetchIncludeAfterUpdate={include}
         onInteraction={this.handleInteraction}
+        relationshipsToCheckBeforeDelete={relationshipsToCheckBeforeDelete}
         renderCreateForm={this.renderCreateForm}
         renderEditForm={this.renderEditForm}
         renderFilterForm={this.renderFilterForm}

@@ -7,8 +7,17 @@ const ERROR = {
   displayType: FIXED,
   level: 'error',
   priority: 20,
-  ttl: 8000,
   type: 'ERROR',
 }
 
-export { ERROR }
+const SUCCESS = {
+  collision: COLLISION_REPLACE,
+  component: Flash,
+  displayType: FIXED,
+  level: 'success',
+  priority: 20,
+  ttl: 2000,
+  type: 'SUCCESS',
+}
+
+export { ERROR, SUCCESS }
